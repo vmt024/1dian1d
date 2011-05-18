@@ -1,0 +1,28 @@
+<div id="rewards-content">
+        <ul id="project-stats">
+          <li>支持者 <span class="white-number"><%= @project.supporters.blank? ? "0" : @project.supporters.count %></span> 人</li>
+          <li>剩余 <span class="white-number"><%= project_days_left(@project.complete_time) %></span> 天</li>
+    </ul>
+
+    <div id="support-btn">
+      <% unless already_supported? %>
+        <%= link_to "我来支持你", :controller=>"projects", :action=>"support_this_project" %>
+      <% else %>
+        <%= link_to "谢谢支持","",:href=>"#" %>
+      <% end %>
+    </div>
+
+    <div id="rewards-list">
+            <h2 class="white-number">犒赏</h2>
+            <dl>
+            <% rewards = ProjectPrize.where('project_id = ?',session[:current_project_id]) %>
+            <% unless rewards.blank? %>
+              <% rewards.each do |reward| %>
+                <dt><%= reward.name %></dt>
+                <dd><%= reward.description %></dd>
+              <% end %>
+            <% end %>
+        </dl>
+    </div><!-- rewards-list -->
+
+</div><!-- rewards-content -->        

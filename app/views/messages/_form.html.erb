@@ -1,0 +1,9 @@
+<fieldset>
+好友：<%= User.find(params[:friend]).name %>
+<%= form.hidden_field :receiver_id,:value=>params[:friend] %>
+</fieldset>
+<fieldset>
+<%= form.label :内容 %>
+<%= form.text_area :content,:class=>"validate[required]" %>
+</fieldset>
+

@@ -1,0 +1,18 @@
+<h2>我要登录</h2>
+
+<%= form_for 'user', :url =>{:controller => :user_session, :action => :create},:html=>{:id=>"signin_form"} do |f| %>
+    <fieldset>
+  	<%= f.label :你的邮箱 %>
+	<%= f.text_field :email,:class=>"validate[required,custom[email]]" %>
+	</fieldset>
+        <fieldset>
+	<%= f.label :你的密码 %>
+	<%= f.password_field :password,:class=>"validate[required]" %>
+	</fieldset>
+
+  <%= f.submit "登录"  %>
+<% end %>
+<%= link_to "忘记自己的密码了？",lost_password_url %>
+<script type="text/javascript">
+  $("#signin_form").validationEngine();
+</script>

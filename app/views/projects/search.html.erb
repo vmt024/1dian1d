@@ -1,0 +1,33 @@
+<% @projects.each do |project| %>
+<div class="grid_7 alpah omega">
+    <a href="<%= project_url(project.id)%> ">
+    <%if File.exist?(project.avatar.url(:thumb)) %>
+      <%= image_tag project.avatar.url(:thumb), :size=>"83x53" %>
+    <% else %>
+      <%= image_tag project.category.avatar.url(:thumb), :size=>"83x53" %>
+    <% end %>
+    </a>
+    <h3><%= link_to project.name, project_url(project.id) %></h3>
+    <ul class="project-meta">
+        <li><%= project.owner.name %></li>
+        <li><%= project.owner.location %></li>
+    </ul>
+    <div class="project-content">
+      <p><%= project.description%></p>
+    
+    <ul class="stats-meta">
+        <li><%= project.supporters.blank? ? "0" : project.supporters.count %>支持</li>
+        <li><%= project_days_left(project.complete_time)%>天剩余</li>
+        <li><%= project.views%>次浏览</li>
+    </ul>
+    </div>
+</div>
+<% end %>
+
+<div id="pagination" class="grid_3 prefix_2 alpha">
+    <ul>
+        <li><a href="#" id="prevPage">&lt;&lt; 上一页</a></li>
+        <li><a href="#" id="nextPage">下一页 &gt;&gt;</a></li>
+    </ul>
+</div>
+

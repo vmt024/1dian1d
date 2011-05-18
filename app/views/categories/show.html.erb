@@ -1,0 +1,31 @@
+
+    <div id="breadcrumb">
+    <ul>
+    	<li><a href="#">主页</a></li>
+        <li><a href="#">艺术</a></li>
+    </ul>
+    </div><!-- end of breadcrumb-->
+       
+       <div class="grid_5 alpha" id="project-title">
+			<h2><%= @category.name%></h2>
+       </div>
+       <div class="grid_2 omega" id="follow-project">
+       		<div class="button">
+            	&nbsp;
+            </div>
+       </div>
+       
+        <div class="grid_4 alpha" id="project-navigation">
+       	    <ul>
+                <li><%= link_to "修改类别", edit_category_url %></li>
+            </ul>
+       	</div>
+        
+        <div class="grid_3 omega" id="project-meta-detail">
+        	<ul class="project-meta">
+                  <li><%= @category.projects.size %>个项目</li>
+            </ul>
+        </div>
+        <div class="clear"></div>
+        
+        <%= image_tag @category.avatar.url(:medium) %>

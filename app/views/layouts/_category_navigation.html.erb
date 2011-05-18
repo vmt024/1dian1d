@@ -1,0 +1,13 @@
+<div id="category-navigation">
+      <ul>
+      <% categories = Category.all %>
+      <% categories.each_with_index do |category, index| %>
+        <% if ((index+1)%4 == 0) %>
+            <li><a href="<%= projects_url(:category=>category.name) %>" class="last"><%= category.name %></a></li>
+        <% else %>
+            <li><a href="<%= projects_url(:category=>category.name) %>" class="marginRight20"><%= category.name %></a></li>
+        <% end %>
+      <% end %>
+      </ul>
+      <div class="clear"></div>
+</div><!-- end of category navigation-->

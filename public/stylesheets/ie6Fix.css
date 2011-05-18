@@ -1,0 +1,9 @@
+#main-nav li a{
+		color:#FFF;
+		font-family:Helvetica, Arial, sans-serif;
+		font-weight:bold;
+		font-size:14px;
+		padding:5px 15px;
+		line-height:1;
+		background-color:#666;
+	}

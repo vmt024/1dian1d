@@ -1,0 +1,3 @@
+<% @my_private_messages.each do |message| %>
+  From: <%= User.find(message.sender_id).name %>:<%= message.content%>--<%= link_to "回复", reply_messages_url(:message_id=>message.id) %><br/>
+<% end  %>

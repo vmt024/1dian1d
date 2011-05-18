@@ -1,0 +1,33 @@
+<fieldset>
+<%= form.label :你的昵称 %>
+<%= form.text_field :name,:class=>"validate[required,minSize[2]]" %>
+</fieldset>
+<fieldset>
+<%= form.label :你的邮箱 %>
+<%= form.text_field :email,:class=>"validate[required,custom[email]]" %>
+</fieldset>
+<fieldset>
+<%= form.label :自我介绍 %>
+<%= form.text_area :description,:class=>"validate[required,minSize[25]]" %>
+</fieldset>
+<fieldset>
+<%= form.label :来自哪里 %>
+<%= form.select :location, province_list %>
+</fieldset>
+
+<% if form.object.new_record?%>
+<fieldset>
+<%= form.label :你的密码 %>
+<%= form.password_field :password,:class=>"validate[required,minSize[6]]",:value=>'' %>
+</fieldset>
+<fieldset>
+<%= form.label :密码确认 %>
+<%= form.password_field :password_confirmation,:class=>"validate[required,equals[user_password]]",:value=>'' %>
+</fieldset>
+<% else %>
+<fieldset>
+<%= form.label :更改您的密码 %>
+<%= form.password_field :password,:class=>"validate[minSize[6]]",:value=>'' %>
+</fieldset>
+<% end %>
+

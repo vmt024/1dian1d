@@ -1,0 +1,2 @@
+module ProjectPrizesHelper
+end

@@ -1,0 +1,10 @@
+<%= render :partial=>'layouts/main_banner' %>
+
+
+<% unless (params[:controller].eql?('projects') && params[:action].eql?('show')) %>
+<%= render :partial=>'layouts/main_navigation' %>
+<%= render :partial=>'layouts/city_navigation' %>
+<%= render :partial=>'layouts/category_navigation' %>
+<% else %>
+<%= render :partial=>'layouts/rewards_content' %>
+<% end %>

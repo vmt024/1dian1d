@@ -1,0 +1,83 @@
+<div id="breadcrumb">
+  <ul>
+    <li><%= link_to "返回主页", root_url %></li>
+  </ul>
+</div><!-- end of breadcrumb-->
+
+<% if session[:current_user_id].eql?(@user.id) %>
+<% unless session[:new_progress].blank? && session[:followed_progress].blank? %>
+  <div class="global-notification">
+    <ul>
+      <% unless session[:followed_progress].blank? %>
+      	<li><strong><span class="followed-progress"><%= session[:followed_progress].size %></span></strong> 个你所关注的项目有了新的进展。</li>
+      <% end %>
+      <% unless session[:new_progress].blank? %>
+        <% session[:new_progress].each_pair do |project_id,progress|%>
+          <li><a href="#"><strong><span class="new-progress"><%= Project.find(project_id).name %></span></strong></a>项目有了
+	    <% unless progress[:comment_counts].eql?(0)%><strong><%= progress[:comment_counts]%></strong> 个新的留言<%end%>
+            <% unless progress[:follower_counts].eql?(0)||progress[:comment_counts].eql?(0)%>和<% end %>
+	    <% unless progress[:follower_counts].eql?(0)%><strong><%= progress[:follower_counts]%></strong> 位新的支持者。<%end%>
+          </li>
+        <% end %>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
+<% end %>
+
+<div id="personal-intro">
+  <% if session[:current_user_id].eql?(@user.id) %>
+  <h1 id="hero">这是你的控制面板,你可以在这里<%= link_to "修改", edit_user_url(session[:current_user_id]) %>个人资料，管理与你有关的目标和<%= link_to '创建', new_project_url %>新的目标。
+  <% if action_allowed? %>
+   管理员还可以<%= link_to "添加", new_category_url %>新的目标类别。
+   <% end %>
+  </h1>
+  <% else %>
+     <h2 style="float:left"><%=h @user.name %>的主页</h2>
+     <% unless @user.is_my_friend?(session[:current_user_id])%>
+         <%= link_to "加为好友",new_friend_request_url(:user_id=>@user.id) ,{:class=>"add-as-friend"}%>
+     <% end %>
+     <div class="clear"></div>
+    <p><%=h @user.description %></p>
+  <% end %>
+
+  </div>
+
+            <div class="grid_7 alpha omega" id="project-navigation">
+            <ul class="borderBottom">
+                <li><a href="index.html" class="currentNavigationalItem">创建的项目(<%= @my_projects.size %>)</a></li>
+                <li><a href="detail-process.html">支持的项目(<%= @my_support_projects.size %>)</a></li>
+                <li><a href="#">你的好友(<%= @my_friends.size %>)</a></li>
+  <% if session[:current_user_id].eql?(@user.id) %>
+                <li><a href="#">你的私信(<%= @my_private_messages.size%>)</a></li>
+<% end %>
+            </ul>
+        </div>
+        <div class="clear"></div>
+
+	    <h2>创建的项目</h2>
+	    <% unless @my_projects.blank? %>
+	        <!-- display my projects-->
+                <%= render :partial=> 'my_projects',:locals=>{:projects=>@my_projects} %>
+            <% else %>
+            	<%=h @user.name %>还没有设定自己目标
+            <% end %>
+
+            <h2>关注的项目</h2>
+            <% unless @my_support_projects.blank? %>
+	        <%= render :partial=>'my_support_projects', :locals=>{:projects=>@my_support_projects}%>
+	    <% else %>
+		<%= link_to '快去浏览其他人的目标吧', projects_url %>
+	    <% end %>
+
+            <h2>我的好友</h2>
+            <% unless @my_friends.blank? %>
+	        <%= render :partial=>'my_friends'%>
+	    <% end %>
+
+  <% if session[:current_user_id].eql?(@user.id) %>
+            <h2>我的私信</h2>
+            <% unless @my_private_messages.blank? %>
+	        <%= render :partial=>'my_private_messages'%>
+	    <% end %>
+<% end %>

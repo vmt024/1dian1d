@@ -1,0 +1,17 @@
+<% @categories.each do |category| %>
+<div class="grid_3 <%= cycle("alpah", "omega") %>">
+    <%= image_tag category.avatar.url(:thumb) %>
+    <h3><%= link_to category.name, category_url(category.id) %></h3>
+    <ul class="stats-meta">
+        <li><%= category.projects.size%>个项目</li>
+    </ul>
+</div>
+<% end %>
+
+<div id="pagination" class="grid_3 prefix_2 alpha">
+    <ul>
+        <li><a href="#" id="prevPage">&lt;&lt; 上一页</a></li>
+        <li><a href="#" id="nextPage">下一页 &gt;&gt;</a></li>
+    </ul>
+</div>
+

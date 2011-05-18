@@ -1,0 +1,36 @@
+<div id="banner">
+    <div id="search">
+      <%= form_tag search_projects_url,{:autocomplete=>"off"}  do %>
+            <fieldset>
+              <input type="text" id="mainSearchField" name="search" value="搜索项目" onfocus="clear_search_text(this);" onblur="set_search_text(this);"/>
+            </fieldset>
+      <% end %>
+     </div><!-- end of search-->
+
+    <h1>趣目</h1>
+    <h2>实现你的目标<br/>
+    <span class="big-numbers"><%= Project.all.size%></span>个趣目项目
+    </h2>
+
+
+ <ul id="user-navigation">
+    <li><%= link_to "趣目主页", root_url %></li>
+    <li><%= link_to "创建目标", new_project_url %></li>
+    <% if session[:current_user_id].blank?  %>
+      <li><%= link_to "登录", sign_in_url %></li>
+      <li><%= link_to "注册", sign_up_url %></li>
+    <% else %>
+      <li><%= link_to "控制面板", user_url(session[:current_user_id]) %></li>
+      <li><%= link_to "退出系统", sign_out_url, :method=>:delete%></li>
+    <% end %>
+    </ul>
+
+</div><!-- end of banner-->
+<script type="text/javascript">
+  function clear_search_text(field){
+    field.value = ""
+  }
+  function set_search_text(field){
+    field.value = "搜索项目"
+  }
+</script>

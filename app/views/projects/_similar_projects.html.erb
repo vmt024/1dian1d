@@ -1,0 +1,7 @@
+<h3>类似项目</h3>
+
+<ul id="similarProjects">
+<% @similar_projects.each do |project| %>
+    <li><a href="<%= project_url(project.id) %>"><%= project.name%></a></li>
+<% end %>
+</ul>

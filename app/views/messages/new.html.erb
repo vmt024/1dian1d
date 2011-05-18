@@ -1,0 +1,10 @@
+<h2>发送私信</h2>
+
+<%= form_for @message, :url => messages_url,:html => { :id=>"message_form", :method=>:post} do |f| %>
+  <%= render :partial => "form", :object => f %>
+  <%= f.submit "发送" %>
+<% end %>
+<script type="text/javascript">
+  $("#message_form").validationEngine();
+</script>
+

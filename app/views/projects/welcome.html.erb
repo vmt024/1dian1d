@@ -1,0 +1,24 @@
+<%= render :partial=>'layouts/hero_statement' %>
+<% @projects.each do |project| %>
+    <div class="grid_3 <%= cycle("alpha", "omega prefix_1") -%>">
+            <h3><%= link_to project.name, project_url(project.id) %></h3>
+            <ul class="project-meta">
+                <li class="project-meta-user"><%= project.owner.name %></li>
+                <li class="project-meta-place"><%= project.owner.location %></li>
+                <li class="project-meta-cate"><%= project.owner.location %></li>
+            </ul>
+            <div class="project-content">
+                <p><%= truncate(project.description,:length=>65  )%></p>
+                <ul class="stats-meta">
+                <li><%= project.supporters.blank? ? "0" : project.supporters.count %>支持</li>
+                <li><%= project_days_left(project.complete_time)%>天剩余</li>
+                <li><%= project.views%>次浏览</li>
+                </ul>
+            </div>
+        </div>
+<% end %>
+<div class="clear"></div>
+<div id="pagination" class="grid_3 alpha">
+  <%= will_paginate @projects %>
+</div>
+
