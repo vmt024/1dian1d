@@ -12,7 +12,7 @@ class User < ActiveRecord::Base
 
   attr_protected :superman
 
-  attr_accessor :password, :password_confirmation
+  attr_accessor :password, :password_confirmation, :remember_me
   validates_uniqueness_of :email
   validates_presence_of :name,:email
 
@@ -20,6 +20,16 @@ class User < ActiveRecord::Base
       logger.error("cr: #{self.crypted_password}")
       logger.error("ps: #{encrypt(submitted_password)}")
       self.crypted_password == encrypt(submitted_password)
+    end
+ 
+
+    def self.sign_in_with_cookies(remember_cookie)
+      return nil if remember_cookie.blank?
+      cookie = Encryptor.decrypt(remember_cookie)
+      email = cookie.split('--A--')[0]
+      password_salt = cookie.split('--A--')[1]
+      user = User.find_by_email(email)
+      return (!user.blank? && user.password_salt == password_salt) ? user.id : nil
     end
 
     def reset_password

@@ -2,7 +2,7 @@ class ProjectPrizesController < ApplicationController
 
   before_filter :require_user, :only=>[:new,:create,:edit,:update,:destroy]
 
-  layout 'qutou'
+  layout 'diandi'
 
   # GET /project_prizes/new
   # GET /project_prizes/new.xml

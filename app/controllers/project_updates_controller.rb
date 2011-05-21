@@ -1,5 +1,5 @@
 class ProjectUpdatesController < ApplicationController
-  layout 'qutou'
+  layout 'diandi'
 
   before_filter :require_user, :only=>[:new,:create,:edit,:update,:destroy]
   # GET /project_updates

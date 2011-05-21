@@ -1,5 +1,5 @@
 class UserSessionController < ApplicationController
-  layout 'qutou'
+  layout 'diandi'
 
   before_filter :require_user, :only=>:destroy
 
@@ -22,6 +22,7 @@ class UserSessionController < ApplicationController
       @user.last_login_time = '2011-04-05 10:10:10'#@user.current_login_time
       @user.current_login_time = Time.now
       @user.save
+      cookies[:remember_token] = Encryptor.encrypt(:value=>"#{@user.email}--A--#{@user.password_salt}") if params[:user][:remember_me].eql?('1')
       session[:followed_progress] = @user.followed_progress
       session[:new_progress] = @user.new_progress
       if @user.superman.eql?("YES")

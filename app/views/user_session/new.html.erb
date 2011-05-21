@@ -1,6 +1,6 @@
 <h2>我要登录</h2>
 
-<%= form_for 'user', :url =>{:controller => :user_session, :action => :create},:html=>{:id=>"signin_form"} do |f| %>
+<%= form_for 'user', :url=>{:controller=>:user_session,:action=>:create},:html=>{:id=>"signin_form", :method=>:post} do |f| %>
     <fieldset>
   	<%= f.label :你的邮箱 %>
 	<%= f.text_field :email,:class=>"validate[required,custom[email]]" %>
@@ -10,6 +10,10 @@
 	<%= f.password_field :password,:class=>"validate[required]" %>
 	</fieldset>
 
+        <fieldset>
+	<%= f.check_box :remember_me %>
+        <%= f.label :保持在登录状态 %>
+	</fieldset>
   <%= f.submit "登录"  %>
 <% end %>
 <%= link_to "忘记自己的密码了？",lost_password_url %>

@@ -1,5 +1,5 @@
 class CategoriesController < ApplicationController
-  layout 'qutou'
+  layout 'diandi'
 
   before_filter :require_user
   before_filter :require_superman

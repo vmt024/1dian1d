@@ -44,3 +44,6 @@ module Ququ
 
   end
 end
+
+Encryptor.default_options.merge!(:algorithm => 'aes-256-cbc', :key => 'diandi Tony and Peter and Joy and Tingting 2011')
+

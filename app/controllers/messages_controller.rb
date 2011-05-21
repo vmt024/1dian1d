@@ -1,5 +1,5 @@
 class MessagesController < ApplicationController
-  layout 'qutou'
+  layout 'diandi'
 
   def index
     @messages = Message.all

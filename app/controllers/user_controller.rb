@@ -1,5 +1,5 @@
 class UserController < ApplicationController
-  layout 'qutou'
+  layout 'diandi'
 
   before_filter :require_user, :only=>[:edit,:update]
 

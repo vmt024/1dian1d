@@ -1,5 +1,5 @@
 class ProjectsController < ApplicationController
-  layout 'qutou'
+  layout 'diandi'
 
   before_filter :require_user, :only=>[:new,:create,:edit,:update,:destroy,:support_this_project,:not_support_this_project]
 

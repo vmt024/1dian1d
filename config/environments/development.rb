@@ -28,7 +28,7 @@ Ququ::Application.configure do
   config.action_mailer.smtp_settings = {
     :address              => "smtp.gmail.com",
     :port                 => 587,
-    :domain               => 'www.qutou.com',
+    :domain               => 'www.1dian1di.com',
     :user_name            => 'ncs.testing@gmail.com',
     :password             => 'ncstesting',
     :authentication       => 'plain',

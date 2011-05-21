@@ -10,7 +10,8 @@ class ApplicationController < ActionController::Base
   private
 
     def current_user
-      return session[:current_user_id]
+      session[:current_user_id] ||= User.sign_in_with_cookies(cookies[:remember_token])
+      return session[:current_user_id] 
     end
     
     def require_user

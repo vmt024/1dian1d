@@ -2,21 +2,21 @@
     <div id="search">
       <%= form_tag search_projects_url,{:autocomplete=>"off"}  do %>
             <fieldset>
-              <input type="text" id="mainSearchField" name="search" value="搜索项目" onfocus="clear_search_text(this);" onblur="set_search_text(this);"/>
+              <input type="text" id="mainSearchField" name="search" value="搜索目标" onfocus="clear_search_text(this);" onblur="set_search_text(this);"/>
             </fieldset>
       <% end %>
      </div><!-- end of search-->
 
-    <h1>趣目</h1>
+    <h1>一点一滴</h1>
     <h2>实现你的目标<br/>
-    <span class="big-numbers"><%= Project.all.size%></span>个趣目项目
+    <span class="big-numbers"><%= Project.all.size%></span>个项标
     </h2>
 
 
  <ul id="user-navigation">
-    <li><%= link_to "趣目主页", root_url %></li>
+    <li><%= link_to "一点一滴", root_url %></li>
     <li><%= link_to "创建目标", new_project_url %></li>
-    <% if session[:current_user_id].blank?  %>
+    <% if current_user.blank?  %>
       <li><%= link_to "登录", sign_in_url %></li>
       <li><%= link_to "注册", sign_up_url %></li>
     <% else %>
@@ -31,6 +31,6 @@
     field.value = ""
   }
   function set_search_text(field){
-    field.value = "搜索项目"
+    field.value = "搜索目标"
   }
 </script>
