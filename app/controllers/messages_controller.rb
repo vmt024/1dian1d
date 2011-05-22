@@ -13,7 +13,7 @@ class MessagesController < ApplicationController
     @message = Message.new(params[:message])
     @message.sender_id = session[:current_user_id]
     if @message.save
-      redirect_to :back
+      redirect_to user_url(session[:current_user_id])
     else
       render :action=>:new
     end

@@ -1,5 +1,5 @@
 <fieldset>
-好友：<%= User.find(params[:friend]).name %>
+收信人：<%= User.find(params[:friend]).name %>
 <%= form.hidden_field :receiver_id,:value=>params[:friend] %>
 </fieldset>
 <fieldset>

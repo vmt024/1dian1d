@@ -34,9 +34,7 @@
   </h1>
   <% else %>
      <h2 style="float:left"><%=h @user.name %>的主页</h2>
-     <% unless @user.is_my_friend?(session[:current_user_id])%>
-         <%= link_to "加为好友",new_friend_request_url(:user_id=>@user.id) ,{:class=>"add-as-friend"}%>
-     <% end %>
+
      <div class="clear"></div>
     <p><%=h @user.description %></p>
   <% end %>
@@ -45,39 +43,21 @@
 
             <div class="grid_7 alpha omega" id="project-navigation">
             <ul class="borderBottom">
-                <li><a href="index.html" class="currentNavigationalItem">创建的项目(<%= @my_projects.size %>)</a></li>
-                <li><a href="detail-process.html">支持的项目(<%= @my_support_projects.size %>)</a></li>
-                <li><a href="#">你的好友(<%= @my_friends.size %>)</a></li>
+                <li><%= link_to "支持的目标",user_supported_projects_url(:user_id=>@user.id),:remote=>true,:id=>"support_project_tab"%></li>
+                <li><%= link_to "我的目标",user_projects_url(:user_id=>@user.id),:remote=>true,:class=>"currentNavigationalItem",:id=>"project_tab" %></li>
+                <li><%= link_to "我的好友",user_friends_url(:user_id=>@user.id),:remote=>true,:id=>"friend_tab" %></li>
   <% if session[:current_user_id].eql?(@user.id) %>
-                <li><a href="#">你的私信(<%= @my_private_messages.size%>)</a></li>
+                <li><%= link_to "我的私信",user_messages_url(:user_id=>@user.id),:remote=>true,:id=>"message_tab" %></li>
 <% end %>
             </ul>
         </div>
         <div class="clear"></div>
-
-	    <h2>创建的项目</h2>
+        <div id="tab_content">
+	    <h2>我的项目</h2>
 	    <% unless @my_projects.blank? %>
 	        <!-- display my projects-->
                 <%= render :partial=> 'my_projects',:locals=>{:projects=>@my_projects} %>
             <% else %>
             	<%=h @user.name %>还没有设定自己目标
             <% end %>
-
-            <h2>关注的项目</h2>
-            <% unless @my_support_projects.blank? %>
-	        <%= render :partial=>'my_support_projects', :locals=>{:projects=>@my_support_projects}%>
-	    <% else %>
-		<%= link_to '快去浏览其他人的目标吧', projects_url %>
-	    <% end %>
-
-            <h2>我的好友</h2>
-            <% unless @my_friends.blank? %>
-	        <%= render :partial=>'my_friends'%>
-	    <% end %>
-
-  <% if session[:current_user_id].eql?(@user.id) %>
-            <h2>我的私信</h2>
-            <% unless @my_private_messages.blank? %>
-	        <%= render :partial=>'my_private_messages'%>
-	    <% end %>
-<% end %>
+        </div>

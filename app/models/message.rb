@@ -5,7 +5,7 @@ class Message < ActiveRecord::Base
     if option[:unread_only]
       return Message.where("receiver_id = ? and read_yn = ?",user_id,false)
     else
-      return Message.where("receiver_id = ?",user_id)
+      return Message.where("receiver_id = ? or sender_id = ?",user_id,user_id)
     end 
   end  
 

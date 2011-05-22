@@ -1,0 +1,3 @@
+$('#project-navigation ul li a').removeClass("currentNavigationalItem");
+$("#project_tab").addClass("currentNavigationalItem");
+$('#tab_content').html("<%= escape_javascript(render :partial=>'projects') %>");

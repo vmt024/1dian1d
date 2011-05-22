@@ -1,0 +1,3 @@
+$('#project-navigation ul li a').removeClass("currentNavigationalItem");
+$("#message_tab").addClass("currentNavigationalItem");
+$('#tab_content').html("<%= escape_javascript(render :partial=>'messages') %>");

@@ -36,10 +36,6 @@ class UserController < ApplicationController
 
     order = "#{session[:sort_project_by]} #{session[:sort_order]}"
     @user = User.find(params[:id])
-    @my_private_messages = Message.my_private_messages(@user.id,:unread_only=>true)
-    @my_friends = Friend.my_friends(@user.id) 
-    @my_projects = Project.where('user_id = ?',@user.id).order(order)
-    @my_support_projects = @user.support_projects.all(:order=>order)
 
     if !params[:section].blank? && params[:section].eql?("创建项目")
       @my_projects = Project.where('user_id = ?',@user.id).order(order)
@@ -47,6 +43,38 @@ class UserController < ApplicationController
 
     if !params[:section].blank? && params[:section].eql?("关注项目")
       @my_support_projects = @user.support_projects.all(:order=>order)
+    end
+  end
+  
+  def messages
+    @user = User.find(params[:user_id])
+    @messages = Message.my_private_messages(params[:user_id])
+    respond_to do |format|
+      format.js
+    end
+  end
+
+  def friends
+    @user = User.find(params[:user_id])
+    @friends = Friend.my_friends(params[:user_id]) 
+    respond_to do |format|
+      format.js
+    end
+  end
+
+  def projects
+    @user = User.find(params[:user_id])
+    @projects = Project.where('user_id = ?',params[:user_id])
+    respond_to do |format|
+      format.js
+    end
+  end
+
+  def supported_projects
+    @user = User.find(params[:user_id])
+    @projects = @user.support_projects
+    respond_to do |format|
+      format.js
     end
   end
 

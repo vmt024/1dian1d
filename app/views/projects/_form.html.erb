@@ -22,27 +22,8 @@
    <% end %>
 <% end %>
 </fieldset>
-<% (1..4).each do|i| %>
-<fieldset>
-<%= label 'reward_conditions',"#{i}", "犒赏条件 #{i}" %>
-<%= text_field 'reward_conditions',"#{i}",:class=>"validate[minSize[8]]" %>
-</fieldset>
-<fieldset>
-<%= label 'rewards',"#{i}", :犒赏内容 %>
-<%= text_area 'rewards', "#{i}",:class=>"validate[minSize[10]]" %>
-</fieldset>
-<% end %>
-<%= link_to_function("需要更多犒赏来鼓励自己？","$('.more_rewards').slideToggle('slow')") %>
-<% (5..8).each do|j| %>
-<fieldset class="more_rewards" style="display:none;">
-<%= label 'reward_conditions',"#{j}", "犒赏条件 #{j}"%>
-<%= text_field 'reward_conditions',"#{j}",:class=>"validate[minSize[8]]" %>
-</fieldset>
-<fieldset class="more_rewards" style="display:none;">
-<%= label 'rewards',"#{j}", :犒赏内容 %>
-<%= text_area 'rewards', "#{j}",:class=>"validate[minSize[10]]" %>
-</fieldset>
-<% end %>
+<%= render :partial=>"prize" %>
+<%= link_to_function("需要更多犒赏来鼓励自己？","$('#more_rewards').before($('#reward').html())",:id=>"more_rewards") %>
 <fieldset>
 <%= form.label :上传个目标图片吧 %>
 <%= form.file_field :avatar,:value=>"上传" %>

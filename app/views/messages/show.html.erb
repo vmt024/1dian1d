@@ -1,0 +1,4 @@
+From: <%= User.find(@message.sender_id).name %><br/>
+To: <%= User.find(@message.receiver_id).name%><br/>
+Sent at: <%= time_ago_in_words(@message.created_at) %>前<br/>
+Content:<%= @message.content%>

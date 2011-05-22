@@ -1,0 +1,8 @@
+<% if session[:current_user_id].eql?(@user.id) %>
+  <h2>我的私信</h2>
+   <% unless @messages.blank? %>
+     <% @messages.each do |message| %>
+       From: <%= session[:current_user_id].eql?(message.sender_id) ? "自己" : User.find(message.sender_id).name %> To:<%= User.find(message.receiver_id).name%> <%= link_to("查看", message_url(message.id)) %>  <%= link_to("回复", reply_messages_url(:message_id=>message.id)) unless session[:current_user_id].eql?(message.sender_id)%><br/>
+     <% end  %>
+   <% end %>
+<% end %>

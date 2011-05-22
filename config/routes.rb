@@ -14,6 +14,10 @@ Ququ::Application.routes.draw do
   end
 
   resources :user do
+    get :projects
+    get :messages
+    get :supported_projects
+    get :friends
   end
 
   resources :user_session
@@ -28,8 +32,6 @@ Ququ::Application.routes.draw do
   match 'password_recover' => 'user#password_recover', :as => :password_recover
   
   match '/friend_request' => 'user#send_friend_request', :as => :new_friend_request
-  match '/accept_friend_request' => 'user#accept_friend_request', :as => :accept_friend_request
-  match '/reject_friend_request' => 'user#reject_friend_request', :as => :reject_friend_request
   
   match 'about' => 'projects#aboutus', :as => :about
   match 'contact' => 'projects#contactus', :as => :contact

@@ -6,7 +6,7 @@
     <td><%= link_to "浏览次数",user_url(session[:current_user_id],:section=>"创建项目",:sort_by=>"浏览次数") %></td>
     <td></td>
   </tr>
-  <% @my_projects.each do |my_proj| %>
+  <% @projects.each do |my_proj| %>
   <tr>
     <td class="td-titles">
     <% project_name = (!session[:new_progress].blank? && session[:new_progress].include?(my_proj.id)) ? ("<span class=\"new-progress\">#{my_proj.name}</span>").html_safe : my_proj.name %>

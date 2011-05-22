@@ -51,6 +51,7 @@ class UserSessionController < ApplicationController
     session[:followed_progress] = nil
     session[:new_progress] = nil
     flash[:notice] = "Logout successful!"
+    cookies.delete(:remember_token)
     redirect_to root_url
   end
 
