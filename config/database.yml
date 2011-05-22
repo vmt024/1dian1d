@@ -9,7 +9,7 @@ development:
   adapter: mysql2
   encoding: utf8
   reconnect: false
-  database: qqq_development
+  database: diandi_dev
   pool: 5
   username: root
   password: compaq1234
@@ -28,12 +28,3 @@ test:
   password:
   socket: /var/run/mysqld/mysqld.sock
 
-production:
-  adapter: mysql2
-  encoding: utf8
-  reconnect: false
-  database: qqq_production
-  pool: 5
-  username: root
-  password:
-  socket: /var/run/mysqld/mysqld.sock
