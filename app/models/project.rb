@@ -9,7 +9,7 @@ class Project < ActiveRecord::Base
   has_many :comments
 
   cattr_reader :per_page
-  @@per_page = 2
+  @@per_page = 10
 
 
   def self.get_all_locations
