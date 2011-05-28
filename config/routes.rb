@@ -18,6 +18,10 @@ Ququ::Application.routes.draw do
     get :messages
     get :supported_projects
     get :friends
+    collection do
+      get :validate_name
+      get :validate_email
+    end
   end
 
   resources :user_session

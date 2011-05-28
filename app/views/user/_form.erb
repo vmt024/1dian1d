@@ -1,10 +1,10 @@
 <fieldset>
 <%= form.label :你的昵称 %>
-<%= form.text_field :name,:class=>"validate[required,minSize[2]]" %>
+<%= form.text_field :name,:class=>"validate[required,funcCall[validateName],minSize[2]]" %>
 </fieldset>
 <fieldset>
 <%= form.label :你的邮箱 %>
-<%= form.text_field :email,:class=>"validate[required,custom[email]]" %>
+<%= form.text_field :email,:class=>"validate[required,funcCall[validateUserEmail],custom[email]]" %>
 </fieldset>
 <fieldset>
 <%= form.label :自我介绍 %>
@@ -31,3 +31,37 @@
 </fieldset>
 <% end %>
 
+<script>
+function validateUserEmail(field, rules, i, options){
+  jQuery(function($) {
+    email_already_exists = 
+      $.ajax({
+        url : "user/validate_email",
+        data: "email=" + field.val(),
+        async: false
+      }).responseText;
+      email_already_exists = email_already_exists.replace(/^\s+|\s+$/g, '');
+  })
+  if (email_already_exists == 'true'){
+    // this allows the use of i18 for the error msgs
+    return options.allrules.validateUserEmail.alertText;
+  }
+}
+
+
+function validateName(field, rules, i, options){
+  jQuery(function($) { 
+      name_already_exists = 
+      $.ajax({
+        url : "user/validate_name",
+        data: "name=" + field.val(),
+        async:false
+      }).responseText;
+      name_already_exists = name_already_exists.replace(/^\s+|\s+$/g, '');
+ })
+  if (name_already_exists == 'true'){
+    // this allows the use of i18 for the error msgs
+    return options.allrules.validateName.alertText;
+  }
+}
+</script>

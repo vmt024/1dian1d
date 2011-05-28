@@ -1,9 +1,8 @@
 <h2>修改我的资料</h2>
 
 <%= form_for @user, :url =>{:controller => :user, :action => :update, :id=>@user.id},:html=>{:id=>"edit_user_form"} do |f| %>
-  <%= f.error_messages %>
   <%= render :partial => "form", :object => f %>
-  <%= f.submit "确定" %>
+  <%= f.submit "修改",:disable_with=>"修改中..." %>
 <% end %>
 
 <script type="text/javascript">

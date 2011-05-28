@@ -50,7 +50,7 @@ class ProjectUpdatesController < ApplicationController
     @project_update.project_id = session[:current_project_id]
     respond_to do |format|
       if @project_update.save
-        format.html { redirect_to(project_url(session[:current_project_id],:selected_tab=>"project_update"), :notice => 'ProjectUpdate was successfully created.') }
+        format.html { redirect_to(project_updates_url, :notice => 'ProjectUpdate was successfully created.') }
         format.xml  { render :xml => @project_update, :status => :created, :location => @project_update }
       else
         format.html { render :action => "new" }

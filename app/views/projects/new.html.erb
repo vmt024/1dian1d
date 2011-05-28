@@ -3,7 +3,7 @@
 <%= form_for(@project,{},:html => { :id=>"project_form",:multipart => true }) do |f| %>
   <%= render :partial => "form", :object => f %>
   <p>
-    <%= f.submit '创建目标' %>
+    <%= f.submit '创建目标', :disable_with=>"创建中..." %>
   </p>
 <% end %>
 <script type="text/javascript">

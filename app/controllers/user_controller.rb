@@ -20,30 +20,8 @@ class UserController < ApplicationController
   end
 
   def show
-    if params[:section].blank? || params[:sort_by].blank?
-      session[:sort_project_by] = "name"
-    elsif params[:sort_by].eql?("项目名称")
-      session[:sort_project_by] = "name"
-    elsif params[:sort_by].eql?("支持人数")
-      session[:sort_project_by] = "number_of_supporters"
-    elsif params[:sort_by].eql?("剩余时间")
-      session[:sort_project_by] = "complete_time"
-    elsif params[:sort_by].eql?("浏览次数")
-      session[:sort_project_by] = "views"
-    end
-
-    session[:sort_order] = session[:sort_order].blank? || session[:sort_order].eql?("Desc") ? "Asc" : "Desc"
-
-    order = "#{session[:sort_project_by]} #{session[:sort_order]}"
     @user = User.find(params[:id])
-
-    if !params[:section].blank? && params[:section].eql?("创建项目")
-      @my_projects = Project.where('user_id = ?',@user.id).order(order)
-    end
-
-    if !params[:section].blank? && params[:section].eql?("关注项目")
-      @my_support_projects = @user.support_projects.all(:order=>order)
-    end
+    @projects = Project.where('user_id = ?',@user.id)
   end
   
   def messages
@@ -120,5 +98,18 @@ class UserController < ApplicationController
     redirect_to :back
   end
 
+  def validate_name
+    @already_exists = User.exists?(["name = ?",params[:name]])
+    respond_to do |format|
+      format.js 
+    end
+  end
+
+  def validate_email
+    @already_exists = User.exists?(["email = ?",params[:email]])
+    respond_to do |format|
+      format.js
+    end
+  end
 end
 

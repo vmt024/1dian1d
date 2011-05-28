@@ -23,13 +23,13 @@
             if (!form.data('jqv') || form.data('jqv') == null ) {
                 methods._saveOptions(form, options);
 
-                // bind all formError elements to close on click
+                // disabled  all formError elements to close on click
                 $(".formError").live("click", function() {
-                    $(this).fadeOut(150, function() {
+                    //$(this).fadeOut(150, function() {
 
                         // remove prompt once invisible
-                        $(this).remove();
-                    });
+                    //    $(this).remove();
+                    //});
                 });
             }
         },

@@ -1,10 +1,10 @@
-<h2>添加项目更新</h2>
+<h2>添加目标更新</h2>
 
 <%= form_for(@project_update) do |f| %>
   <%= f.error_messages %>
   <%= render :partial => "form", :object => f %>
   <p>
-    <%= f.submit '确定' %>
+    <%= f.submit '更新', :disable_with=>"更新中..." %>
   </p>
 <% end %>
 

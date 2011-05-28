@@ -91,6 +91,12 @@
                 "onlyLetterNumber": {
                     "regex": /^[0-9a-zA-Z]+$/,
                     "alertText": "* 这里只能填写英文字母和数字"
+                },
+                "validateName": {
+                    "alertText": "* 用户昵称已经存在"
+                },
+                "validateUserEmail": {
+                    "alertText": "* 邮箱地已经存在"
                 }
             };
             

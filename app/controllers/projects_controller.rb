@@ -7,7 +7,7 @@ class ProjectsController < ApplicationController
   # GET /projects
   # GET /projects.xml
   def welcome
-    @projects = Project.paginate(:all,:page=>params[:page])
+    @projects = Project.paginate(:all,:page=>params[:page],:order=>"rand()")
 
     respond_to do |format|
       format.html # index.html.erb
@@ -103,14 +103,16 @@ class ProjectsController < ApplicationController
     @project.location = User.find(session[:current_user_id]).location
 
     respond_to do |format|
+
       if @project.save
-        (1..8).each do |i|
-          unless params[:reward_conditions]["#{i}"].blank? || params[:rewards]["#{i}"].blank?
-          reward = ProjectPrize.new({:name=>params[:reward_conditions]["#{i}"],:description=>params[:rewards]["#{i}"]})
-          reward.project_id = @project.id
-          reward.save
+        unless params[:reward_conditions].blank? || params[:rewards].blank?
+          for i in 0 .. params[:reward_conditions].size do 
+            reward = ProjectPrize.new({:name=>params[:reward_conditions][i],:description=>params[:rewards][i]})
+            reward.project_id = @project.id
+            reward.save
           end
         end
+
         format.html { redirect_to(@project, :notice => 'Project was successfully created.') }
         format.xml  { render :xml => @project, :status => :created, :location => @project }
       else

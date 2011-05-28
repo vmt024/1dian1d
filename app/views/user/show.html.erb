@@ -1,6 +1,6 @@
 <div id="breadcrumb">
   <ul>
-    <li><%= link_to "返回主页", root_url %></li>
+    <li><%= link_to "网站主页", root_url %></li>
   </ul>
 </div><!-- end of breadcrumb-->
 
@@ -9,11 +9,11 @@
   <div class="global-notification">
     <ul>
       <% unless session[:followed_progress].blank? %>
-      	<li><strong><span class="followed-progress"><%= session[:followed_progress].size %></span></strong> 个你所关注的项目有了新的进展。</li>
+      	<li><strong><span class="followed-progress"><%= session[:followed_progress].size %></span></strong> 个你所关注的目标有了新的进展。</li>
       <% end %>
       <% unless session[:new_progress].blank? %>
         <% session[:new_progress].each_pair do |project_id,progress|%>
-          <li><a href="#"><strong><span class="new-progress"><%= Project.find(project_id).name %></span></strong></a>项目有了
+          <li><a href="#"><strong><span class="new-progress"><%= Project.find(project_id).name %></span></strong></a>目标有了
 	    <% unless progress[:comment_counts].eql?(0)%><strong><%= progress[:comment_counts]%></strong> 个新的留言<%end%>
             <% unless progress[:follower_counts].eql?(0)||progress[:comment_counts].eql?(0)%>和<% end %>
 	    <% unless progress[:follower_counts].eql?(0)%><strong><%= progress[:follower_counts]%></strong> 位新的支持者。<%end%>
@@ -44,19 +44,18 @@
             <div class="grid_7 alpha omega" id="project-navigation">
             <ul class="borderBottom">
                 <li><%= link_to "支持的目标",user_supported_projects_url(:user_id=>@user.id),:remote=>true,:id=>"support_project_tab"%></li>
-                <li><%= link_to "我的目标",user_projects_url(:user_id=>@user.id),:remote=>true,:class=>"currentNavigationalItem",:id=>"project_tab" %></li>
-                <li><%= link_to "我的好友",user_friends_url(:user_id=>@user.id),:remote=>true,:id=>"friend_tab" %></li>
+                <li><%= link_to "创建的目标",user_projects_url(:user_id=>@user.id),:remote=>true,:class=>"currentNavigationalItem",:id=>"project_tab" %></li>
+                <li><%= link_to "好友",user_friends_url(:user_id=>@user.id),:remote=>true,:id=>"friend_tab" %></li>
   <% if session[:current_user_id].eql?(@user.id) %>
-                <li><%= link_to "我的私信",user_messages_url(:user_id=>@user.id),:remote=>true,:id=>"message_tab" %></li>
+                <li><%= link_to "私信",user_messages_url(:user_id=>@user.id),:remote=>true,:id=>"message_tab" %></li>
 <% end %>
             </ul>
         </div>
         <div class="clear"></div>
         <div id="tab_content">
-	    <h2>我的项目</h2>
-	    <% unless @my_projects.blank? %>
+	    <% unless @projects.blank? %>
 	        <!-- display my projects-->
-                <%= render :partial=> 'my_projects',:locals=>{:projects=>@my_projects} %>
+                <%= render :partial=> 'projects' %>
             <% else %>
             	<%=h @user.name %>还没有设定自己目标
             <% end %>
