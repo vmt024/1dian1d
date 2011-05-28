@@ -39,19 +39,15 @@ Ququ::Application.configure do
   config.action_dispatch.best_standards_support = :builtin
   config.action_mailer.perform_deliveries = true
   config.action_mailer.raise_delivery_errors = true
-  config.action_mailer.delivery_method = :smtp
-  config.action_mailer.smtp_settings = {
-    :address              => "smtp.gmail.com",
-    :port                 => 587,
-    :domain               => 'www.1dian1di.com',
-    :user_name            => 'ncs.testing@gmail.com',
-    :password             => 'ncstesting',
-    :authentication       => 'plain',
-    :enable_starttls_auto => true  }
+  config.action_mailer.delivery_method = :sendmail
+  config.action_mailer.sendmail_settings = {
+    :location => "/usr/sbin/sendmail",
+    :arguments => "-i -t -f peterpengnz@gmail.com -F admin@1diand1di.com"
+  }
 
 
   # Enable threaded mode
-  # config.threadsafe!
+  config.threadsafe!
 
   # Enable locale fallbacks for I18n (makes lookups for any locale fall back to
   # the I18n.default_locale when a translation can not be found)

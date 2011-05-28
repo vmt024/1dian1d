@@ -1,8 +1,8 @@
 <h2>我要注册</h2>
-
-<%= form_for @user, :url => {:controller => :user, :action=>:create},:html => { :multipart => true, :id=>"signup_form" } do |f| %>
+<div id="singup_error_msg"></div>
+<%= form_for @user, :url => {:controller => :user, :action=>:create},:html => {:remote => true, :multipart => true, :id=>"signup_form" } do |f| %>
   <%= render :partial => "form", :object => f %>
-  <%= f.submit "注册" %>
+  <%= f.submit "注册", :disable_with=>"注册中..." %>
 <% end %>
 <script type="text/javascript">
   $("#signup_form").validationEngine();

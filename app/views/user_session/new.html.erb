@@ -1,5 +1,7 @@
 <h2>我要登录</h2>
-
+<% unless flash[:error].blank? %>
+<div id="sign_in_error_msg">邮箱或者密码不正确！</div>
+<% end %>
 <%= form_for 'user', :url=>{:controller=>:user_session,:action=>:create},:html=>{:id=>"signin_form", :method=>:post} do |f| %>
     <fieldset>
   	<%= f.label :你的邮箱 %>
@@ -14,7 +16,7 @@
 	<%= f.check_box :remember_me %>
         <%= f.label :自动登录 %>
 	</fieldset>
-  <%= f.submit "登录"  %>
+  <%= f.submit "登录",:disable_with=>"登录中..."  %>
 <% end %>
 <%= link_to "忘记自己的密码了？",lost_password_url %>
 <script type="text/javascript">
