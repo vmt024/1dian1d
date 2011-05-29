@@ -7,14 +7,14 @@
       <% end %>
      </div><!-- end of search-->
 
-    <h1>一点一滴</h1>
-    <h2>实现你的目标<br/>
+    <h1>1点1滴</h1>
+    <h2>分享<span id="amp"> &amp; </span>实现你的个人目标<br>
     <span class="big-numbers"><%= Project.all.size%></span>个项标
     </h2>
 
 
  <ul id="user-navigation">
-    <li><%= link_to "一点一滴", root_url %></li>
+    <li><%= link_to "网站主页", root_url %></li>
     <li><%= link_to "创建目标", new_project_url %></li>
     <% if current_user.blank?  %>
       <li><%= link_to "登录", sign_in_url %></li>

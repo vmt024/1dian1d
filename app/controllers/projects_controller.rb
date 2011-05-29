@@ -173,7 +173,7 @@ class ProjectsController < ApplicationController
   def not_support_this_project
     unless session[:current_user_id].blank?
       support = UserProject.where("project_id = ? and user_id = ?", params[:project_id],session[:current_user_id]).limit(1)
-      support.destroy
+      support.destroy unless support.blank?
       session[:followed_progress].delete(params[:project_id]) if session[:followed_progress].include?(params[:project_id])
       project = Project.find(params[:project_id])
       project.number_of_supporters -= 1

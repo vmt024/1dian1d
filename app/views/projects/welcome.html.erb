@@ -10,7 +10,7 @@
             <ul class="project-meta">
                 <li class="project-meta-user"><%= project.owner.name %></li>
                 <li class="project-meta-place"><%= project.owner.location %></li>
-                <li class="project-meta-cate"><%= project.owner.location %></li>
+                <li class="project-meta-cate"><%= project.category.name %></li>
             </ul>
             <div class="project-content">
                 <p><%= truncate(project.description,:length=>65  )%></p>

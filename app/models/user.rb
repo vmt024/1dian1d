@@ -3,8 +3,8 @@ require 'digest'
 class User < ActiveRecord::Base
 
   has_attached_file :avatar, :styles => { :medium => "538x288#", :thumb => "220x144#" }
-
-  has_and_belongs_to_many :support_projects, :join_table=>:user_projects, :class_name=>'Project'
+  has_many :user_projects
+  has_many :support_projects, :through=>:user_projects, :source=>:project
   has_many :my_projects, :class_name=>'Project'
   before_create :validate_password
   before_save :encrypt_password

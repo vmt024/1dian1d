@@ -1,0 +1,169 @@
+@charset "utf-8";
+
+/* CSS Document */
+
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1.0em}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outline:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:separate;}
+
+
+/* BASIC TYPOGRAPHY */
+
+body { font-family:"微软雅黑","微軟正黑體",Arial, Helvetica, sans-serif;}
+strong, th, thead td{ font-weight: Bold;}
+h1, h2, h3, h4, h5, h6{ font-weight:normal; text-transform:uppercase}
+cite, em, dfn { font-style: italic; }
+del { text-decoration: line-through; color: #666; }
+ins, dfn { border-bottom: 1px solid #ccc; }
+small, sup, sub { font-size: 85%; }
+abbr, acronym { text-transform: uppercase; font-size: 85%; letter-spacing: .1em; }
+a abbr, a acronym { border: none; }
+abbr[title], acronym[title], dfn[title] { cursor: help; border-bottom: 1px solid #ccc; }
+sup { vertical-align: super; }
+sub { vertical-align: sub; }
+
+
+/* LISTS */
+ul{ margin:0; padding:0;}
+ul li{ list-style:none; margin:0;}
+
+
+
+/* BASE SIZES */
+
+body { font-size: 12px; line-height:18px; }
+h1 { font-size: 28px; font-weight:bold; }
+h2 { font-size: 20px; font-weight:bold;}
+h3 { font-size: 16px; font-weight:bold; }
+h4 { font-size: 13px;}
+h5 { font-size: 15px; }
+h6 { font-size: 12px; }
+
+h1 { line-height: 28px; }
+h2 { line-height: 22px; }
+h3 { line-height: 18px; }
+h4 { line-height: 14px; }
+h5 { line-height: 18px; }
+h6 { line-height: 16px; }
+
+
+/* MARGINS & PADDINGS */
+
+hr, p, ul, ol, dl, pre, blockquote, address, table, form { margin-bottom: 18px; }
+img{ margin-bottom:9px;}
+/* NOTE: Calulate header margins: TOP: 1.6em/size, BOTTOM: 1.6em/size/2 */
+h1 { margin: 0 0 9px 0;  }
+h2 { margin: 0 0 9px 0; }
+h3 { margin: 0 0 9px 0; }
+h4 { margin: 0 0 5px 0; }
+h5 { margin: 0 0 10px 0; }
+h6 { margin: 0 0 5px 0; }
+h1#hero{ margin-bottom:36px; line-height:26px; font-size:20px; }
+th, td { padding: 9px 0; }
+caption { padding-bottom: .8em; } /* padding instead of margin for IE */
+blockquote { padding: 0 1em; }
+fieldset { padding: 0; margin: 1.6em 0; } /* padding-top is margin-top for fieldsets in Opera */
+legend { padding-left: .8em; padding-right: .8em; }
+legend+* { margin-top: 1em; } /* compensates for the opera margin bug */
+textarea, input { padding: .3em .4em .15em .4em; }
+select { padding: .1em .2em 0 .2em; }
+option { padding: 0 .4em; }
+dt { margin-top: 0; margin-bottom:0; }
+ol { margin-left: 2.35em; }
+ol ol, ul ol { margin-left: 2.5em; }
+
+
+
+/* COLORS */
+
+body{ color:#ffffff; background:url(../himages/holding-page.jpg) no-repeat center top #f99f01;}
+h1,h3,h4,h5,h6{ color:#727272;}
+h2{ color:#4a4a4a;}
+a{ text-decoration: none; color:#000000; -webkit-transition:color 0.3s ease-in-out; -moz-transition:color 0.3s ease-in-out;}
+a:hover { text-decoration: none; color:#737373; }
+code, pre { color: #c33; } /* very optional, but still useful. W3C uses about the same colors for codes */
+#user-navigation a{ color:#333; font-weight:bold; -webkit-transition:color 0.3s ease-in-out;}
+#user-navigation a:hover{ color:#FFF;}
+
+
+/*UTILITIES*/
+
+.marginRight15{ margin-right:15px;}
+.marginRight30{ margin-right:20px;}
+.marginTop36{ margin-top:36px;}
+.marginTop18{ margin-top:18px;}
+.marginRight20{ margin-right:20px;}
+.white-number{ color:#CCC;}
+.borderBottom{ border-bottom:1px solid #E8E8E8; padding-bottom:9px; margin-bottom:18px!important;}
+
+
+
+/* FROMS */
+
+label{ display:block; text-shadow:0 1px 1px #fff; margin-bottom:10px; font-size:14px;}
+label.errorInput{ color:#F00;}
+input[type="text"], input[type="password"]{ line-height:1; -moz-border-radius: 20px;
+border-radius: 20px;}
+input[type="text"],input[type="password"],textarea{ background-color:#FFF; width:280px; padding:10px; font-size:14px; border: 0px solid #ccc; -webkit-transition:all 0.3s  ease-in-out;}
+textarea{ height:150px; line-height:18px;}
+
+@-webkit-keyframes flash{
+	0%{
+		-webkit-box-shadow:0 0 10px rgba(70, 70, 70, 0.2);
+		}
+		
+		50%{
+		-webkit-box-shadow:0 0 10px rgba(70, 70, 70, 1.0);
+		}
+		
+		100%{
+		-webkit-box-shadow:0 0 10px rgba(70, 70, 70, 0.2);
+		}
+
+}
+
+input[type="text"]:focus, textarea:focus, input[type="password"]:focus{
+		border: 0px solid #666;
+		-webkit-animation:flash 1.5s infinite ease-in-out;
+		width:380px;
+}
+
+input[type="submit"]{
+		padding:10px 40px 10px 40px;
+		line-height:1;
+		margin-top:18px;
+		color:#FFF;
+		border:none;
+		font-size:16px;
+		font-weight:bold;
+		text-transform:uppercase;
+		font-family:Helvetica, Arial, sans-serif;
+		cursor:pointer;
+		-moz-border-radius: 20px;
+		text-shadow:0 1px 0px rgba(0,0,0, 0.5);
+		border-radius: 20px;
+		background: #45484d;
+background: -moz-linear-gradient(top, #45484d 0%, #000000 100%);
+background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#45484d), color-stop(100%,#000000));
+background: -webkit-linear-gradient(top, #45484d 0%,#000000 100%);
+background: -o-linear-gradient(top, #45484d 0%,#000000 100%);
+background: -ms-linear-gradient(top, #45484d 0%,#000000 100%);
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#45484d', endColorstr='#000000',GradientType=0 );
+background: linear-gradient(top, #45484d 0%,#000000 100%);
+
+}
+
+
+input[type="submit"]:hover{
+	background: #000000;
+background: -moz-linear-gradient(top, #000000 0%, #45484d 100%);
+background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#000000), color-stop(100%,#45484d));
+background: -webkit-linear-gradient(top, #000000 0%,#45484d 100%);
+background: -o-linear-gradient(top, #000000 0%,#45484d 100%);
+background: -ms-linear-gradient(top, #000000 0%,#45484d 100%);
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#000000', endColorstr='#45484d',GradientType=0 );
+background: linear-gradient(top, #000000 0%,#45484d 100%);
+}
+
+
+
+
+

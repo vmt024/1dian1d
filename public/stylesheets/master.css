@@ -74,10 +74,10 @@ ol ol, ul ol { margin-left: 2.5em; }
 
 /* COLORS */
 
-body{ color:#737373; background-color:#f8f8f8;}
+body{ color:#737373; background-color:#ffffff;}
 h1,h3,h4,h5,h6{ color:#727272;}
 h2{ color:#4a4a4a;}
-a{ text-decoration: none; color:#f99f01; -webkit-transition:color 0.3s ease-in-out;}
+a{ text-decoration: none; color:#f99f01; -webkit-transition:color 0.3s ease-in-out; -moz-transition:color 0.3s ease-in-out;}
 a:hover { text-decoration: none; color:#737373; }
 code, pre { color: #c33; } /* very optional, but still useful. W3C uses about the same colors for codes */
 #user-navigation a{ color:#333; font-weight:bold; -webkit-transition:color 0.3s ease-in-out;}
@@ -108,11 +108,11 @@ textarea{ height:150px; line-height:18px;}
 	0%{
 		-webkit-box-shadow:0 0 10px rgba(70, 70, 70, 0.2);
 		}
-
+		
 		50%{
 		-webkit-box-shadow:0 0 10px rgba(70, 70, 70, 1.0);
 		}
-
+		
 		100%{
 		-webkit-box-shadow:0 0 10px rgba(70, 70, 70, 0.2);
 		}
@@ -127,7 +127,6 @@ input[type="text"]:focus, textarea:focus, input[type="password"]:focus{
 input[type="submit"]{
 		padding:8px 30px 5px 30px;
 		line-height:1;
-		margin-top:18px;
 		color:#FFF;
 		border:none;
 		font-size:16px;
@@ -140,7 +139,7 @@ input[type="submit"]{
 		border-radius: 20px;
 		background: #b3833c; /* old browsers */
 		background: -moz-linear-gradient(top, #EDC180 0%, #EAA22E 100%); /* firefox */
-		background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#EDC180), color-stop(100%,#EAA22E)); /* webkit */
+		background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#EDC180), color-stop(100%,#EAA22E)); /* webkit */		
 		-webkit-box-shadow: 0px 1px 1px rgba(0,0,0, 0.5);
 		-moz-box-shadow: 0px 1px 1px rgba(0,0,0, 0.5);
 		box-shadow: 0px 1px 1px rgba(0,0,0, 0.5);
@@ -176,19 +175,28 @@ input[type="submit"]:hover{
 	display:inline;
 }
 
-#pagination ul li a{
+#pagination a{
 	display:block;
 	width:60px;
 	border-top:1px solid #E8E8E8;
 	padding-top:18px;
 	padding:5px;
+	text-align:center;
 }
 
-	#pagination ul li a:hover{
+	#pagination a.previous_page{
+		float:left;
+	}
+	
+	#pagination a.next_page{
+		float:right;
+	}
+
+	#pagination a:hover{
 		background-color:#f99f01;
 		color:#FFF
 	}
-
+		
 
 
 #pagination ul li a#prevPage{
@@ -207,6 +215,11 @@ input[type="submit"]:hover{
 	margin-bottom:18px;
 }
 
+.entry h6{
+	color:#333;
+	margin-bottom:18px!important;
+}
+
 
 /* personal intro */
 
@@ -216,9 +229,9 @@ input[type="submit"]:hover{
 
 
 .csscolumns #personal-intro p{
-	-webkit-column-count:2;
+	-webkit-column-count:2;	
 	-webkit-column-gap:30px;
-	-moz-column-count:2;
+	-moz-column-count:2;	
 	-moz-column-gap:30px;
 	-webkit-column-rule:1px solid #E8E8E8;
 	-moz-column-rule:1px solid #E8E8E8;
@@ -266,8 +279,13 @@ input[type="submit"]:hover{
 .project-content{
 	border-bottom:1px solid #E8E8E8;
 	margin-bottom:36px;
+	-webkit-transition:all 0.3s ease-in-out; 
+	-moz-transition:all 0.3s ease-in-out;
 }
 
+	.project-content:hover{
+		border-bottom:1px solid #666;
+	}
 
 
 
@@ -340,6 +358,8 @@ ul.stats-meta li{
 /* site banner */
 #banner{
 	background-color:#f99f01;
+	-webkit-transition:all 0.3s ease-in-out;
+	-moz-transition:all 0.3s ease-in-out;
 }
 
 
@@ -369,6 +389,11 @@ ul.stats-meta li{
 		-webkit-animation:none;
 		color:#333;
 	}
+	
+
+#banner h1{
+	font-size:30px;
+}
 
 #banner h1, #banner h2{
 	color:#FFF;
@@ -377,13 +402,18 @@ ul.stats-meta li{
 }
 
 .big-numbers{
+        margin-right: 5px;
 	font-size:60px;
 	line-height:70px;
 	letter-spacing:-2px;
 	font-weight:normal;
-   margin-right: 8px;
 }
 
+#banner:hover{
+	-webkit-box-shadow: 0px 1px 20px rgba(0,0,0,0.4);
+	-moz-box-shadow: 0px 1px 20px rgba(0,0,0,0.4);
+}
+	
 
 /* navigational structure */
 
@@ -419,14 +449,20 @@ ul.stats-meta li{
 		background-color:#f99f01;
 		border-top:1px solid #f99f01;
 	}
-
+	
 
 #breadcrumb{
 	border-bottom:1px solid #E8E8E8;
 	top:-20px;
 	position:relative;
+	-webkit-transition:all 0.3s ease-in-out; 
+	-moz-transition:all 0.3s ease-in-out;
 }
 
+	#breadcrumb:hover{
+		border-bottom:1px solid #f99f01;
+	}
+	
 	#breadcrumb ul{
 		margin-bottom:9px;
 	}
@@ -436,7 +472,7 @@ ul.stats-meta li{
 		display:inline;
 		margin-right:18px;
 	}
-
+	
 
 #project-navigation ul li{
 	display:inline;
@@ -468,11 +504,11 @@ ul.stats-meta li{
 		border-top:1px solid #555454;
 		padding:9px 0;
 	}
-
+	
 	#project-stats li:first-child{
 		border-top:none;
 	}
-
+	
 	#project-stats li:last-child{
 		border-bottom:none;
 	}
@@ -483,12 +519,12 @@ ul.stats-meta li{
 	font-size:14px;
 	font-weight:bold;
 }
-
+	
 	#rewards-list dl dd{
 		color:#CCC;
 		margin-bottom:18px;
 	}
-
+	
 
 #support-btn a{
 	font-size:30px;
@@ -501,7 +537,7 @@ ul.stats-meta li{
 	-moz-border-radius: 5px;
 	border-radius: 5px;
 	-webkit-transition:all .3s ease-in-out;
-
+	
 }
 
 	#support-btn a:hover{
@@ -541,9 +577,9 @@ h1.cpanelHeading{
 }
 
 .csscolumns #text-content{
-	-webkit-column-count:2;
+	-webkit-column-count:2;	
 	-webkit-column-gap:30px;
-	-moz-column-count:2;
+	-moz-column-count:2;	
 	-moz-column-gap:30px;
 	-webkit-column-rule:1px solid #E8E8E8;
 	-moz-column-rule:1px solid #E8E8E8;
@@ -564,9 +600,9 @@ h1.cpanelHeading{
 /* similar projects */
 
 .csscolumns #similarProjects{
-	-webkit-column-count:3;
+	-webkit-column-count:3;	
 	-webkit-column-gap:30px;
-	-moz-column-count:3;
+	-moz-column-count:3;	
 	-moz-column-gap:30px;
 	-webkit-column-rule:1px solid #E8E8E8;
 	-moz-column-rule:1px solid #E8E8E8;
@@ -589,11 +625,19 @@ ul#similarProjects li{
 	-webkit-box-shadow: 0px 0px 10px #7d7d7d;
 -moz-box-shadow: 0px 0px 10px #7d7d7d;
 box-shadow: 0px 0px 10px #7d7d7d;
+-webkit-column-count:2;	
+	-webkit-column-gap:30px;
+	-moz-column-count:2;	
+	-moz-column-gap:30px;
+	-webkit-column-rule:1px solid #3b3b3b;
+	-moz-column-rule:1px solid #3b3b3b;
+	-webkit-animation:flash 1.5s infinite ease-in-out;
 }
 
 	.global-notification ul{
 		margin-bottom:0!important;
 		color:#FCFCFC;
+
 	}
 
 
@@ -602,7 +646,15 @@ box-shadow: 0px 0px 10px #7d7d7d;
 }
 
 .new-progress{
-	color:#9C0;
+	color:#F39;
+}
+
+.success-project{
+	color:#990;
+}
+
+.failed-project{
+	color:#C00;
 }
 
 input.add-as-friend{
@@ -611,3 +663,22 @@ input.add-as-friend{
 	float:right;
 }
 
+
+/* site message*/
+
+#siteMessage{
+	background-color:#9C0;
+	padding:18px;
+	margin-bottom:18px;
+	color:#FFF;
+	-webkit-animation:flash 1.5s infinite ease-in-out;
+}
+
+	#siteMessage p{
+		margin-bottom:0;
+	}
+
+#amp{ font-family:Baskerville, "Baskerville old face", "Hoefler Text", Garamond, "Times New Roman", serif!important; font-style:italic; font-weight:normal;}
+
+::-moz-selection{ color:#FFF; background-color:#b72f47; text-shadow:none;}
+::selection{ color:#FFF; background-color:#b72f47; text-shadow:none;}

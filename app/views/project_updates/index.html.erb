@@ -42,8 +42,6 @@
 <% if @project.owner.id.eql?(session[:current_user_id])%>       
 <%= form_for(@new_project_update) do |f| %>
   <%= f.text_area :content %>
-  <p>
-    <%= f.submit '更新', :disable_with=>"更新中..." %>
-  </p>
+  <%= f.submit '更新', :disable_with=>"更新中..." %>
 <% end %>
 <% end %>

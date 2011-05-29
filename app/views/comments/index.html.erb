@@ -42,8 +42,6 @@
 
 <%= form_for(@new_comment) do |f| %>
   <%= f.text_area :content %>
-  <p>
-    <%= f.submit '留言', :disable_with=>"留言中..." %>
-  </p>
+  <%= f.submit '留言', :disable_with=>"留言中..." %>
 <% end %>
 
