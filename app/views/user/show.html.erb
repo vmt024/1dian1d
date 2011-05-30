@@ -3,7 +3,7 @@
   <div class="global-notification">
     <ul>
       <% unless session[:followed_progress].blank? %>
-      	<li><strong><span class="followed-progress"><%= session[:followed_progress].size %></span></strong> 个你所关注的目标有了新的进展。</li>
+      	<li><strong><span class="followed-progress"><%= session[:followed_progress].size %></span></strong> 个你所支持的目标有了新的进展。</li>
       <% end %>
       <% unless session[:new_progress].blank? %>
         <% session[:new_progress].each_pair do |project_id,progress|%>

@@ -1,9 +1,9 @@
-<table width="100%" border="0" summary="你所关注的目标" class="myTable">
+<table width="100%" border="0" summary="你所支持的目标" class="myTable">
   <tr>
-    <td class="td-titles"><%= link_to "目标名称", user_url(session[:current_user_id],:section=>"关注目标",:sort_by=>"目标名称") %></td>
-    <td><%= link_to "支持人数",user_url(session[:current_user_id],:section=>"关注目标",:sort_by=>"支持人数") %></td>
-    <td><%= link_to "剩余时间",user_url(session[:current_user_id],:section=>"关注目标",:sort_by=>"剩余时间") %></td>
-    <td><%= link_to "浏览次数",user_url(session[:current_user_id],:section=>"关注目标",:sort_by=>"浏览次数") %></td>
+    <td class="td-titles"><%= link_to "目标名称", user_url(session[:current_user_id],:section=>"支持目标",:sort_by=>"目标名称") %></td>
+    <td><%= link_to "支持人数",user_url(session[:current_user_id],:section=>"支持目标",:sort_by=>"支持人数") %></td>
+    <td><%= link_to "剩余时间",user_url(session[:current_user_id],:section=>"支持目标",:sort_by=>"剩余时间") %></td>
+    <td><%= link_to "浏览次数",user_url(session[:current_user_id],:section=>"支持目标",:sort_by=>"浏览次数") %></td>
     <td></td>
   </tr>
   <% @projects.each do |my_int_proj| %>
@@ -11,7 +11,7 @@
     <td class="td-titles">
     <% project_name = (!session[:followed_progress].blank? && session[:followed_progress].include?(my_int_proj.id)) ? ("<span class=\"followed-progress\">#{my_int_proj.name}</span>").html_safe : my_int_proj.name %>
     <%= link_to project_name, project_url(my_int_proj.id) %></td>
-    <td><%= my_int_proj.supporters.count %>关注</td>
+    <td><%= my_int_proj.supporters.count %>支持</td>
     <td><%= project_days_left(my_int_proj.complete_time) %>天剩余</td>
     <td><%= my_int_proj.views %>次浏览</td>
     <td>
