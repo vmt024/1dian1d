@@ -1,6 +1,6 @@
 <fieldset>
 <%= form.label :你的昵称 %>
-<%= form.text_field :name,:class=>"validate[required,funcCall[validateName],minSize[2]]" %>
+<%= form.text_field :name,:class=>"validate[required,funcCall[validateName],minSize[2],maxSize[5]]" %>
 </fieldset>
 <fieldset>
 <%= form.label :你的邮箱 %>

@@ -1,13 +1,9 @@
 <div id="city-navigation">
   <ul>
-      <% project_locations = Project.get_all_locations %>
-      <% project_locations.each_with_index do |project, index| %>
-        <% if ((index+1)%4 == 0) %>
-          <li><a href="<%= projects_url(:location=>project.location) %>" class="marginRight20"><%= project.location %></a></li>
-        <% else %>
-          <li><a href="<%= projects_url(:location=>project.location) %>" class="last"><%= project.location %></a></li>
-        <% end %>
-      <% end %>
-      </ul>
-      <div class="clear"></div>
+    <% project_locations = Project.get_all_locations %>
+    <% project_locations.each do |project| %>
+      <li><%= link_to project.location, projects_url(:location=>project.location),{:class=> cycle("marginRight20","marginRight20","marginRight20","last")} %></li>
+    <% end %>
+  </ul>
+  <div class="clear"></div>
 </div><!-- end of category navigation-->

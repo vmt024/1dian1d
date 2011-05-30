@@ -13,6 +13,6 @@ class Project < ActiveRecord::Base
 
 
   def self.get_all_locations
-    return Project.where(:all).select('location').group("location")
+    return Project.select('location').group("location")
   end
 end

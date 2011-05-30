@@ -1,0 +1,6 @@
+  <%if File.exist?(@project.avatar.url(:medium)) %>
+    <%= image_tag @project.avatar.url(:medium) %>
+  <% else %>
+    <%= image_tag @project.category.avatar.url(:medium) %>
+  <% end %>
+  <p><%= @project.description%></p>

@@ -1,9 +1,3 @@
-<div id="breadcrumb">
-  <ul>
-    <li><%= link_to "网站主页", root_url %></li>
-  </ul>
-</div><!-- end of breadcrumb-->
-
 <% if session[:current_user_id].eql?(@user.id) %>
 <% unless session[:new_progress].blank? && session[:followed_progress].blank? %>
   <div class="global-notification">

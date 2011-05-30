@@ -1,5 +1,5 @@
 class UserMailer < ActionMailer::Base
-   default :from=>"一点一滴",:charset=>"UTF-8",:content_type => "text/html"
+   default :from=>"1dian1di",:charset=>"UTF-8",:content_type => "text/html"
   #layout 'awesome'
   
   def welcome_email(user)

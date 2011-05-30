@@ -4,6 +4,7 @@ class ProjectUpdatesController < ApplicationController
   before_filter :require_user, :only=>[:new,:create,:edit,:update,:destroy]
   # GET /project_updates
   # GET /project_updates.xml
+
   def index
     project_id = session[:current_project_id] || params[:project_id]
     @project_updates = ProjectUpdate.all(:conditions=>['project_id = ?',project_id])
@@ -12,7 +13,7 @@ class ProjectUpdatesController < ApplicationController
     @new_update = Project.new
     respond_to do |format|
       format.html # index.html.erb
-      format.xml  { render :xml => @project_updates }
+      format.js  
     end
   end
 

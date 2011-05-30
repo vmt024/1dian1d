@@ -1,35 +1,30 @@
-<% if params[:category].blank? %>
-<%= render :partial=>'layouts/hero_statement' %>
-<% else %>
- <h1><%= params[:category]%></h1>
-<% end %>
 <% unless @projects.blank? %>
-<% @projects.each do |project| %>
+  <% @projects.each do |project| %>
     <div class="grid_3 <%= cycle("alpha", "omega prefix_1") -%>">
-            <h3><%= link_to project.name, project_url(project.id) %></h3>
-            <ul class="project-meta">
-                <li class="project-meta-user"><%= project.owner.name %></li>
-                <li class="project-meta-place"><%= project.owner.location %></li>
-                <li class="project-meta-cate"><%= project.category.name %></li>
-            </ul>
-            <div class="project-content">
-                <p><%= truncate(project.description,:length=>65  )%></p>
-                <ul class="stats-meta">
-                <li><%= project.supporters.blank? ? "0" : project.supporters.count %>支持</li>
-                <li><%= project_days_left(project.complete_time)%>天剩余</li>
-                <li><%= project.views%>次浏览</li>
-                </ul>
-            </div>
-        </div>
-      <%if current_cycle.eql?("omega prefix_1") %>
-         <div class="clear"></div> 
-      <% end %>
-<% end %>
+      <h3><%= link_to project.name, project_url(project.id) %></h3>
+      <ul class="project-meta">
+        <li class="project-meta-user"><%= project.owner.name %></li>
+        <li class="project-meta-place"><%= project.owner.location %></li>
+        <li class="project-meta-cate"><%= project.category.name %></li>
+      </ul>
+      <div class="project-content">
+        <p><%= truncate(project.description,:length=>65  )%></p>
+        <ul class="stats-meta">
+          <li><%= project.supporters.blank? ? "0" : project.supporters.count %>支持</li>
+          <li><%= project_days_left(project.complete_time)%>天剩余</li>
+          <li><%= project.views%>次浏览</li>
+        </ul>
+      </div>
+    </div>
+    <%if current_cycle.eql?("omega prefix_1") %>
+      <div class="clear"></div> 
+    <% end %>
+  <% end %>
 <% else %>
-目前该目录下还没有任何目标，如果你有类似的目标，请不要犹豫哦！赶快<%= link_to "创建", new_project_url %>！
+  目前该目录下还没有任何目标，如果你有类似的目标，请不要犹豫哦！赶快<%= link_to "创建", new_project_url %>！
 <% end %>
-<div class="clear"></div>
-<div id="pagination" class="grid_3 alpha">
-  <%= will_paginate @projects %>
-</div>
+  <div class="clear"></div>
+  <div id="pagination" class="grid_3 alpha">
+    <%= will_paginate @projects %>
+  </div>
 

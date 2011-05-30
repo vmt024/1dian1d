@@ -1,0 +1,18 @@
+<% if params[:controller].eql?("projects") && params[:action].eql?("welcome") %>
+  <%= render :partial=>'layouts/hero_statement' %>
+<% else %>
+<div id="breadcrumb">
+  <ul>
+    <li><%= link_to "网站主页", root_url %></li>
+    <% unless @project.blank?%>
+      <li><%= link_to @project.category.name, projects_url(:category=>@project.category.name) %></li>
+    <% end %>
+  </ul>
+</div><!-- end of breadcrumb-->
+<h1>
+<%= params[:search_by] unless params[:search_by].blank? %>
+<%= params[:location] unless params[:location].blank? %>
+<%= params[:category] unless params[:category].blank? %>
+</h1>
+<% end %>
+

@@ -1,9 +1,12 @@
+<!-- main (yellow colored) section -->
 <%= render :partial=>'layouts/main_banner' %>
 
-
 <% unless (params[:controller].eql?('projects') && params[:action].eql?('show')) %>
+<!-- recommondation, latest, about us section -->
 <%= render :partial=>'layouts/main_navigation' %>
+<!-- city list -->
 <%= render :partial=>'layouts/city_navigation' %>
+<!-- category list -->
 <%= render :partial=>'layouts/category_navigation' %>
 <% else %>
 <%= render :partial=>'layouts/rewards_content' %>
