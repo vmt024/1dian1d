@@ -1,9 +1,9 @@
 <table width="100%" border="0" summary="你所支持的目标" class="myTable">
   <tr>
-    <td class="td-titles"><%= link_to "目标名称", user_url(session[:current_user_id],:section=>"支持目标",:sort_by=>"目标名称") %></td>
-    <td><%= link_to "支持人数",user_url(session[:current_user_id],:section=>"支持目标",:sort_by=>"支持人数") %></td>
-    <td><%= link_to "剩余时间",user_url(session[:current_user_id],:section=>"支持目标",:sort_by=>"剩余时间") %></td>
-    <td><%= link_to "浏览次数",user_url(session[:current_user_id],:section=>"支持目标",:sort_by=>"浏览次数") %></td>
+    <td class="td-titles">目标名称</td>
+    <td>支持人数</td>
+    <td>剩余时间</td>
+    <td>浏览次数</td>
     <td></td>
   </tr>
   <% @projects.each do |my_int_proj| %>

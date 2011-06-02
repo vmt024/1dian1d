@@ -9,6 +9,7 @@ class User < ActiveRecord::Base
   before_create :validate_password
   before_save :encrypt_password
   has_many :comments
+  has_many :friends
 
   attr_protected :superman
 

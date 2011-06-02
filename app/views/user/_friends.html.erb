@@ -1,4 +1,4 @@
 <% @friends.each do |friend| %>
-  <%= User.find(friend.friend_id).name %>--<%= link_to "发送私信", new_message_url(:friend=>friend.friend_id)  %><br/>
+  <%= User.find(friend.friend_id).name %><%= link_to "发送私信", new_message_url(:friend=>friend.friend_id) if @user.id.eql?(session[:current_user_id]) %><br/>
 <% end  %>
 

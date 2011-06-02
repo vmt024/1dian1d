@@ -5,7 +5,7 @@ class Friend < ActiveRecord::Base
   end
   
   def self.my_friends(user_id)
-    return Friend.where("user_id = ? or friend_id = ?",user_id,user_id)
+    return Friend.where("user_id = ?",user_id)
   end
 
   def self.are_they_friend?(user1,user2)

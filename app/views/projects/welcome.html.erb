@@ -3,9 +3,9 @@
     <div class="grid_3 <%= cycle("alpha", "omega prefix_1") -%>">
       <h3><%= link_to project.name, project_url(project.id) %></h3>
       <ul class="project-meta">
-        <li class="project-meta-user"><%= project.owner.name %></li>
-        <li class="project-meta-place"><%= project.owner.location %></li>
-        <li class="project-meta-cate"><%= project.category.name %></li>
+        <li class="project-meta-user"><%= link_to project.owner.name, user_url(project.owner.id) %></li>
+        <li class="project-meta-place"><%= link_to project.owner.location, projects_url(:location=>project.owner.location) %></li>
+        <li class="project-meta-cate"><%= link_to project.category.name, projects_url(:category=>project.category.name) %></li>
       </ul>
       <div class="project-content">
         <p><%= truncate(project.description,:length=>65  )%></p>
