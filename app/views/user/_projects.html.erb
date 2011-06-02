@@ -16,7 +16,7 @@
     <td><%= my_proj.views %>次浏览</td>
     <td>
       <% if user_is_project_owner?(my_proj.user_id) %>
-        <%= link_to "更新进展", project_updates_url(:project_id=>my_proj.id) %>
+        <%= link_to "更新进展", project_progress_url(:project_id=>my_proj.id) %>
       <% end %>
     </td>
   </tr>

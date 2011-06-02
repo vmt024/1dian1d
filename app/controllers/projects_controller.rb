@@ -68,10 +68,40 @@ class ProjectsController < ApplicationController
     @project.views += 1
     @project.save(false)
     project_list = Project.where("category_id = ? and id != ?",@project.category_id,@project.id).select('id').collect{|p| p.id}
-    @similar_projects = Project.where("id in (?)",project_list.shuffle.first(2).join(","))
-
+    unless project_list.blank?
+      @similar_projects = Project.where("id in (#{project_list.shuffle.first(9).join(",")})")
+    else
+      @similar_projects = []
+    end
     session[:new_progress].delete(@project.id) if !session[:new_progress].blank? && session[:new_progress].include?(@project.id)
     session[:followed_progress].delete(@project.id) if !session[:followed_progress].blank? && session[:followed_progress].include?(@project.id)
+
+    respond_to do |format|
+      format.html # show.html.erb
+      format.xml  { render :xml => @project }
+    end
+  end
+
+  def supporters
+    @project = Project.find(params[:project_id])
+
+    respond_to do |format|
+      format.html # show.html.erb
+      format.xml  { render :xml => @project }
+    end
+  end
+
+  def comments
+    @project = Project.find(params[:project_id])
+
+    respond_to do |format|
+      format.html # show.html.erb
+      format.xml  { render :xml => @project }
+    end
+  end
+
+  def progress
+    @project = Project.find(params[:project_id])
 
     respond_to do |format|
       format.html # show.html.erb

@@ -48,10 +48,9 @@ class ProjectUpdatesController < ApplicationController
   # POST /project_updates.xml
   def create
     @project_update = ProjectUpdate.new(params[:project_update])
-    @project_update.project_id = session[:current_project_id]
     respond_to do |format|
       if @project_update.save
-        format.html { redirect_to(project_updates_url, :notice => 'ProjectUpdate was successfully created.') }
+        format.html { redirect_to (:back, :notice => 'ProjectUpdate was successfully created.') }
         format.xml  { render :xml => @project_update, :status => :created, :location => @project_update }
       else
         format.html { render :action => "new" }

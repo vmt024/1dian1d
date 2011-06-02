@@ -47,12 +47,11 @@ class CommentsController < ApplicationController
   # POST /comments.xml
   def create
     @comment = Comment.new(params[:comment])
-    @comment.project_id = session[:current_project_id]
     @comment.user_id = session[:current_user_id]
     
     respond_to do |format|
       if @comment.save
-        format.html { redirect_to (comments_url, :notice => 'Comment was successfully created.') }
+        format.html { redirect_to (:back, :notice => 'Comment was successfully created.') }
         format.xml  { render :xml => @comment, :status => :created, :location => @comment }
       else
         format.html { render :action => "new" }

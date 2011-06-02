@@ -1,33 +1,12 @@
-<div class="grid_5 alpha" id="project-title">
-  <h2><%= @project.name%></h2>
-</div>
-<div class="grid_2 omega" id="follow-project">
-  <div class="button">
-   PM or add friend 
-  </div>
-</div>
-       
-<div class="grid_5 alpha" id="project-navigation">
-  <ul>
-    <li><%= link_to "目标主页", project_url(@project.id), :remote=>true, :id=>"project_tab" %></li>
-    <li><%= link_to "进展(" + "#{@project.project_updates.size}" + ")",project_updates_url, :remote=>true, :id=>"update_tab" %></li>
-    <li><%= link_to "留言(" + "#{@project.comments.size}" + ")",comments_url,:remote=>true, :id=>"comment_tab" %></li>
-    <li><%= link_to "支持者(" + "#{@project.supporters.count}" + ")",list_supporters_projects_url, :remote=>true, :id=>"support_tab" %></li>
-  </ul>
-</div>
+<%= render :partial=>"project_detail_header"%>
 
-<div id="project_tab">
-  <div class="grid_2 omega" id="project-meta-detail">
-    <ul class="project-meta">
-      <li class="project-meta-user"><%= link_to @project.owner.name, user_url(@project.user_id) %></li>
-      <li class="project-meta-place"><%= link_to @project.owner.location,projects_url(:location=>@project.owner.location) %></li>
-    </ul>
-  </div>
-  <div class="clear"></div>
-
-  <div id="text-content">
-    <%= render :partial=>"project_content"%>
-  </div>
+<div id="text-content">
+  <%if File.exist?(@project.avatar.url(:medium)) %>
+    <%= image_tag @project.avatar.url(:medium) %>
+  <% else %>
+    <%= image_tag @project.category.avatar.url(:medium) %>
+  <% end %>
+  <p><%= @project.description%></p>
 </div>
 
 <div class="clear"></div>

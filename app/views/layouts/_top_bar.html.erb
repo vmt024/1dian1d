@@ -4,8 +4,17 @@
 <div id="breadcrumb">
   <ul>
     <li><%= link_to "网站主页", root_url %></li>
-    <% unless @project.blank?%>
+    <% unless @project.blank? || @project.new_record? %>
       <li><%= link_to @project.category.name, projects_url(:category=>@project.category.name) %></li>
+    <% end %>
+    <% if !params[:category].blank? && params[:controller].eql?('projects') %>
+      <li><%= link_to params[:category], '#' %></li>
+    <% end %>
+    <% if !params[:location].blank? && params[:controller].eql?('projects') %>
+      <li><%= link_to params[:location], '#' %></li>
+    <% end %>
+    <% if !params[:search_by].blank? && params[:controller].eql?('projects') %>
+      <li><%= link_to params[:search_by], '#' %></li>
     <% end %>
   </ul>
 </div><!-- end of breadcrumb-->

@@ -4,6 +4,9 @@ Ququ::Application.routes.draw do
   resources :categories
   resources :project_updates
   resources :projects do
+    get :progress
+    get :comments
+    get :supporters
     collection do
       get :not_support_this_project
       get :list_supporters

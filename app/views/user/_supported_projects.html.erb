@@ -15,7 +15,7 @@
     <td><%= project_days_left(my_int_proj.complete_time) %>天剩余</td>
     <td><%= my_int_proj.views %>次浏览</td>
     <td>
-      <% if user_is_project_owner?(my_int_proj.user_id) %>
+      <% if user_is_project_owner?(my_int_proj.user_id) && @user.id.eql?(session[:current_user_id]) %>
         <%= link_to "取消支持", :controller=>"projects", :action=>"not_support_this_project", :project_id=>my_int_proj.id %>
       <% end %>
     </td>

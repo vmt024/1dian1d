@@ -1,0 +1,17 @@
+<%= render :partial=>"project_detail_header"%>
+
+<table width="100%" border="0" summary="你所创建的目标" class="myTable">
+  <% @project.supporters.each do |supporter| %>
+  <tr>
+    <td class="td-titles"><%=link_to supporter.name, user_url(supporter.id) %></td>
+    <td><%= supporter.location %></td>
+    <% if supporter.support_projects.count > 0 %>
+    <td><%= supporter.name %> 还支持了其他<%=link_to " #{supporter.support_projects.count} ", projects_url(:support_by=>supporter.id) %>个目标</td>
+    <% else %>
+    <td> </td>
+    <% end %>
+  </tr>
+  <% end %>
+</table>
+
+<div class="clear"></div>
