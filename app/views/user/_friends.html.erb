@@ -1,4 +1,14 @@
-<% @friends.each do |friend| %>
-  <%= User.find(friend.friend_id).name %><%= link_to "发送私信", new_message_url(:friend=>friend.friend_id) if @user.id.eql?(session[:current_user_id]) %><br/>
-<% end  %>
+<table width="100%" border="0" class="myTable" summary="你所创建的项目">
+    <tbody>
+      <% @friends.each do |friend| %>
+      <tr>
+        <td><%= link_to User.find(friend.friend_id).name, user_url(friend.friend_id) %></td>
+        <td><%= User.find(friend.friend_id).location %></td>
+        <td>ta 支持了<%=link_to " #{User.find(friend.friend_id).support_projects.count} ", projects_url(:support_by=>friend.friend_id) %>个目标</td>
+        <td><a href="#">删除好友</a></td>
+        <td><%= link_to "发私信", new_message_url(:friend=>friend.friend_id) if @user.id.eql?(session[:current_user_id]) %></td>
+      </tr>
+      <% end  %>
+    </tbody>
+</table>
 
