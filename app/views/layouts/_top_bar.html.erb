@@ -16,12 +16,24 @@
     <% if !params[:search_by].blank? && params[:controller].eql?('projects') %>
       <li><%= link_to params[:search_by], '#' %></li>
     <% end %>
+    <% if params[:action].eql?('show') && params[:controller].eql?('user') %>
+      <li>
+        <%if params[:id].eql?(session[:current_user_id].to_s)%>
+          <%= link_to "控制面板", '#' %>
+        <% else %>
+          <%= link_to "#{@user.name}的主页", '#' %>
+        <% end %>
+      </li>
+    <% end %>
   </ul>
 </div><!-- end of breadcrumb-->
+<% unless params[:search_by].blank? && params[:location].blank? && params[:category].blank? %>
 <h1>
-<%= params[:search_by] unless params[:search_by].blank? %>
-<%= params[:location] unless params[:location].blank? %>
-<%= params[:category] unless params[:category].blank? %>
+<%= params[:search_by]%>
+<%= params[:location] %>
+<%= params[:category] %>
 </h1>
+<%= image_tag "beijing.gif" if params[:location].eql?("北京市")%>
+<% end %>
 <% end %>
 

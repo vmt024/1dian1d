@@ -1,7 +1,7 @@
 <!-- main (yellow colored) section -->
 <%= render :partial=>'layouts/main_banner' %>
 
-<% unless (params[:controller].eql?('projects') && params[:action].eql?('show')) %>
+<% unless (params[:controller].eql?('projects') && (params[:action].eql?('show') || params[:action].eql?('comments') ||params[:action].eql?('progress') || params[:action].eql?('supporters') )) %>
 <!-- recommondation, latest, about us section -->
 <%= render :partial=>'layouts/main_navigation' %>
 <!-- city list -->

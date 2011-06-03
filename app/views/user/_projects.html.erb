@@ -14,11 +14,21 @@
     <td><%= my_proj.supporters.count %>支持</td>
     <td><%= project_days_left(my_proj.complete_time) %>天剩余</td>
     <td><%= my_proj.views %>次浏览</td>
+    <% if project_days_left(my_proj.complete_time).eql?(0) %>
+    <td>
+      <% if my_proj.supporters.count.eql?(0) %>
+        目标失败
+      <% else %>
+        目标成功
+      <% end %>
+    </td>
+    <% else %>
     <td>
       <% if user_is_project_owner?(my_proj.user_id) %>
         <%= link_to "更新进展", project_progress_url(:project_id=>my_proj.id) %>
       <% end %>
     </td>
+    <% end %>
   </tr>
   <% end %>
 </table>

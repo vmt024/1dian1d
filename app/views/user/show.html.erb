@@ -27,7 +27,14 @@
    <% end %>
   </h1>
   <% else %>
-     <h2 style="float:left"><%=h @user.name %>的主页</h2>
+    <div class="grid_5 alpha" id="project-title">
+    <h2><%= @user.name%>的主页</h2>
+  </div>
+
+  <div class="grid_2 omega" id="follow-project">
+     <%= link_to "发私信", "#" %>
+     <%= link_to "加为好友", "#" %>
+  </div>
 
      <div class="clear"></div>
     <p><%=h @user.description %></p>
@@ -37,8 +44,8 @@
 
             <div class="grid_7 alpha omega" id="project-navigation">
             <ul class="borderBottom">
-                <li><%= link_to "支持的目标(#{@user.support_projects.size})" ,user_supported_projects_url(:user_id=>@user.id),:remote=>true,:id=>"support_project_tab"%></li>
                 <li><%= link_to "创建的目标(#{@user.user_projects.size})",user_projects_url(:user_id=>@user.id),:remote=>true,:class=>"currentNavigationalItem",:id=>"project_tab" %></li>
+                <li><%= link_to "支持的目标(#{@user.support_projects.size})" ,user_supported_projects_url(:user_id=>@user.id),:remote=>true,:id=>"support_project_tab"%></li>
                 <li><%= link_to "好友(#{@user.friends.size})",user_friends_url(:user_id=>@user.id),:remote=>true,:id=>"friend_tab" %></li>
   <% if session[:current_user_id].eql?(@user.id) %>
                 <li><%= link_to "私信(#{Message.my_private_messages(@user.id).size})",user_messages_url(:user_id=>@user.id),:remote=>true,:id=>"message_tab" %></li>
