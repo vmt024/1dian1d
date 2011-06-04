@@ -22,6 +22,8 @@ Ququ::Application.routes.draw do
     get :supported_projects
     get :friends
     collection do
+      get :add_friend
+      get :delete_friend
       get :validate_name
       get :validate_email
     end
@@ -37,8 +39,6 @@ Ququ::Application.routes.draw do
 
   match 'lost_password' => 'user#lost_password', :as => :lost_password
   match 'password_recover' => 'user#password_recover', :as => :password_recover
-  
-  match '/friend_request' => 'user#send_friend_request', :as => :new_friend_request
   
   match 'about' => 'projects#aboutus', :as => :about
   match 'contact' => 'projects#contactus', :as => :contact

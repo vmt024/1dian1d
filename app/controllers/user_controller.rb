@@ -93,9 +93,21 @@ class UserController < ApplicationController
     redirect_to :back
   end
 
-  def send_friend_request
+  def add_friend
     Friend.add_as_my_friend(session[:current_user_id],params[:user_id])
-    redirect_to :back
+    respond_to do |format|
+      format.html {redirect_to :back} 
+      format.js 
+    end
+  end
+
+  def delete_friend
+    Friend.delete_my_friend(session[:current_user_id],params[:user_id])
+    @friends_count = Friend.my_friends(params[:user_id]) 
+    respond_to do |format|
+      format.html {redirect_to :back} 
+      format.js 
+    end
   end
 
   def validate_name

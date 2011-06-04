@@ -89,6 +89,9 @@ class User < ActiveRecord::Base
       return Friend.are_they_friend?(self.id,my_user_id)
     end
 
+    def is_allowed_send_PM_to(friend_id)
+      return Friend.are_they_friend_to_each_other?(self.id,friend_id)
+    end
 
     private
     def encrypt_password

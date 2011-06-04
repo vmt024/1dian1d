@@ -10,8 +10,16 @@
     <% else %>
     <td> </td>
     <% end %>
-    <td><%=link_to "加为好友", "#" %></td>
-    <td><%=link_to "发私信", "#" %></td>
+    <td>
+     <% if session[:current_user_id] %>
+       <% if User.find(session[:current_user_id]).is_my_friend?(supporter.id) %>
+         <%= link_to "删除好友", delete_friend_user_index_url(:user_id=>supporter.id),:remote=>true %>
+       <% else%>
+         <%= link_to "加为好友", add_friend_user_index_url(:user_id=>supporter.id),:remote=>true unless supporter.id.eql?(session[:current_user_id])%>
+       <% end %>
+     <% end %>
+    </td>
+    <td><%=link_to "发私信", new_message_url(:friend=>supporter.id) if supporter.is_allowed_send_PM_to(session[:current_user_id]) and !supporter.id.eql?(session[:current_user_id]) %></td>
   </tr>
   <% end %>
 </table>
