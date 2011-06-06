@@ -1,7 +1,7 @@
 <span id="reward">
 <fieldset>
 <%= label 'reward_conditions','', "犒赏条件" %>
-<%= text_field 'reward_conditions','',:class=>"validate[minSize[8]]" %>
+<%= text_field 'reward_conditions','',:class=>"validate[minSize[8],maxSize[16]]" %>
 </fieldset>
 <fieldset>
 <%= label 'rewards',"", "犒赏内容" %>

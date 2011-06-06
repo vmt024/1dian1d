@@ -5,7 +5,7 @@
       <tr id="<%= row_id%>">
         <td><%= link_to User.find(friend.friend_id).name, user_url(friend.friend_id) %></td>
         <td><%= User.find(friend.friend_id).location %></td>
-        <td>ta 支持了<%=link_to " #{User.find(friend.friend_id).support_projects.count} ", projects_url(:support_by=>friend.friend_id) %>个目标</td>
+        <td>支持了<%=link_to " #{User.find(friend.friend_id).support_projects.count} ", projects_url(:support_by=>friend.friend_id) %>个目标</td>
         <td>
           <% if @user.id.eql?(session[:current_user_id])%>
 	    <%= link_to "删除好友", delete_friend_user_index_url(:user_id=>friend.friend_id,:row_id=>row_id),:remote=>true %>

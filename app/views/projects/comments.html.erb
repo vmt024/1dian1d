@@ -12,7 +12,9 @@
 <% unless session[:current_user_id].blank? %>
   <%= form_for(:comment, :url=>comments_url,:html=>{:method=>:post}) do |f| %>
     <%= f.hidden_field :project_id,:value=>@project.id %>
+    <fieldset>
     <%= f.text_area :content %>
+    </fieldset>
     <%= f.submit '留言', :disable_with=>"留言中..." %>
   <% end %>
 <% end %>
