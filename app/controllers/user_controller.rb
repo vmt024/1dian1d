@@ -95,6 +95,7 @@ class UserController < ApplicationController
 
   def add_friend
     Friend.add_as_my_friend(session[:current_user_id],params[:user_id])
+    @user = User.find(params[:user_id])
     respond_to do |format|
       format.html {redirect_to :back} 
       format.js 
@@ -104,6 +105,7 @@ class UserController < ApplicationController
   def delete_friend
     Friend.delete_my_friend(session[:current_user_id],params[:user_id])
     @friends_count = Friend.my_friends(params[:user_id]) 
+    @user = User.find(params[:user_id])
     respond_to do |format|
       format.html {redirect_to :back} 
       format.js 

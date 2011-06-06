@@ -1,8 +1,7 @@
 <div id="city-navigation">
   <ul>
-    <% project_locations = Project.get_all_locations %>
-    <% project_locations.each do |project| %>
-      <li><%= link_to project.location, projects_url(:location=>project.location),{:class=> cycle("marginRight20","marginRight20","marginRight20","last")} %></li>
+    <% province_list.each do |p| %>
+      <li><%= link_to p, projects_url(:location=>p.to_s),{:class=> cycle("marginRight20","marginRight20","marginRight20","last")} %></li>
     <% end %>
   </ul>
   <div class="clear"></div>

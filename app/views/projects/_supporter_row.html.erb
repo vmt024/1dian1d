@@ -1,0 +1,17 @@
+  <td><%=link_to supporter.name, user_url(supporter.id) %></td>
+  <td><%= supporter.location %></td>
+  <% if supporter.support_projects.count > 0 %>
+    <td>支持了其他<%=link_to " #{supporter.support_projects.count} ", projects_url(:support_by=>supporter.id) %>个目标</td>
+  <% else %>
+    <td></td>
+  <% end %>
+  <td>
+    <% if session[:current_user_id] %>
+      <% if User.find(session[:current_user_id]).is_my_friend?(supporter.id) %>
+        <%= link_to "删除好友", delete_friend_user_index_url(:user_id=>supporter.id,:supporter_list=>true),:remote=>true %>
+      <% else%>
+        <%= link_to "加为好友", add_friend_user_index_url(:user_id=>supporter.id, :supporter_list=>true),:remote=>true unless supporter.id.eql?(session[:current_user_id])%>
+      <% end %>
+    <% end %>
+  </td>
+  <td><%=link_to "发私信", new_message_url(:friend=>supporter.id) if supporter.is_allowed_send_PM_to(session[:current_user_id]) and !supporter.id.eql?(session[:current_user_id]) %></td>
