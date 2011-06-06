@@ -11,7 +11,7 @@ class ApplicationController < ActionController::Base
 
     def current_user
       session[:current_user_id] ||= User.sign_in_with_cookies(cookies[:remember_token])
-      @current_user = User.find(session[:current_user_id])
+      @current_user ||= User.find(session[:current_user_id]) unless session[:current_user_id].blank?
       return session[:current_user_id] 
     end
     
