@@ -1,5 +1,5 @@
-<div id="siteMessage">
-    <p>这里会显示用户提醒语句，比如"感谢你对这个目标的支持"。</p>
+<div id="siteMessage" style="display:none;">
+    <p>感谢你对这个目标的支持。</p>
 </div>  
 
   <div class="grid_5 alpha" id="project-title">
@@ -11,7 +11,7 @@
       <li><%= link_to "目标主页", project_url(@project.id), :class=>highlight_this?("show") %></li>
       <li><%= link_to "进展(" + "#{@project.project_updates.size}" + ")",project_progress_url(:project_id=>@project.id),:class=>highlight_this?("progress") %></li>
       <li><%= link_to "留言(" + "#{@project.comments.size}" + ")",project_comments_url(:project_id=>@project.id), :class=>highlight_this?("comments") %></li>
-      <li><%= link_to "支持(" + "#{@project.supporters.count}" + ")",project_supporters_url(:project_id=>@project.id), :class=>highlight_this?("supporters") %></li>
+      <li><%= link_to ("支持(" + "<span id='supporter-number'>#{@project.supporters.count}</span>" + ")").html_safe,project_supporters_url(:project_id=>@project.id), :class=>highlight_this?("supporters") %></li>
     </ul>
   </div>
 

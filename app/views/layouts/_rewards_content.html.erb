@@ -1,12 +1,12 @@
 <div id="rewards-content">
         <ul id="project-stats">
-          <li>支持者 <span class="white-number"><%= @project.supporters.blank? ? "0" : @project.supporters.count %></span> 人</li>
+          <li>支持者 <span class="white-number" id="supporter-white-number"><%= @project.supporters.blank? ? "0" : @project.supporters.count %></span> 人</li>
           <li>剩余 <span class="white-number"><%= project_days_left(@project.complete_time) %></span> 天</li>
     </ul>
 
     <div id="support-btn">
       <% unless already_supported? %>
-        <%= link_to "我来支持你", :controller=>"projects", :action=>"support_this_project" %>
+        <%= link_to "我来支持你", support_this_project_projects_url,:remote=>true %>
       <% else %>
         <%= link_to "谢谢支持","",:href=>"#" %>
       <% end %>

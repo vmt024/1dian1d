@@ -1,1 +1,1 @@
-$("#supporter_row_<%= @user.id%>").html('<%= (render :partial=>'projects/supporter_row', :locals=>{:supporter => @user}).html_safe %>');
+$("#supporter_row_<%= @user.id%>").html('<%= escape_javascript(render :partial=>'projects/supporter_row', :locals=>{:supporter => @user}).html_safe %>');

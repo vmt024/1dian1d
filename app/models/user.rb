@@ -86,7 +86,7 @@ class User < ActiveRecord::Base
     end
 
     def is_my_friend?(my_user_id)
-      return Friend.are_they_friend?(self.id,my_user_id)
+      return Friend.is_my_friend?(self.id,my_user_id)
     end
 
     def is_allowed_send_PM_to(friend_id)

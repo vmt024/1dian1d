@@ -193,26 +193,27 @@ class ProjectsController < ApplicationController
       project = Project.find(session[:current_project_id])
       project.number_of_supporters += 1
       project.save
-      redirect_to project_url(session[:current_project_id])
-    else
-      session[:back_url] = request.env["REQUEST_URI"]
-      redirect_to new_user_session_url
+    end
+    respond_to do |format|
+      format.html {redirect_to project_url(session[:current_project_id])}
+      format.js
     end
   end
 
   def not_support_this_project
     unless session[:current_user_id].blank?
-      support = UserProject.where("project_id = ? and user_id = ?", params[:project_id],session[:current_user_id]).limit(1)
-      support.destroy unless support.blank?
+      support = UserProject.where("project_id = ? and user_id = ?", params[:project_id],session[:current_user_id]).first
+      support.destroy unless support.blank? 
       session[:followed_progress].delete(params[:project_id]) if session[:followed_progress].include?(params[:project_id])
-      project = Project.find(params[:project_id])
-      project.number_of_supporters -= 1
-      project.save
+      @project = Project.find(params[:project_id])
+      @project.number_of_supporters -= 1
+      @project.save
+      @user = User.find(session[:current_user_id])
+    end
 
-      redirect_to :back
-    else
-      session[:back_url] = request.env["REQUEST_URI"]
-      redirect_to new_user_session_url
+    respond_to do |format|
+      format.html {redirect_to :back} 
+      format.js
     end
   end
 end

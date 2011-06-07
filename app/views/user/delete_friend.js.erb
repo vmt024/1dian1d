@@ -1,6 +1,6 @@
 <% if params[:supporter_list].blank? %> 
-$("#<%= params[:row_id]%>").slideUp();
+$("#my_friend_<%= @user.id%>").slideUp();
 $("#friend_tab").html('<%= "好友(#{@friends_count.size})"%>');
 <% else %>
-$("#supporter_row_<%= @user.id%>").html('<%= (render :partial=>'projects/supporter_row', :locals=>{:supporter => @user}).html_safe %>');
+$("#supporter_row_<%= @user.id%>").html('<%= escape_javascript(render :partial=>'projects/supporter_row', :locals=>{:supporter => @user}).html_safe %>');
 <% end %>

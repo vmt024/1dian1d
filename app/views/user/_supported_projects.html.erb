@@ -1,6 +1,6 @@
 <table width="100%" border="0" summary="你所支持的目标" class="myTable">
   <% @projects.each do |my_int_proj| %>
-  <tr>
+  <tr id="support_project_<%= my_int_proj.id%>">
     <td class="td-titles">
     <% project_name = (!session[:followed_progress].blank? && session[:followed_progress].include?(my_int_proj.id)) ? ("<span class=\"followed-progress\">#{my_int_proj.name}</span>").html_safe : my_int_proj.name %>
     <%= link_to project_name, project_url(my_int_proj.id) %></td>
@@ -11,8 +11,8 @@
     <% if project_days_left(my_int_proj.complete_time).eql?(0) %>
       目标成功
     <% else %>
-      <% if user_is_project_owner?(my_int_proj.user_id) && @user.id.eql?(session[:current_user_id]) %>
-        <%= link_to "取消支持", :controller=>"projects", :action=>"not_support_this_project", :project_id=>my_int_proj.id %>
+      <% if !user_is_project_owner?(my_int_proj.user_id) && @user.id.eql?(session[:current_user_id]) %>
+        <%= link_to "取消支持", not_support_this_project_projects_url(:project_id=>my_int_proj.id),:remote=>true %>
       <% end %>
     <% end %>
     </td>
