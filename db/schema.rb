@@ -113,7 +113,7 @@ ActiveRecord::Schema.define(:version => 13) do
   add_index "sessions", ["session_id"], :name => "index_sessions_on_session_id"
   add_index "sessions", ["updated_at"], :name => "index_sessions_on_updated_at"
 
-  create_table "user_projects", :id => false, :force => true do |t|
+  create_table "user_projects", :force => true do |t|
     t.integer  "user_id",    :null => false
     t.integer  "project_id", :null => false
     t.datetime "created_at"

@@ -21,7 +21,7 @@ class UserController < ApplicationController
 
   def show
     @user = User.find(params[:id])
-    @projects = Project.where('user_id = ?',@user.id)
+    @projects = Project.where('user_id = ?',@user.id).order("updated_at DESC")
   end
   
   def messages
@@ -42,7 +42,7 @@ class UserController < ApplicationController
 
   def projects
     @user = User.find(params[:user_id])
-    @projects = Project.where('user_id = ?',params[:user_id])
+    @projects = Project.where('user_id = ?',params[:user_id]).order("updated_at DESC")
     respond_to do |format|
       format.js
     end
