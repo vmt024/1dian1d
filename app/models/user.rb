@@ -35,7 +35,7 @@ class User < ActiveRecord::Base
     end
 
     def reset_password
-      new_password = secure_hash("#{self.email}==#{Time.now}==recover_password").first(8)
+      new_password = secure_hash("#{self.email}==#{Time.now}==recover_password").first(6).upcase
       logger.error("NEW PASSWORD::::::::::::::::: #{new_password}")
       self.password = new_password
       self.password_confirmation = new_password
