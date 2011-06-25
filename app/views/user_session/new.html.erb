@@ -1,4 +1,6 @@
-
+  <div id="siteMessage" style="display:none;">
+    <%= flash[:notice]%>
+  </div>
 <h2>我要登录</h2>
 <%= form_for 'user', :url=>{:controller=>:user_session,:action=>:create},:html=>{:id=>"signin_form", :method=>:post} do |f| %>
     <fieldset>
@@ -19,4 +21,6 @@
 <%= link_to "忘记自己的密码了？",lost_password_url %>
 <script type="text/javascript">
   $("#signin_form").validationEngine();
+  $("#siteMessage").slideToggle("slow");
+  $('#siteMessage').fadeOut(4000);
 </script>

@@ -34,16 +34,6 @@
   </ul>
 </div><!-- end of breadcrumb-->
 
-<% unless flash[:error].blank? %>
-  <div id="siteErrorMessage" style="">
-    <%= flash[:error]%>
-  </div>
-<% end %>
-<% unless flash[:notice].blank? %>
-  <div id="siteMessage" style="">
-    <%= flash[:notice]%>
-  </div>
-<% end %>
 
 <% unless params[:search_by].blank? && params[:location].blank? && params[:category].blank? %>
 <h1>
