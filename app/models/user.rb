@@ -10,6 +10,7 @@ class User < ActiveRecord::Base
   before_save :encrypt_password
   has_many :comments
   has_many :friends
+  has_many :fans, :class_name=>"Friend",:foreign_key=>:friend_id
 
   attr_protected :superman
 

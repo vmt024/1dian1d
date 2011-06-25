@@ -1,7 +1,7 @@
 class ProjectsController < ApplicationController
   layout 'diandi'
 
-  before_filter :require_user, :only=>[:new,:create,:edit,:update,:destroy,:support_this_project,:not_support_this_project]
+  before_filter :require_user, :only=>[:new,:edit,:destroy,:support_this_project,:not_support_this_project]
 
 
   # GET /projects
@@ -57,7 +57,12 @@ class ProjectsController < ApplicationController
     else
       @projects = Project.paginate.all(:page=>params[:page])
     end
-    #render :action=> "index"
+    render :action=> "welcome"
+  end
+
+  def recent_updated_followed
+    @projects = Project.paginate(:all,:conditions=>["id in (#{session[:followed_progress].join(',')})"],:order=>"name Asc",:page=>params[:page])
+    render :action=> "welcome"
   end
 
   # GET /projects/1
@@ -134,18 +139,22 @@ class ProjectsController < ApplicationController
 
     respond_to do |format|
 
-      if @project.save
+      if @project.save!
+        logger.error("EE1")
         unless params[:reward_conditions].blank? || params[:rewards].blank?
+        logger.error("EE2")
           for i in 0 .. params[:reward_conditions].size do 
+           logger.error("EE3")
             reward = ProjectPrize.new({:name=>params[:reward_conditions][i],:description=>params[:rewards][i]})
             reward.project_id = @project.id
             reward.save
           end
         end
 
-        format.html { redirect_to(@project, :notice => 'Project was successfully created.') }
+        format.html { redirect_to project_url(@project) }
         format.xml  { render :xml => @project, :status => :created, :location => @project }
       else
+        logger.error("EE4")
         format.html { render :action => "new" }
         format.xml  { render :xml => @project.errors, :status => :unprocessable_entity }
       end
@@ -185,23 +194,20 @@ class ProjectsController < ApplicationController
   end
 
   def support_this_project
-    unless session[:current_user_id].blank?
       support = UserProject.new
-      support.project_id = session[:current_project_id]
+      support.project_id = params[:project_id]
       support.user_id = session[:current_user_id]
       support.save
-      project = Project.find(session[:current_project_id])
+      project = Project.find(params[:project_id])
       project.number_of_supporters += 1
       project.save
-    end
     respond_to do |format|
-      format.html {redirect_to project_url(session[:current_project_id])}
-      format.js
+      format.html{redirect_to project_url(params[:project_id])}
+      format.js 
     end
   end
 
   def not_support_this_project
-    unless session[:current_user_id].blank?
       support = UserProject.where("project_id = ? and user_id = ?", params[:project_id],session[:current_user_id]).first
       support.destroy unless support.blank? 
       session[:followed_progress].delete(params[:project_id]) if session[:followed_progress].include?(params[:project_id])
@@ -209,10 +215,27 @@ class ProjectsController < ApplicationController
       @project.number_of_supporters -= 1
       @project.save
       @user = User.find(session[:current_user_id])
-    end
 
     respond_to do |format|
       format.html {redirect_to :back} 
+      format.js
+    end
+  end
+
+  def set_project_success
+    @project = Project.find(params[:project_id])
+    @project.success_yn = true
+    @project.save
+    respond_to do |format|
+      format.js
+    end
+  end
+
+  def set_project_fail
+    @project = Project.find(params[:project_id])
+    @project.success_yn = false
+    @project.save
+    respond_to do |format|
       format.js
     end
   end

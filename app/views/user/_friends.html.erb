@@ -1,19 +1,30 @@
+<% if @friends.blank? %>
+  <div>目前还没有任何关注的人，要不要<%= link_to "浏览", root_url %>其他人的目标和他们成为朋友呢？</div>
+<% else %>
 <table width="100%" border="0" class="myTable" summary="你所创建的项目">
     <tbody>
       <% @friends.each do |friend| %>
+        <% friend_user = User.find(friend.friend_id) %>
       <% row_id = "my_friend_#{friend.friend_id}"%>
       <tr id="<%= row_id%>">
-        <td><%= link_to User.find(friend.friend_id).name, user_url(friend.friend_id) %></td>
-        <td><%= User.find(friend.friend_id).location %></td>
-        <td>支持了<%=link_to " #{User.find(friend.friend_id).support_projects.count} ", projects_url(:support_by=>friend.friend_id) %>个目标</td>
+        <td><%= link_to friend_user.name, user_url(friend_user.id) %></td>
+        <td><%= friend_user.location %></td>
         <td>
-          <% if @user.id.eql?(session[:current_user_id])%>
-	    <%= link_to "删除好友", delete_friend_user_index_url(:user_id=>friend.friend_id),:remote=>true %>
+          <% unless friend_user.support_projects.blank? %>
+            支持了<%=link_to "#{friend_user.support_projects.count} ", projects_url(:support_by=>friend_user) %>个目标
           <% end %>
         </td>
-        <td><%= link_to "发私信", new_message_url(:friend=>friend.friend_id) if @user.is_allowed_send_PM_to(friend.friend_id) and @user.id.eql?(session[:current_user_id]) %></td>
+        <td>
+          <% if @user.id.eql?(session[:current_user_id])%>
+	    <%= link_to "取消关注", delete_friend_user_index_url(:user_id=>friend_user),:remote=>true %>
+          <% end %>
+        </td>
+        <td>
+        <!--<= link_to "发私信", new_message_url(:friend=>friend.friend_id) if @user.is_allowed_send_PM_to(friend.friend_id) and @user.id.eql?(session[:current_user_id]) %>-->
+      </td>
       </tr>
       <% end  %>
     </tbody>
 </table>
+<% end %>
 

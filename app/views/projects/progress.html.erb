@@ -1,11 +1,15 @@
 <%= render :partial=>"project_detail_header"%>
 
 <div id="project-updates">
+  <% if @project.project_updates.blank? %>
+    目前还没有目标的最新进展。让我们一起期待吧。
+  <% else %>
   <% @project.project_updates.each do |pu|%> 	
     <div class="entry">
       <p><%= pu.content%></p>
       <h6>更新于<%= time_ago_in_words(pu.updated_at)%>前</h6>
     </div>
+  <% end %>
   <% end %>
   <% if @project.owner.id.eql?(session[:current_user_id])%>       
     <%= form_for :project_update, :url=>project_updates_url,:html=>{:method=>:post} do |f| %>

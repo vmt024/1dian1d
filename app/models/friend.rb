@@ -8,6 +8,10 @@ class Friend < ActiveRecord::Base
     return Friend.where("user_id = ?",user_id)
   end
 
+  def self.my_fans(user_id)
+    return Friend.where("friend_id = ?",user_id)
+  end
+
   # user 2 is user 1's friend
   def self.is_my_friend?(user1,user2)
     return Friend.exists?(["user_id = ? and friend_id = ?",user1,user2])

@@ -10,7 +10,7 @@ class UserMailer < ActionMailer::Base
     attachments.inline['line-break-2.jpg'] = File.read(Rails.public_path + '/images/line-break-2.jpg')
     attachments.inline['date-bg.jpg'] = File.read(Rails.public_path + '/images/date-bg.jpg')
     mail(:to => user.email,
-         :subject => "会员注册成功，一点一滴欢迎您的加入",
+         :subject => "会员注册成功，1点1滴欢迎您的加入",
          :date => Date.today,
          :reply_to => "peterpengnz@gmail.com")
   end
@@ -23,7 +23,7 @@ class UserMailer < ActionMailer::Base
     attachments.inline['line-break-2.jpg'] = File.read(Rails.public_path + '/images/line-break-2.jpg')
     attachments.inline['date-bg.jpg'] = File.read(Rails.public_path + '/images/date-bg.jpg')
     mail(:to => user.email,
-         :subject => "一点一滴已经为您更新了密码",
+         :subject => "1点1滴已经为您更新了密码",
          :date => Date.today,
          :reply_to => "peterpengnz@gmail.com")
   end

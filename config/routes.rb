@@ -7,12 +7,15 @@ Ququ::Application.routes.draw do
     get :progress
     get :comments
     get :supporters
+    get :set_project_success
+    get :set_project_fail
     collection do
       get :not_support_this_project
       get :list_supporters
       get :welcome
       post :search
       get :support_this_project
+      get :recent_updated_followed
     end
   end
 
@@ -21,6 +24,7 @@ Ququ::Application.routes.draw do
     get :messages
     get :supported_projects
     get :friends
+    get :fans
     collection do
       get :add_friend
       get :delete_friend

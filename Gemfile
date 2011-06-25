@@ -11,6 +11,7 @@ gem "paperclip", "~> 2.3"
 gem "will_paginate", "~> 3.0.pre2"
 gem "jquery-rails"
 gem "encryptor"
+gem "rails-footnotes", :group=>:development
 
 # Use unicorn as the web server
 # gem 'unicorn'
