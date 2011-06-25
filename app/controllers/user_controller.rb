@@ -1,7 +1,7 @@
 class UserController < ApplicationController
   layout 'diandi'
 
-  before_filter :require_user, :only=>[:edit,:update]
+  before_filter :require_user, :only=>[:edit,:update,:add_friend, :delete_friend]
 
   def signup
     @user = User.new
@@ -39,6 +39,15 @@ class UserController < ApplicationController
       format.js
     end
   end
+
+  def fans
+    @user = User.find(params[:user_id])
+    @fans = Friend.my_fans(params[:user_id]) 
+    respond_to do |format|
+      format.js
+    end
+  end
+
 
   def projects
     @user = User.find(params[:user_id])
@@ -97,7 +106,7 @@ class UserController < ApplicationController
     Friend.add_as_my_friend(session[:current_user_id],params[:user_id])
     @user = User.find(params[:user_id])
     respond_to do |format|
-      format.html {redirect_to :back} 
+      format.html {redirect_to user_url(params[:user_id])} 
       format.js 
     end
   end
@@ -107,7 +116,7 @@ class UserController < ApplicationController
     @friends_count = Friend.my_friends(session[:current_user_id]) 
     @user = User.find(params[:user_id])
     respond_to do |format|
-      format.html {redirect_to :back} 
+      format.html {redirect_to user_url(params[:user_id])} 
       format.js 
     end
   end

@@ -1,12 +1,16 @@
 <%= render :partial=>"project_detail_header"%>
 
 <div id="comments">
+  <% if @project.comments.blank? %>
+    目前还没有该目标的留言，要不要鼓励一下呢。
+  <% else %>
   <% @project.comments.each do |comment|%>
     <div class="entry">
       	<p><%= comment.content%></p>
         <h6><%= comment.user.name%>更新于<%= time_ago_in_words(comment.updated_at)%>前</h6>
     </div>
   <% end %>
+<% end %>
  </div>
 
 <% unless session[:current_user_id].blank? %>

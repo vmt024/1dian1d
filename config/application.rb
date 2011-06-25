@@ -40,10 +40,10 @@ module Ququ
     config.filter_parameters += [:password,:password_confirmation]
 
     config.active_record.timestamped_migrations = false
-    config.action_mailer.default_url_options = { :host => "qutou.com" }
+    config.action_mailer.default_url_options = { :host => "www.1dian1di.com" }
 
   end
 end
 
 Encryptor.default_options.merge!(:algorithm => 'aes-256-cbc', :key => 'diandi Tony and Peter and Joy and Tingting 2011')
-
+Footnotes.run! if Rails.env.development?

@@ -1,7 +1,5 @@
+
 <h2>我要登录</h2>
-<% unless flash[:error].blank? %>
-<div id="sign_in_error_msg">邮箱或者密码不正确！</div>
-<% end %>
 <%= form_for 'user', :url=>{:controller=>:user_session,:action=>:create},:html=>{:id=>"signin_form", :method=>:post} do |f| %>
     <fieldset>
   	<%= f.label :你的邮箱 %>

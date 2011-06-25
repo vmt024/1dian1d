@@ -5,10 +5,15 @@
     </ul>
 
     <div id="support-btn">
-      <% unless already_supported? %>
-        <%= link_to "我来支持你", support_this_project_projects_url,:remote=>true %>
+      <%if project_days_left(@project.complete_time).eql?(0) %>
+          <%= link_to "目标成功","",:href=>"#" if @project.success_yn.eql?(true) %>
+          <%= link_to "目标失败","",:href=>"#" if @project.success_yn.eql?(false) %>
       <% else %>
-        <%= link_to "谢谢支持","",:href=>"#" %>
+        <% unless already_supported? %>
+          <%= link_to "我来支持你", support_this_project_projects_url(:project_id=>@project.id),:remote=>!session[:current_user_id].blank? %>
+        <% else %>
+          <%= link_to "谢谢支持","",:href=>"#", :onclick=>"show_already_supported_msg();" %>
+        <% end %>
       <% end %>
     </div>
 
@@ -26,3 +31,10 @@
     </div><!-- rewards-list -->
 
 </div><!-- rewards-content -->        
+<script>
+  function show_already_supported_msg(){
+    $("#siteMessage").html("<p>您已经支持了该目标，谢谢您的支持！</p>");
+    $("#siteMessage").slideToggle("slow");
+    $('#siteMessage').fadeOut(4000);
+  }
+</script>

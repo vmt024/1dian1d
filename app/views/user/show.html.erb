@@ -3,14 +3,28 @@
   <div class="global-notification">
     <ul>
       <% unless session[:followed_progress].blank? %>
-      	<li><strong><span class="followed-progress"><%= session[:followed_progress].size %></span></strong> 个你所支持的目标有了新的进展。</li>
+        <li>
+          <strong>
+            <span class="followed-progress">
+              <%= link_to session[:followed_progress].size, recent_updated_followed_projects_url %>
+            </span>
+          </strong> 个你所支持的目标有了新的进展。
+        </li>
       <% end %>
       <% unless session[:new_progress].blank? %>
         <% session[:new_progress].each_pair do |project_id,progress|%>
-          <li><a href="#"><strong><span class="new-progress"><%= Project.find(project_id).name %></span></strong></a>目标有了
-	    <% unless progress[:comment_counts].eql?(0)%><strong><%= progress[:comment_counts]%></strong> 个新的留言<%end%>
-            <% unless progress[:follower_counts].eql?(0)||progress[:comment_counts].eql?(0)%>和<% end %>
-	    <% unless progress[:follower_counts].eql?(0)%><strong><%= progress[:follower_counts]%></strong> 位新的支持者。<%end%>
+          <li>
+              <strong>
+                
+                <%= link_to "<span class='new-progress'>#{Project.find(project_id).name}</span>".html_safe, project_url(project_id) %></strong>目标有了
+          <% unless progress[:comment_counts].eql?(0)%>
+            <strong><%= progress[:comment_counts]%></strong> 个新的留言
+          <%end%>
+          <% unless progress[:follower_counts].eql?(0) || progress[:comment_counts].eql?(0)%>
+           和
+          <% end %>
+          <% unless progress[:follower_counts].eql?(0)%><strong><%= progress[:follower_counts]%></strong> 位新的支持者。
+          <%end%>
           </li>
         <% end %>
       <% end %>
@@ -35,11 +49,13 @@
     <div class="button">
      <% if session[:current_user_id] %>
        <% if User.find(session[:current_user_id]).is_my_friend?(@user.id) %>
-         <%= link_to "发私信", new_message_url(:friend=>@user.id) if @user.is_allowed_send_PM_to(session[:current_user_id]) and !@user.id.eql?(session[:current_user_id]) %>
-         <%= link_to "删除好友", delete_friend_user_index_url(:user_id=>@user.id) %>
+         <!--<= link_to "发私信", new_message_url(:friend=>@user.id) if @user.is_allowed_send_PM_to(session[:current_user_id]) and !@user.id.eql?(session[:current_user_id]) %>-->
+         <%= link_to "取消关注", delete_friend_user_index_url(:user_id=>@user.id) %>
        <% else%>
-         <%= link_to "加为好友", add_friend_user_index_url(:user_id=>@user.id) %>
+         <%= link_to "加关注", add_friend_user_index_url(:user_id=>@user.id) %>
        <% end %>
+     <% else %>
+         <%= link_to "加关注", add_friend_user_index_url(:user_id=>@user.id) %>
      <% end %>
     </div>
   </div>
@@ -54,10 +70,13 @@
             <ul class="borderBottom">
                 <li><%= link_to "创建的目标(#{@user.my_projects.size})",user_projects_url(:user_id=>@user.id),:remote=>true,:class=>"currentNavigationalItem",:id=>"project_tab" %></li>
                 <li><%= link_to "支持的目标(#{@user.support_projects.size})" ,user_supported_projects_url(:user_id=>@user.id),:remote=>true,:id=>"support_project_tab"%></li>
-                <li><%= link_to "好友(#{@user.friends.size})",user_friends_url(:user_id=>@user.id),:remote=>true,:id=>"friend_tab" %></li>
-  <% if session[:current_user_id].eql?(@user.id) %>
-                <li><%= link_to "私信(#{Message.my_private_messages(@user.id).size})",user_messages_url(:user_id=>@user.id),:remote=>true,:id=>"message_tab" %></li>
-<% end %>
+                <li><%= link_to "关注(#{@user.friends.size})",user_friends_url(:user_id=>@user.id),:remote=>true,:id=>"friend_tab" %></li>
+                <li><%= link_to "粉丝(#{@user.fans.size})",user_fans_url(:user_id=>@user.id),:remote=>true,:id=>"fans_tab" %></li>
+                <!--
+                  < if session[:current_user_id].eql?(@user.id) %>
+    <li><= link_to "私信(#{Message.my_private_messages(@user.id).size})",user_messages_url(:user_id=>@user.id),:remote=>true,:id=>"message_tab" %></li>
+    < end %>
+    -->
             </ul>
         </div>
         <div class="clear"></div>
@@ -66,6 +85,7 @@
 	        <!-- display my projects-->
                 <%= render :partial=> 'projects' %>
             <% else %>
-            	<%=h @user.name %>还没有设定自己目标
+              <div>目前还没有创建目标，要不要<%= link_to "浏览", root_url %>其他人的目
+              标<% if session[:current_user_id].eql?(@user.id) %>或者<%= link_to "创建",new_project_url %>自己的目标呢？<% end %></div>
             <% end %>
         </div>

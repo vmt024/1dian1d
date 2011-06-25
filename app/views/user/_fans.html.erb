@@ -1,0 +1,24 @@
+<% if @fans.blank? %>
+  <div>目前还没有粉丝，要不要<%= link_to "浏览", root_url %>其他人的目标和他们成为朋友呢？</div>
+<% else %>
+<table width="100%" border="0" class="myTable">
+    <tbody>
+      <% @fans.each do |fan| %>
+      <% fan_user = User.find(fan.user_id) %>
+      <% row_id = "my_fan_#{fan.user_id}"%>
+      <tr id="<%= row_id%>">
+        <td><%= link_to fan_user.name, user_url(fan_user.id) %></td>
+        <td><%= fan_user.location %></td>
+        <td>
+          <% unless fan_user.support_projects.blank? %>
+            支持了<%=link_to "#{fan_user.support_projects.count} ", projects_url(:support_by=>fan_user.id) %>个目标
+          <% end %>
+        </td>
+        <td></td>
+        <td></td>
+      </tr>
+      <% end %>
+    </tbody>
+</table>
+<% end %>
+
