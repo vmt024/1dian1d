@@ -10,15 +10,20 @@
       <td><%= my_proj.supporters.count %>支持</td>
       <td><%= project_days_left(my_proj.complete_time) %>天剩余</td>
     <td><%= my_proj.views %>次浏览</td>
-    <% if project_days_left(my_proj.complete_time).eql?(0) and my_proj.success_yn.blank? %>
+    <% if project_days_left(my_proj.complete_time).eql?(0) && my_proj.success_yn.nil? && user_is_project_owner?(my_proj.user_id) %>
       <td id="project_result_<%= my_proj.id%>">
         <%= link_to "成功", project_set_project_success_url(:project_id=>my_proj.id),:remote=>true %>
-      <%= link_to "失败", project_set_project_fail_url(:project_id=>my_proj.id),:remote=>true %>
+        <%= link_to "失败", project_set_project_fail_url(:project_id=>my_proj.id),:remote=>true %>
     </td>
     <% else %>
     <td>
-      <% if user_is_project_owner?(my_proj.user_id) %>
-        <%= link_to "更新进展", project_progress_url(:project_id=>my_proj.id) %>
+      <% if my_proj.success_yn.nil? %>
+        <% if user_is_project_owner?(my_proj.user_id) %>
+          <%= link_to "更新进展", project_progress_url(:project_id=>my_proj.id) %>
+        <% end %>
+      <% else %>
+        <% msg = my_proj.success_yn.eql?(true) ? "<span style='color: green;'>目标成功</span>" : "<span style='color: red;'>目标失败</span>"%>
+        <%= msg.html_safe%> 
       <% end %>
     </td>
     <% end %>

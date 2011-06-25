@@ -1,4 +1,4 @@
-  <div id="siteMessage" style="display:none;">
+  <div id="siteMessage" style="">
     <%= flash[:notice]%>
   </div>
 <h2>我要登录</h2>
@@ -21,6 +21,5 @@
 <%= link_to "忘记自己的密码了？",lost_password_url %>
 <script type="text/javascript">
   $("#signin_form").validationEngine();
-  $("#siteMessage").slideToggle("slow");
   $('#siteMessage').fadeOut(4000);
 </script>
