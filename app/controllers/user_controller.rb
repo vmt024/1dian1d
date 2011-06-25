@@ -90,6 +90,7 @@ class UserController < ApplicationController
     else
       logger.error("User does not exist in the system.")
     end
+    flash[:notice] ="新的密码已经发送到您的邮箱里了"
     redirect_to :back
   end
 

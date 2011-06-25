@@ -9,7 +9,7 @@
     <td><%= my_int_proj.views %>次浏览</td>
     <td>
     <% if project_days_left(my_int_proj.complete_time).eql?(0) %>
-      目标成功
+      <span style="color: green">目标成功</span>
     <% else %>
       <% if !user_is_project_owner?(my_int_proj.user_id) && @user.id.eql?(session[:current_user_id]) %>
         <%= link_to "取消支持", not_support_this_project_projects_url(:project_id=>my_int_proj.id),:remote=>true %>

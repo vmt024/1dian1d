@@ -10,9 +10,9 @@
     <% if project_days_left(my_proj.complete_time).eql?(0) %>
     <td>
       <% if my_proj.supporters.count.eql?(0) %>
-        目标失败
+        <span style="color: red">目标失败</span>
       <% else %>
-        目标成功
+        <span style="color: green">目标成功</span>
       <% end %>
     </td>
     <% else %>
