@@ -9,11 +9,11 @@
     	<%= link_to project_name, project_url(my_proj.id) %></span></td>
       <td><%= my_proj.supporters.count %>支持</td>
       <td><%= project_days_left(my_proj.complete_time) %>天剩余</td>
-      <td><%= my_proj.views %>次浏览</td>
+    <td><%= my_proj.views %>次浏览</td>
     <% if project_days_left(my_proj.complete_time).eql?(0) and my_proj.success_yn.blank? %>
       <td id="project_result_<%= my_proj.id%>">
-        <%= link_to "<span style='color: green'>成功</span>".html_safe, project_set_project_success_url(:project_id=>my_proj.id),:remote=>true %>
-      <%= link_to "<span style='color: red'>失�</span>��".html_safe, project_set_project_fail_url(:project_id=>my_proj.id),:remote=>true %>
+        <%= link_to "成功", project_set_project_success_url(:project_id=>my_proj.id),:remote=>true %>
+      <%= link_to "失败", project_set_project_fail_url(:project_id=>my_proj.id),:remote=>true %>
     </td>
     <% else %>
     <td>

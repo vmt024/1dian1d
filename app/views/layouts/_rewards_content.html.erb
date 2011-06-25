@@ -6,7 +6,6 @@
 
     <div id="support-btn">
       <% unless @project.user_id == session[:current_user_id]%>
-        <%= link_to "我来支持你", support_this_project_projects_url,:remote=>true %>
       <%if project_days_left(@project.complete_time).eql?(0) %>
           <%= link_to "目标成功","",:href=>"#" if @project.success_yn.eql?(true) %>
           <%= link_to "目标失败","",:href=>"#" if @project.success_yn.eql?(false) %>
