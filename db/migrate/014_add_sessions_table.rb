@@ -4,7 +4,7 @@ class AddSessionsTable < ActiveRecord::Migration
 #      t.string :session_id, :null => false
 #      t.text :data
 #      t.timestamps
-    end
+#    end
 
 #    add_index :sessions, :session_id
 #    add_index :sessions, :updated_at
