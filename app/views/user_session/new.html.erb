@@ -1,24 +1,25 @@
-  <div id="siteMessage" style="">
+<div id="siteMessage" style="">
     <%= flash[:notice]%>
-  </div>
+</div>
+
 <h2>我要登录</h2>
-<%= form_for 'user', :url=>{:controller=>:user_session,:action=>:create},:html=>{:id=>"signin_form", :method=>:post} do |f| %>
+  <%= form_for 'user', :url=>{:controller=>:user_session,:action=>:create},:html=>{:id=>"signin_form", :method=>:post} do |f| %>
     <fieldset>
-  	<%= f.label :你的邮箱 %>
-	<%= f.text_field :email,:class=>"validate[required,custom[email]]" %>
+      <%= f.label :你的邮箱,{:for=>"user_email"} %>
+	  <%= f.text_field :email,:class=>"validate[required,custom[email]]" %>
 	</fieldset>
-        <fieldset>
-	<%= f.label :你的密码 %>
-	<%= f.password_field :password,:class=>"validate[required]" %>
+    <fieldset>
+      <%= f.label :你的密码 ,{:for=>"user_password"}%>
+	  <%= f.password_field :password,:class=>"validate[required]" %>
 	</fieldset>
 
-        <fieldset>
-	<%= f.check_box :remember_me %>
-        <%= f.label :自动登录,{:for=>"user_remember_me"} %>
+    <fieldset>
+	  <%= f.check_box :remember_me %>
+      <%= f.label :自动登录,{:for=>"user_remember_me"} %>
 	</fieldset>
-  <%= f.submit "登录",:disable_with=>"登录中..."  %>
-<% end %>
-<%= link_to "忘记自己的密码了？",lost_password_url %>
+    <%= f.submit "登录",:disable_with=>"登录中..."  %>
+  <% end %>
+  <%= link_to "忘记自己的密码了？",lost_password_url %>
 <script type="text/javascript">
   $("#signin_form").validationEngine();
   $('#siteMessage').fadeOut(4000);

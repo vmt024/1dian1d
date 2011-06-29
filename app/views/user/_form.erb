@@ -1,35 +1,35 @@
-<fieldset>
-  <%= form.label :你的昵称 %>
-  <%= form.text_field :name,:class=>"validate[required,funcCall[validateName],minSize[2],maxSize[5]]" %>
-</fieldset>
-<fieldset>
-  <%= form.label :你的邮箱 %>
-  <%= form.text_field :email,:class=>"validate[required,funcCall[validateUserEmail],custom[email]]" %>
-</fieldset>
-<fieldset>
-  <%= form.label :自我介绍 %>
-  <%= form.text_area :description,:class=>"validate[required,minSize[25]]" %>
-</fieldset>
-<fieldset>
-  <%= form.label :来自哪里 %>
-  <%= form.select :location, province_list %>
-</fieldset>
+  <fieldset>
+    <%= form.label :你的昵称,{:for=>"user_name"} %>
+    <%= form.text_field :name,:class=>"validate[required,funcCall[validateName],minSize[2],maxSize[5]]" %>
+  </fieldset>
+  <fieldset>
+    <%= form.label :你的邮箱, {:for=>"user_email"} %>
+    <%= form.text_field :email,:class=>"validate[required,funcCall[validateUserEmail],custom[email]]" %>
+  </fieldset>
+  <fieldset>
+    <%= form.label :自我介绍, {:for=>"user_description"} %>
+    <%= form.text_area :description,:class=>"validate[required,minSize[25]]" %>
+  </fieldset>
+  <fieldset>
+    <%= form.label :来自哪里, {:for=>"user_location"} %>
+    <%= form.select :location, province_list %>
+  </fieldset>
 
-<% if form.object.new_record?%>
+  <% if form.object.new_record?%>
     <fieldset>
-    <%= form.label :你的密码 %>
-<%= form.password_field :password,:class=>"validate[required,minSize[6]]",:value=>'' %>
-</fieldset>
-<fieldset>
-<%= form.label :密码确认 %>
-<%= form.password_field :password_confirmation,:class=>"validate[required,equals[user_password]]",:value=>'' %>
-</fieldset>
-<% else %>
-<fieldset>
-<%= form.label :更改您的密码 %>
-<%= form.password_field :password,:class=>"validate[minSize[6]]",:value=>'' %>
-</fieldset>
-<% end %>
+      <%= form.label :你的密码, {:for=>"user_password"} %>
+      <%= form.password_field :password,:class=>"validate[required,minSize[6]]",:value=>'' %>
+    </fieldset>
+    <fieldset>
+      <%= form.label :密码确认,{:for=>"user_password_confirmation"} %>
+      <%= form.password_field :password_confirmation,:class=>"validate[required,equals[user_password]]",:value=>'' %>
+    </fieldset>
+  <% else %>
+    <fieldset>
+      <%= form.label :更改您的密码,{:for=>"user_password"} %>
+      <%= form.password_field :password,:class=>"validate[minSize[6]]",:value=>'' %>
+    </fieldset>
+  <% end %>
 
 <script>
 function validateUserEmail(field, rules, i, options){
