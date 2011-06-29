@@ -696,7 +696,7 @@ input.add-as-friend{
 #siteMessage p{
 	margin-bottom:0;
 }
-
+#user_remember_me {float:left;}
 #amp{ font-family:Baskerville, "Baskerville old face", "Hoefler Text", Garamond, "Times New Roman", serif!important; font-style:italic; font-weight:normal;}
 
 ::-moz-selection{ color:#FFF; background-color:#b72f47; text-shadow:none;}
