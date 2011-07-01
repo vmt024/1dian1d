@@ -4,7 +4,6 @@
 class ApplicationController < ActionController::Base
   helper :all # include all helpers, all the time
   protect_from_forgery # See ActionController::RequestForgeryProtection for details
-  
   helper_method :current_user
   
   private
@@ -34,7 +33,9 @@ class ApplicationController < ActionController::Base
     end
     
     def redirect_back_or_default(default)
-      logger.error("AAEEE: #{session[:return_to]}")
+      if Rails.env.development?
+        logger.error("return_to session: #{session[:return_to]}")
+      end
       redirect_to(session[:return_to] || default)
       session[:return_to] = nil
     end

@@ -18,13 +18,16 @@ class User < ActiveRecord::Base
   validates_uniqueness_of :email
   validates_presence_of :name,:email
 
+  # check the crypted  password
     def correct_password?(submitted_password)
-      logger.error("cr: #{self.crypted_password}")
-      logger.error("ps: #{encrypt(submitted_password)}")
+      if Rails.env.development?
+        logger.error("cr: #{self.crypted_password}") 
+        logger.error("ps: #{encrypt(submitted_password)}")
+      end
       self.crypted_password == encrypt(submitted_password)
     end
  
-
+  # check stored sign in cookies
     def self.sign_in_with_cookies(remember_cookie)
       return nil if remember_cookie.blank?
       cookie = Encryptor.decrypt(remember_cookie)
@@ -34,9 +37,12 @@ class User < ActiveRecord::Base
       return (!user.blank? && user.password_salt == password_salt) ? user.id : nil
     end
 
+    # auto reset password for user
     def reset_password
       new_password = secure_hash("#{self.email}==#{Time.now}==recover_password").first(6).upcase
-      logger.error("NEW PASSWORD::::::::::::::::: #{new_password}")
+      if Rails.env.development?
+        logger.error("NEW PASSWORD::::::::::::::::: #{new_password}")
+      end 
       self.password = new_password
       self.password_confirmation = new_password
     end
@@ -45,7 +51,6 @@ class User < ActiveRecord::Base
     # return [] if no updates since last_login_time
     def followed_progress
       list = []
-#      projects = Project.find_by_sql("select up.project_id as project_id from user_projects as up left join project_updates as pu on up.project_id = pu.project_id where pu.created_at > '#{self.last_login_time}'")
       projects = self.support_projects.includes(:project_updates).where("project_updates.created_at > ?",self.last_login_time)
       projects.collect{|p| list << p.id.to_i unless list.include?(p.id.to_i)}
       return list

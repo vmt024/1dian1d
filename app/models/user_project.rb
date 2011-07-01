@@ -5,6 +5,7 @@ class UserProject < ActiveRecord::Base
 
   after_save :update_project_timestamp
 
+  # update project updated_at timestamp after user update the project details
   def update_project_timestamp
     self.project.updated_at = Time.now
     self.project.save

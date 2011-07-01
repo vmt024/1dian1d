@@ -1,7 +1,6 @@
 <h2>修改类别</h2>
 
 <%= form_for(@category,{},:html => { :multipart => true }) do |f| %>
-  <%= f.error_messages %>
   <%= render :partial => "form", :object => f %>
   <p>
     <%= f.submit '确定' %>

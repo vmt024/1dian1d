@@ -13,6 +13,7 @@ class Project < ActiveRecord::Base
   @@per_page = 10
 
 
+  # return a list of locations for current projects
   def self.get_all_locations
     return Project.select('location').group("location")
   end

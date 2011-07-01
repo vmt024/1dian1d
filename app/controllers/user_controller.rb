@@ -11,7 +11,6 @@ class UserController < ApplicationController
     @user = User.new(params[:user])
     @user.superman = "NO"
     if @user.save
-      flash[:notice] = "Account registered!"
       session[:current_user_id] = @user.id
       redirect_to user_url(@user)
     else
@@ -76,7 +75,6 @@ class UserController < ApplicationController
     end
 
     if @user.update_attributes(params[:user])
-      flash[:notice] = "Account updated!"
       redirect_to edit_user_url(@user)
     else
       render :action => :edit

@@ -1,6 +1,8 @@
+<% unless flash[:notice].blank? %>
 <div id="siteMessage" style="">
     <%= flash[:notice]%>
 </div>
+<% end %>
 
 <h2>我要登录</h2>
   <%= form_for 'user', :url=>{:controller=>:user_session,:action=>:create},:html=>{:id=>"signin_form", :method=>:post} do |f| %>
