@@ -206,18 +206,18 @@ margin-bottom:10px;
 	text-align:center;
 }
 
-	#pagination a.previous_page{
-		float:left;
-	}
+#pagination a.previous_page{
+	float:left;
+}
 	
-	#pagination a.next_page{
-		float:right;
-	}
+#pagination a.next_page{
+	float:right;
+}
 
-	#pagination a:hover{
-		background-color:#f99f01;
-		color:#FFF
-	}
+#pagination a:hover{
+	background-color: #f99f01;
+	color: #FFF;
+}
 		
 
 
@@ -229,6 +229,11 @@ margin-bottom:10px;
 	float:right;
 }
 
+.disabled span{
+	width:60px;
+	display:block;
+        margin: 5px;
+}
 
 /* entry */
 
