@@ -1,5 +1,5 @@
 <% if @projects.blank? %>
-  <div>目前还没有创建目标，要不要<%= link_to "浏览", root_url %>其他人的目标<% if session[:current_user_id].eql?(@user.id) %>或者<%= link_to "创建",new_project_url %>自己的目标呢？<% end %></div>
+  <div>目前还没有创建目标,要不要<%= link_to "浏览", root_url %>其他人的目标<% if session[:current_user_id].eql?(@user.id) %>或者<%= link_to "创建",new_project_url %>自己的目标呢？<% end %></div>
 <% else %>
   <table width="100%" border="0" summary="创建的目标" class="myTable">
     <% @projects.each do |my_proj| %>
