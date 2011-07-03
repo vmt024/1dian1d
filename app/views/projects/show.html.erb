@@ -1,7 +1,7 @@
 <%= render :partial=>"project_detail_header"%>
 
 <div id="text-content">
-  <%if File.exist?(@project.avatar.url(:medium)) %>
+  <%if File.exist?(@project.avatar.path(:medium)) %>
     <%= image_tag @project.avatar.url(:medium) %>
   <% else %>
     <%= image_tag @project.category.avatar.url(:medium) %>
