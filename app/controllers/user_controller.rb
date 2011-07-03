@@ -75,6 +75,7 @@ class UserController < ApplicationController
     end
 
     if @user.update_attributes(params[:user])
+      flash[:notice] = "修改成功"
       redirect_to edit_user_url(@user)
     else
       render :action => :edit

@@ -1,7 +1,10 @@
 <h2>修改我的资料</h2>
-<div id="siteMessage">
-  <p>修改成功</p>
+<% unless flash[:notice].blank? %>
+<div id="siteMessage" style="">
+    <%= flash[:notice]%>
 </div>
+<% end %>
+
 <%= form_for @user, :url =>{:controller => :user, :action => :update, :id=>@user.id},:html=>{:id=>"edit_user_form", :autocomplete=>"off"} do |f| %>
   <%= render :partial => "form", :object => f %>
   <%= f.submit "修改",:disable_with=>"修改中..." %>
@@ -9,4 +12,5 @@
 
 <script type="text/javascript">
   $("#edit_user_form").validationEngine();
+  $('#siteMessage').fadeOut(4000);
 </script>
