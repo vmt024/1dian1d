@@ -1,10 +1,18 @@
   <fieldset>
     <%= form.label :你的昵称,{:for=>"user_name"} %>
-    <%= form.text_field :name,:class=>"validate[required,funcCall[validateName],minSize[2],maxSize[5]]" %>
+    <% if @user.new_record? %>
+      <%= form.text_field :name,:class=>"validate[required,funcCall[validateName],minSize[2],maxSize[5]]" %>
+    <% else %>
+      <%= form.text_field :name,:readonly=>true,:onkeypress=>"$(this).validationEngine('showPrompt', '您注册时使用的昵称是不能随意更改的', 'load','topRight',true)", :onblur=>"$(this).validationEngine('hide');" %>
+    <% end %>
   </fieldset>
   <fieldset>
     <%= form.label :你的邮箱, {:for=>"user_email"} %>
-    <%= form.text_field :email,:class=>"validate[required,funcCall[validateUserEmail],custom[email]]" %>
+    <% if @user.new_record? %>
+      <%= form.text_field :email,:class=>"validate[required,funcCall[validateUserEmail],custom[email]]" %>
+    <% else %>
+      <%= form.text_field :email,:readonly=>true, :onkeypress=>"$(this).validationEngine('showPrompt', '您注册时使用的邮箱地址是不能随意更改的', 'load','topRight',true);", :onblur=>"$(this).validationEngine('hide');" %>
+    <% end %>
   </fieldset>
   <fieldset>
     <%= form.label :自我介绍, {:for=>"user_description"} %>
