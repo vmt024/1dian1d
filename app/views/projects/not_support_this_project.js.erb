@@ -1,3 +1,6 @@
+$("#siteMessage").html("<p>您刚刚取消了对目标(<%= @project.name %>)的关注！</p>");
+$("#siteMessage").slideToggle("slow");
 $("#support_project_<%= @project.id%>").slideUp();
 $("#support_project_tab").html('<%= "支持的目标(#{@user.support_projects.size})"%>');
+$('#siteMessage').fadeOut(3000);
 

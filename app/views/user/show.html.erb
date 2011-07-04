@@ -65,6 +65,8 @@
   <% end %>
 
   </div>
+<div id="siteMessage" style="display:none;">
+</div>  
 
             <div class="grid_7 alpha omega" id="project-navigation">
             <ul class="borderBottom">
@@ -85,7 +87,6 @@
 	        <!-- display my projects-->
                 <%= render :partial=> 'projects' %>
             <% else %>
-              <div>目前还没有创建目标，要不要<%= link_to "浏览", root_url %>其他人的目
-              标<% if session[:current_user_id].eql?(@user.id) %>或者<%= link_to "创建",new_project_url %>自己的目标呢？<% end %></div>
+              <div>目前还没有创建目标，要不要<%= link_to "浏览", root_url %>其他人的目标<% if session[:current_user_id].eql?(@user.id) %>或者<%= link_to "创建",new_project_url %>自己的目标呢？<% end %></div>
             <% end %>
         </div>
