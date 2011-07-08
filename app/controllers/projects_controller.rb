@@ -140,11 +140,8 @@ class ProjectsController < ApplicationController
     respond_to do |format|
 
       if @project.save!
-        logger.error("EE1")
         unless params[:reward_conditions].blank? || params[:rewards].blank?
-        logger.error("EE2")
           for i in 0 .. params[:reward_conditions].size do 
-           logger.error("EE3")
             reward = ProjectPrize.new({:name=>params[:reward_conditions][i],:description=>params[:rewards][i]})
             reward.project_id = @project.id
             reward.save
@@ -154,7 +151,6 @@ class ProjectsController < ApplicationController
         format.html { redirect_to project_url(@project) }
         format.xml  { render :xml => @project, :status => :created, :location => @project }
       else
-        logger.error("EE4")
         format.html { render :action => "new" }
         format.xml  { render :xml => @project.errors, :status => :unprocessable_entity }
       end

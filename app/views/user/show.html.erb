@@ -11,18 +11,24 @@
           </strong> 个你所支持的目标有了新的进展。
         </li>
       <% end %>
+      <% unless session[:followed_fans].blank? %>
+        <li>
+          <strong>
+            您有了<span class="followed-fans"><%= session[:followed_fans].size %></span>
+          </strong> 个新粉丝。
+        </li>
+      <% end %>
       <% unless session[:new_progress].blank? %>
         <% session[:new_progress].each_pair do |project_id,progress|%>
           <li>
-              <strong>
-                
-                <%= link_to "<span class='new-progress'>#{Project.find(project_id).name}</span>".html_safe, project_url(project_id) %></strong>目标有了
-          <% unless progress[:comment_counts].eql?(0)%>
-            <strong><%= progress[:comment_counts]%></strong> 个新的留言
-          <%end%>
-          <% unless progress[:follower_counts].eql?(0) || progress[:comment_counts].eql?(0)%>
+              <strong><%= link_to "<span class='new-progress'>#{Project.find(project_id).name}</span>".html_safe, project_url(project_id) %></strong>目标有了
+          <!--< unless progress[:comment_counts].eql?(0)%>
+            <strong><= progress[:comment_counts]%></strong> 个新的留言
+          <end%>
+          < unless progress[:follower_counts].eql?(0) || progress[:comment_counts].eql?(0)%>
            和
-          <% end %>
+           < end %>
+           -->
           <% unless progress[:follower_counts].eql?(0)%><strong><%= progress[:follower_counts]%></strong> 位新的支持者。
           <%end%>
           </li>

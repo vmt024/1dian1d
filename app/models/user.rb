@@ -34,7 +34,13 @@ class User < ActiveRecord::Base
       email = cookie.split('--A--')[0]
       password_salt = cookie.split('--A--')[1]
       user = User.find_by_email(email)
-      return (!user.blank? && user.password_salt == password_salt) ? user.id : nil
+      if (!user.blank? && user.password_salt == password_salt)
+        user.current_login_time = Time.now
+        user.save
+        return user.id 
+      else
+        return nil
+      end
     end
 
     # auto reset password for user
@@ -46,6 +52,15 @@ class User < ActiveRecord::Base
       self.password = new_password
       self.password_confirmation = new_password
     end
+    # return a list of user id which is fans for current login user 
+    # return [] if no fans 
+    def followed_fans
+      list = []
+      fans = self.fans.where("created_at > ?",self.last_login_time)
+      fans.collect{|f| list << f.id.to_i unless list.include?(f.id.to_i)}
+      return list
+    end
+
 
     # return a list of project id which has new update since last login
     # return [] if no updates since last_login_time
