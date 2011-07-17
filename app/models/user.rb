@@ -66,6 +66,7 @@ class User < ActiveRecord::Base
     def closed_projects 
       list = []
       projects = self.my_projects.where("complete_time > ? and success_yn is null",self.last_login_time)
+      logger.error("closed_project: debug")
       projects.collect{|p| list << p.id.to_i unless list.include?(p.id.to_i)}
       return list
     end
