@@ -2,8 +2,11 @@
 <html class="no-js">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>一点一滴 - 实现你的目标</title>
-
+<% if params[:controller].eql?('projects') && !@project.blank? %>
+  <title>一点一滴 - <%= @project.name%></title>
+<% else %>
+<title>一点一滴 - 分享和实现你的目标</title>
+<% end %>
 <%= stylesheet_link_tag( "master", "grids","jqueryui1811",'validationEngine.jquery', 'jquery.countdown')  %>
 
 <%= javascript_include_tag( "jquery.min","jquery_ujs","ui.core","ui.tabs")%>
