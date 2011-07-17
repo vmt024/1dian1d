@@ -65,7 +65,7 @@ class User < ActiveRecord::Base
     # return [] if no closed projects
     def closed_projects 
       list = []
-      projects = self.my_projects.where("complete_time > ? and success_yn is null",self.last_login_time)
+      projects = self.my_projects.where("complete_time > ? and success_yn is null and complete_time <= CURDATE()",self.last_login_time)
       logger.error("closed_project: #{self.last_login_time.to_s}")
       logger.error("closed_project: #{Project.find(1).complete_time.to_s}")
       logger.error("closed_project: debug")
