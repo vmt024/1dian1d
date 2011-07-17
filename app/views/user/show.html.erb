@@ -26,7 +26,7 @@
           <li>
               <strong><%= link_to "<span class='new-progress'>#{Project.find(project_id).name}</span>".html_safe, project_url(project_id) %></strong>目标有了
           <% unless progress[:comment_counts].eql?(0)%>
-            <strong><= progress[:comment_counts]%></strong> 个新的留言
+            <strong><%= progress[:comment_counts]%></strong> 个新的留言
           <%end%>
           <% unless progress[:follower_counts].eql?(0) || progress[:comment_counts].eql?(0)%>
            和
