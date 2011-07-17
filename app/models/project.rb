@@ -6,8 +6,8 @@ class Project < ActiveRecord::Base
   has_many :user_projects
   has_many :supporters, :through=>:user_projects, :source=>:user
   belongs_to :owner, :class_name=>'User', :foreign_key => 'user_id'
-  has_many :project_updates
-  has_many :comments
+  has_many :project_updates, :order =>"created_at DESC"
+  has_many :comments, :order=>"created_at DESC"
 
   cattr_reader :per_page
   @@per_page = 10

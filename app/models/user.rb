@@ -61,6 +61,14 @@ class User < ActiveRecord::Base
       return list
     end
 
+    # return a list of closed projects for current login user 
+    # return [] if no closed projects
+    def closed_projects 
+      list = []
+      projects = self.my_projects.where("complete_time > ? and success_yn is null",self.last_login_time)
+      projects.collect{|p| list << p.id.to_i unless list.include?(p.id.to_i)}
+      return list
+    end
 
     # return a list of project id which has new update since last login
     # return [] if no updates since last_login_time

@@ -78,6 +78,7 @@ class ProjectsController < ApplicationController
     else
       @similar_projects = []
     end
+    session[:closed_projects].delete(@project.id) if !session[:closed_projects].blank? && session[:closed_projects].include?(@project.id)
     session[:new_progress].delete(@project.id) if !session[:new_progress].blank? && session[:new_progress].include?(@project.id)
     session[:followed_progress].delete(@project.id) if !session[:followed_progress].blank? && session[:followed_progress].include?(@project.id)
 

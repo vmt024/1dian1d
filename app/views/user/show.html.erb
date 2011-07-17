@@ -1,7 +1,10 @@
 <% if session[:current_user_id].eql?(@user.id) %>
-<% unless session[:new_progress].blank? && session[:followed_progress].blank? %>
+<% unless session[:new_progress].blank? && session[:followed_progress].blank? && session[:closed_projects].blank? %>
   <div class="global-notification">
     <ul>
+      <% unless session[:closed_projects].blank? %>
+        <li>您的 <strong><%= session[:closed_projects].size %></strong> 个目标的完成期限已到，您还没有确认目标成功与否。</li>
+      <% end %>
       <% unless session[:followed_progress].blank? %>
         <li>
           <strong>
@@ -22,15 +25,13 @@
         <% session[:new_progress].each_pair do |project_id,progress|%>
           <li>
               <strong><%= link_to "<span class='new-progress'>#{Project.find(project_id).name}</span>".html_safe, project_url(project_id) %></strong>目标有了
-          <!--< unless progress[:comment_counts].eql?(0)%>
+          <% unless progress[:comment_counts].eql?(0)%>
             <strong><= progress[:comment_counts]%></strong> 个新的留言
-          <end%>
-          < unless progress[:follower_counts].eql?(0) || progress[:comment_counts].eql?(0)%>
-           和
-           < end %>
-           -->
-          <% unless progress[:follower_counts].eql?(0)%><strong><%= progress[:follower_counts]%></strong> 位新的支持者。
           <%end%>
+          <% unless progress[:follower_counts].eql?(0) || progress[:comment_counts].eql?(0)%>
+           和
+           <% end %>
+          <% unless progress[:follower_counts].eql?(0)%><strong><%= progress[:follower_counts]%></strong> 位新的支持者。<%end%>
           </li>
         <% end %>
       <% end %>
