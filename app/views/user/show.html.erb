@@ -1,5 +1,5 @@
 <% if session[:current_user_id].eql?(@user.id) %>
-<% unless session[:new_progress].blank? && session[:followed_progress].blank? && session[:closed_projects].blank? %>
+<% unless session[:followed_fans].blank? && session[:new_progress].blank? && session[:followed_progress].blank? && session[:closed_projects].blank? %>
   <div class="global-notification">
     <ul>
       <% unless session[:closed_projects].blank? %>
