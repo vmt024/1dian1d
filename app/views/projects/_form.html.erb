@@ -14,16 +14,16 @@
     <%= form.label :选个类别吧, {:for=>"project_category_id"} %>
     <% Category.all.each_with_index do |category, index| %>
       <% if (index == 0) %>
-        <%= form.radio_button :category_id,category.id,{:checked=>true} %><%= category.name %>
+        <%= form.radio_button :category_id,category.id,{:checked=>true} %> <%= ('&nbsp;'*1).html_safe %> <%= category.name %><%= ('&nbsp;'*5).html_safe %>
       <% elsif ((index+1)%4 == 0) %>
-        <%= form.radio_button :category_id,category.id %> <%= category.name %><br/>
+        <%= form.radio_button :category_id,category.id %> <%= ('&nbsp;'*1).html_safe %> <%= category.name %><br/>
       <% else %>
-        <%= form.radio_button :category_id,category.id %> <%= category.name %>
+        <%= form.radio_button :category_id,category.id %> <%= ('&nbsp;'*1).html_safe %> <%= category.name %><%= ('&nbsp;'*5).html_safe %>
       <% end %>
     <% end %>
   </fieldset>
     <%= render :partial=>"prize" %>
-    <%= link_to_function("需要更多犒赏来鼓励自己？","$('#more_rewards').before($('#reward').html())",:id=>"more_rewards") %>
+    <%= link_to "需要更多犒赏来鼓励自己？",more_rewards_projects_url,:remote=>true,:id=>"more_rewards"  %>
   <fieldset>
     <%= form.label :上传个目标图片吧,{:for=>"project_avatar"} %>
     <%= form.file_field :avatar,:value=>"上传" %>

@@ -14,4 +14,7 @@ module ProjectsHelper
     return ""
   end
 
+  def random_id_for_reward
+    return "reward_#{ActiveSupport::SecureRandom.hex(2)}"
+  end
 end

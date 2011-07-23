@@ -2,10 +2,10 @@
 <html class="no-js">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<% if params[:controller].eql?('projects') && !@project.blank? %>
-  <title>一点一滴 - <%= @project.name%></title>
+<% if params[:controller].eql?('projects') && !@project.blank? && !@project.new_record? %>
+  <title>一点一滴 - <%= @project.name%> by <%= @project.owner.name %></title>
 <% else %>
-<title>一点一滴 - 分享和实现你的目标</title>
+  <title>一点一滴 - 分享和实现你的目标</title>
 <% end %>
 <%= stylesheet_link_tag( "master", "grids","jqueryui1811",'validationEngine.jquery', 'jquery.countdown')  %>
 
@@ -27,7 +27,26 @@
     ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
     var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
   })();
-
+ 
+  $(document).ready(function(){
+      // hide #back-top first
+      $("#back-top").hide();
+      // fade in #back-top
+      $(function () {
+        $(window).scroll(function () {
+            if ($(this).scrollTop() > 100) {
+                $('#back-top').fadeIn();
+            } else {
+                $('#back-top').fadeOut();
+            }
+        });
+        // scroll body to 0px on click
+        $('#back-top a').click(function () {
+            $('body,html').animate({scrollTop: 0 }, 800);
+                return false;
+            });
+        });
+});
 </script>
 </head>
 
@@ -48,7 +67,9 @@
     </div><!-- end of right hand side content -->
 
     <%= render :partial=>'layouts/footer' %>
-
+    <p id="back-top">
+      <a href="#top"><span></span>返回顶部</a>
+    </p>
 </div><!-- end of container 12-->
 </body>
 </html>

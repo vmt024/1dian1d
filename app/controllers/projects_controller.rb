@@ -7,7 +7,7 @@ class ProjectsController < ApplicationController
   # GET /projects
   # GET /projects.xml
   def welcome
-    @projects = Project.paginate(:all,:page=>params[:page],:order=>"rand()")
+    @projects = Project.current_projects.paginate(:all,:page=>params[:page],:order=>"rand()")
 
     respond_to do |format|
       format.html # index.html.erb
@@ -24,11 +24,11 @@ class ProjectsController < ApplicationController
       @projects = Project.paginate(:all,:conditions=>["category_id = ?",category_id],:order=>"name Asc",:page=>params[:page])
     elsif !params[:search_by].blank?
       case params[:search_by]
-      when "热门"
+      when "热门目标"
         @projects = Project.paginate(:all,:order=>"views Desc",:page=>params[:page])
-      when "推荐"
-        @projects = Project.paginate(:all,:order=>"number_of_supporters Desc",:page=>params[:page])
-      when "最新"
+      when "过去的目标"
+        @projects = Project.past_projects.paginate(:all,:order=>"rand()",:page=>params[:page])
+      when "最新目标"
         @projects = Project.paginate(:all,:order=>"created_at Desc",:page=>params[:page])
       else
         @projects = Project.paginate(:all,:order=>"name Asc",:page=>params[:page])
@@ -232,6 +232,12 @@ class ProjectsController < ApplicationController
     @project = Project.find(params[:project_id])
     @project.success_yn = false
     @project.save
+    respond_to do |format|
+      format.js
+    end
+  end
+
+  def more_rewards
     respond_to do |format|
       format.js
     end

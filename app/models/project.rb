@@ -9,6 +9,9 @@ class Project < ActiveRecord::Base
   has_many :project_updates, :order =>"created_at DESC"
   has_many :comments, :order=>"created_at DESC"
 
+  scope :current_projects, where('complete_time > curdate()')
+  scope :past_projects, where('complete_time < curdate()')
+
   cattr_reader :per_page
   @@per_page = 10
 

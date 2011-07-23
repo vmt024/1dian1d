@@ -16,6 +16,7 @@ Ququ::Application.routes.draw do
       post :search
       get :support_this_project
       get :recent_updated_followed
+      get :more_rewards
     end
   end
 

@@ -1,7 +1,7 @@
 <div id="rewards-content">
         <ul id="project-stats">
           <li>支持者 <span class="white-number" id="supporter-white-number"><%= @project.supporters.blank? ? "0" : @project.supporters.count %></span> 人</li>
-          <% if project_days_left(@project.complete_time) > 99 %>
+          <% if project_days_left(@project.complete_time) > 1 %>
             <li>剩余 <span class="white-number"><%= project_days_left(@project.complete_time)%></span> 天</li>
           <% else %>
           <li>剩余<span id="project_countdown_timer"></span></li>
@@ -43,5 +43,5 @@
     $("#siteMessage").slideToggle("slow");
     $('#siteMessage').fadeOut(3000);
   }
-  $('#project_countdown_timer').countdown({until: new Date(<%= @project.complete_time.year %>, <%= @project.complete_time.month-1 %>, <%= @project.complete_time.day-1 %>, 12), timezone: +12,format: 'DHMS',compact:true});
+  $('#project_countdown_timer').countdown({until: new Date(<%= @project.complete_time.year %>, <%= @project.complete_time.month-1 %>, <%= @project.complete_time.day %>, <%= @project.complete_time.hour %>,<%= @project.complete_time.min %>),format: 'HMS',compact:true });
 </script>
