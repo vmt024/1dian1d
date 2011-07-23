@@ -50,7 +50,7 @@ class ProjectUpdatesController < ApplicationController
     @project_update = ProjectUpdate.new(params[:project_update])
     respond_to do |format|
       if @project_update.save
-        format.html { redirect_to (:back, :notice => 'ProjectUpdate was successfully created.') }
+        format.html { redirect_to(:back, :notice =>'ProjectUpdate was successfully created.') }
         format.xml  { render :xml => @project_update, :status => :created, :location => @project_update }
       else
         format.html { render :action => "new" }

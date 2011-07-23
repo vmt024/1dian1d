@@ -119,6 +119,7 @@ class ProjectsController < ApplicationController
   # GET /projects/new.xml
   def new
     @project = Project.new
+    @project.complete_time = Time.now.since(1.day)
     respond_to do |format|
       format.html # new.html.erb
       format.xml  { render :xml => @project }
