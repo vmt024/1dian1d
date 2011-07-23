@@ -68,7 +68,7 @@ a:hover { text-decoration: underline !important; }
 	<tr>
 		<td valign="top" align="center" bgcolor="#312c26" background="<%=attachments['date-bg.jpg'].url %>" width="357" height="42">
 		<table width="100%" border="0" cellspacing="0" cellpadding="0"><tr><td height="5"></td></tr></table>
-        <p style="font-size: 24px; font-family: Georgia, 'Times New Roman', Times, serif; color: #ffffff; margin-top: 0px; margin-bottom: 0px;">您好 <%= @user.name %></p>
+        <p style="font-size: 24px; font-family: Georgia, 'Times New Roman', Times, serif; color: #ffffff; margin-top: 0px; margin-bottom: 0px;"><%= @user.name %></p>
 		</td>
 	</tr>
 	</table><!--/date-->
@@ -94,8 +94,12 @@ a:hover { text-decoration: underline !important; }
 	<table width="100%" border="0" cellspacing="0" cellpadding="0">
 	
 </table><!--/line break-->
-    <h1 style="font-size: 36px; font-weight: normal; color: #333333; font-family: Georgia, 'Times New Roman', Times, serif; margin-top: 0px; margin-bottom: 20px;">新的密码是： <%= @new_password %></h1>
-    <p style="font-size: 16px; line-height: 22px; font-family: Georgia, 'Times New Roman', Times, serif; color: #333; margin: 0px;">当您成功登录1点1滴后，您可以在控制面板修改您的密码.</p>
+	<h1 style="font-size: 36px; font-weight: normal; color: #333333; font-family: Georgia, 'Times New Roman', Times, serif; margin-top: 0px; margin-bottom: 20px;">谢谢您的支持！</h1>
+    <% if @project.success_yn %>
+      <p style="font-size: 16px; line-height: 22px; font-family: Georgia, 'Times New Roman', Times, serif; color: #333; margin: 0px;">在大家的鼓励下<%= @project_owner%>的目标：<%= @project_name%>已经成功的完成了，1点1滴和<%= @project_owner%>真诚的感谢您的鼓励与支持！</p>
+  <% else %>
+    <p style="font-size: 16px; line-height: 22px; font-family: Georgia, 'Times New Roman', Times, serif; color: #333; margin: 0px;">在大家的鼓励下<%= @project_owner%>的目标：<%= @project_name%>已经完成了，虽然目标没有成功。但是1点1滴和<%= @project_owner%>真诚的感谢您的鼓励与支持！</p>
+  <% end %>
     </td>
   </tr>
 </table><!--/section 1-->

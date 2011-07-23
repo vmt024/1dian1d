@@ -15,8 +15,9 @@ class UserMailer < ActionMailer::Base
          :reply_to => "peterpengnz@gmail.com")
   end
 
-  def password_recover(user)
+  def password_recover(user,new_password)
     @user = user
+    @new_password = new_password
     @url = "http://www.1dian1di.com/"
     attachments.inline['ribbon.jpg'] = File.read(Rails.public_path + '/images/ribbon.jpg')
     attachments.inline['header-bg.jpg'] = File.read(Rails.public_path + '/images/header-bg.jpg')
@@ -28,4 +29,19 @@ class UserMailer < ActionMailer::Base
          :reply_to => "peterpengnz@gmail.com")
   end
 
+  def project_result(user,project,project_name,project_owner)
+    @user = user
+    @project = project
+    @project_name = project.name
+    @project_owner = project.owner.name
+    @url = "http://www.1dian1di.com/"
+    attachments.inline['ribbon.jpg'] = File.read(Rails.public_path + '/images/ribbon.jpg')
+    attachments.inline['header-bg.jpg'] = File.read(Rails.public_path + '/images/header-bg.jpg')
+    attachments.inline['line-break-2.jpg'] = File.read(Rails.public_path + '/images/line-break-2.jpg')
+    attachments.inline['date-bg.jpg'] = File.read(Rails.public_path + '/images/date-bg.jpg')
+    mail(:to => user.email,
+         :subject => "感谢您对#{user.name}的目标：#{project.name}的支持",
+         :date => Date.today,
+         :reply_to => "peterpengnz@gmail.com")
+  end
 end

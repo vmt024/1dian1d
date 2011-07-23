@@ -222,7 +222,10 @@ class ProjectsController < ApplicationController
   def set_project_success
     @project = Project.find(params[:project_id])
     @project.success_yn = true
-    @project.save
+    if @project.save
+      @project.deliver_project_result
+    end
+    session[:closed_projects].delete(@project.id) if !session[:closed_projects].blank? && session[:closed_projects].include?(@project.id)
     respond_to do |format|
       format.js
     end
@@ -231,7 +234,10 @@ class ProjectsController < ApplicationController
   def set_project_fail
     @project = Project.find(params[:project_id])
     @project.success_yn = false
-    @project.save
+    if @project.save
+      @project.deliver_project_result
+    end
+    session[:closed_projects].delete(@project.id) if !session[:closed_projects].blank? && session[:closed_projects].include?(@project.id)
     respond_to do |format|
       format.js
     end

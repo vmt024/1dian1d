@@ -90,8 +90,9 @@ class UserController < ApplicationController
     if User.exists?(["email = ?",params[:user][:email]])
       user = User.find_by_email(params[:user][:email])
       user.reset_password
+      new_password = user.password
       if user.save
-        UserMailer.password_recover(user).deliver
+        UserMailer.delay.password_recover(user,new_password)
       else
         logger.error("User does not exist in the system.")
       end

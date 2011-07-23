@@ -1,0 +1,19 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+  <head>
+    <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" /></head>
+  <body>
+    <h2><%= @user.name %> 您好</h2>
+    <% if @project.success_yn %>
+      <p>感谢您的支持，<%= @project_owner%>的目标：<%= @project_name%>已经成功地完成了。1点1滴和<%= @project_owner%>真诚的感谢您的支持与鼓励！</p>
+    <% else%>
+      <p>感谢您的支持，<%= @project_owner%>的目标：<%= @project_name%>已经完成了。虽然目标没有成功，但是1点1滴和<%= @project_owner%>真诚的感谢您的支持与鼓励！</p>
+    <% end %>
+    <br/>
+    <p>祝您成功的实现您的目标！</p>
+    <br/>
+    <br/>
+    <br/>
+    <p>1点1滴</p>
+  </body>
+</html>

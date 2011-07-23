@@ -6,11 +6,11 @@
     <tr>
       <td class="td-titles">
       <% project_name = (!session[:new_progress].blank? && session[:new_progress].include?(my_proj.id)) ? ("<span class=\"new-progress\">#{my_proj.name}</span>").html_safe : my_proj.name %>
-    	<%= link_to project_name, project_url(my_proj.id) %></span></td>
+      <%= link_to project_name, project_url(my_proj.id),:name=>"mproject_#{my_proj.id}" %></span></td>
       <td><%= my_proj.supporters.count %>支持</td>
       <td><%= project_days_left(my_proj.complete_time) %>天剩余</td>
     <td><%= my_proj.views %>次浏览</td>
-    <% if (my_proj.complete_time < 12.hours.from_now) && my_proj.success_yn.nil? && user_is_project_owner?(my_proj.user_id) %>
+    <% if (project_days_left(my_proj.complete_time) < 1)  && my_proj.success_yn.nil? && user_is_project_owner?(my_proj.user_id) %>
       <td id="project_result_<%= my_proj.id%>">
         <%= link_to "成功", project_set_project_success_url(:project_id=>my_proj.id),:remote=>true %>
         <%= link_to "失败", project_set_project_fail_url(:project_id=>my_proj.id),:remote=>true %>

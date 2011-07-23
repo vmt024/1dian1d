@@ -20,4 +20,12 @@ class Project < ActiveRecord::Base
   def self.get_all_locations
     return Project.select('location').group("location")
   end
+
+  # deliver project result to all supporter
+  def deliver_project_result
+    users = self.supporters
+    users.each do |user|
+      UserMailer.delay.project_result(user,self,self.name,self.owner.name)
+    end
+  end
 end
