@@ -12,6 +12,7 @@ gem "will_paginate", "~> 3.0.pre2"
 gem "jquery-rails"
 gem "encryptor"
 gem "delayed_job"
+#gem "jammit"
 gem "rails-footnotes", :group=>:development
 
 # Use unicorn as the web server

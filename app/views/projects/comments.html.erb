@@ -5,7 +5,11 @@
     目前还没有该目标的留言，要不要鼓励一下呢。
   <% else %>
   <% @project.comments.each do |comment|%>
+    <% if comment.user_id.eql?(@project.user_id)%>
+    <div class="entry" style="border-bottom: 1px solid #666;">
+    <% else %>
     <div class="entry">
+    <% end %>
       	<p><%= comment.content%></p>
         <h6><%=link_to comment.user.name, user_url(comment.user)%> 更新于<%= time_ago_in_words(comment.updated_at)%>前</h6>
     </div>

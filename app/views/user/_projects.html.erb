@@ -3,10 +3,10 @@
 <% else %>
   <table width="100%" border="0" summary="创建的目标" class="myTable">
     <% @projects.each do |my_proj| %>
-    <tr>
+      <tr>
       <td class="td-titles">
       <% project_name = (!session[:new_progress].blank? && session[:new_progress].include?(my_proj.id)) ? ("<span class=\"new-progress\">#{my_proj.name}</span>").html_safe : my_proj.name %>
-      <%= link_to project_name, project_url(my_proj.id),:name=>"mproject_#{my_proj.id}" %></span></td>
+      <%= link_to project_name, project_url(my_proj.id) %></span></td>
       <td><%= my_proj.supporters.count %>支持</td>
       <td><%= project_days_left(my_proj.complete_time) %>天剩余</td>
     <td><%= my_proj.views %>次浏览</td>
