@@ -85,7 +85,7 @@ class User < ActiveRecord::Base
       new_progress = {}
       own_projects = Project.where("user_id = ?",self.id).select('id')
       own_projects.each do |project|
-        comment_counts = Comment.count(:conditions=>["project_id = ? and created_at > ?",project.id,self.last_login_time])
+        comment_counts = Comment.count(:conditions=>["project_id = ? and created_at > ? and user_id != ?",project.id,self.last_login_time,self.id])
         follower_counts = UserProject.count(:conditions=>["project_id = ? and created_at > ?",project.id,self.last_login_time])
         unless comment_counts.eql?(0) && follower_counts.eql?(0)
           new_progress[project.id] = {:comment_counts=>comment_counts,:follower_counts=>follower_counts}
