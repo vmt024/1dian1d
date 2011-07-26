@@ -12,7 +12,7 @@ class UserMailer < ActionMailer::Base
     mail(:to => user.email,
          :subject => "会员注册成功，1点1滴欢迎您的加入",
          :date => Date.today,
-         :reply_to => "peterpengnz@gmail.com")
+         :reply_to => "1dian1di@1dian1di.com")
   end
 
   def password_recover(user,new_password)
@@ -26,7 +26,7 @@ class UserMailer < ActionMailer::Base
     mail(:to => user.email,
          :subject => "1点1滴已经为您更新了密码",
          :date => Date.today,
-         :reply_to => "peterpengnz@gmail.com")
+         :reply_to => "1dian1di@1dian1di.com")
   end
 
   def project_result(user,project,project_name,project_owner)

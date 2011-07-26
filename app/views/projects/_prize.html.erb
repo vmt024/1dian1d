@@ -1,7 +1,7 @@
 <span id="reward">
 <fieldset>
 <%= label 'reward_conditions','', "犒赏条件" %>
-<%= text_field 'reward_conditions','',:id=>random_id_for_reward,:class=>"validate[minSize[8],maxSize[16]]",:onfocus=>"if(this.value == ''){$(this).validationEngine('showPrompt', '例如：如果我10天不吸烟', 'pass','topRight',true)}" %>
+<%= text_field 'reward_conditions','',:id=>random_id_for_reward,:class=>"validate[minSize[6],maxSize[16]]",:onfocus=>"if(this.value == ''){$(this).validationEngine('showPrompt', '例如：如果我10天不吸烟', 'pass','topRight',true)}" %>
 </fieldset>
 <fieldset>
 <%= label 'rewards',"", "犒赏内容" %>
