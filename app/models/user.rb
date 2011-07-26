@@ -65,7 +65,7 @@ class User < ActiveRecord::Base
     # return [] if no closed projects
     def closed_projects 
       list = []
-      projects = self.my_projects.where("complete_time > ? and success_yn is null and complete_time <= CURDATE()",self.last_login_time)
+      projects = self.my_projects.where("success_yn is null and complete_time < NOW()")
       projects.collect{|p| list << p.id.to_i unless list.include?(p.id.to_i)}
       return list
     end

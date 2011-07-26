@@ -3,7 +3,7 @@
   <div class="global-notification">
     <ul>
       <% unless session[:closed_projects].blank? %>
-        <li>目标 <%= session[:closed_projects].collect{|cp| link_to Project.find(cp).name, project_url(cp)}.join(', ').html_safe %> 已经接近完成期限，您还没有确认目标成功与否。</li>
+        <li>目标 <%= session[:closed_projects].collect{|cp| link_to Project.find(cp).name, project_url(cp)}.join(', ').html_safe %> 已经到了完成期限，您还没有确认目标成功与否。</li>
       <% end %>
       <% unless session[:followed_progress].blank? %>
         <li>

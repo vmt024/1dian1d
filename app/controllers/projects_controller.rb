@@ -25,11 +25,11 @@ class ProjectsController < ApplicationController
     elsif !params[:search_by].blank?
       case params[:search_by]
       when "热门目标"
-        @projects = Project.paginate(:all,:order=>"views Desc",:page=>params[:page],:per_page=>10)
+        @projects = Project.current_projects.paginate(:all,:order=>"views Desc",:page=>params[:page],:per_page=>10)
       when "过去的目标"
         @projects = Project.past_projects.paginate(:all,:order=>"rand()",:page=>params[:page],:per_page=>10)
       when "最新目标"
-        @projects = Project.paginate(:all,:order=>"created_at Desc",:page=>params[:page],:per_page=>10)
+        @projects = Project.current_projects.paginate(:all,:order=>"created_at Desc",:page=>params[:page],:per_page=>10)
       else
         @projects = Project.paginate(:all,:order=>"name Asc",:page=>params[:page],:per_page=>10)
       end
