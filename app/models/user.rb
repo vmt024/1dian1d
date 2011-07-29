@@ -12,7 +12,7 @@ class User < ActiveRecord::Base
   has_many :friends
   has_many :fans, :class_name=>"Friend",:foreign_key=>:friend_id
 
-  attr_protected :superman
+  attr_protected :superman, :crypted_password, :password_salt, :created_at, :updated_at, :last_login_time, :current_login_time
 
   attr_accessor :password, :password_confirmation, :remember_me
   validates_uniqueness_of :email

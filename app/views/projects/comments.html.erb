@@ -19,7 +19,6 @@
 
 <% unless session[:current_user_id].blank? %>
   <%= form_for(:comment, :url=>comments_url,:html=>{:id=>"comment_form",:method=>:post}) do |f| %>
-    <%= f.hidden_field :project_id,:value=>@project.id %>
     <fieldset>
       <%= f.text_area :content,:class=>"validate[required,minSize[5],maxSize[300]]" %>
     </fieldset>

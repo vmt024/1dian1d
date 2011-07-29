@@ -1,9 +1,9 @@
 Ququ::Application.routes.draw do
-  resources :project_prizes
-  resources :comments
-  resources :categories
-  resources :project_updates
-  resources :projects do
+  #resources :project_prizes
+  resources :comments, :only=>[:create]
+  #resources :categories
+  resources :project_updates, :only=>[:create]
+  resources :projects,:except=>[:update,:edit,:destroy] do
     get :progress
     get :comments
     get :supporters
@@ -20,9 +20,9 @@ Ququ::Application.routes.draw do
     end
   end
 
-  resources :user do
+  resources :user,:except=>[:destroy,:index] do
     get :projects
-    get :messages
+#    get :messages
     get :supported_projects
     get :friends
     get :fans
@@ -34,13 +34,13 @@ Ququ::Application.routes.draw do
     end
   end
 
-  resources :user_session
-  resources :messages do
-    collection do 
-      get :reply
-      post :send_reply
-    end
-  end
+  resources :user_session,:except=>[:index,:edit,:update]
+  #resources :messages do
+  #  collection do 
+  #    get :reply
+  #    post :send_reply
+  #  end
+  #end
 
   match 'lost_password' => 'user#lost_password', :as => :lost_password
   match 'password_recover' => 'user#password_recover', :as => :password_recover

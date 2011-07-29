@@ -70,11 +70,14 @@ class UserController < ApplicationController
 
   def update
     @user = User.find(session[:current_user_id])
-    if !params[:user][:password].blank?
-      params[:user][:password_confirmation] = params[:user][:password]
+    unless params[:user][:password].blank?
+      @user.password_confirmation = params[:user][:password]
+      @user.password = params[:user][:password]
     end
 
-    if @user.update_attributes(params[:user])
+    @user.description = params[:user][:description]
+    @user.location = params[:user][:location]
+    if @user.save
       flash[:notice] = "修改成功"
       redirect_to :back
     else

@@ -67,8 +67,8 @@ class ProjectsController < ApplicationController
   # GET /projects/1
   # GET /projects/1.xml
   def show
-    session[:current_project_id] = params[:id]
     @project = Project.find(params[:id])
+    session[:current_project_id] = @project.id
     @project.views += 1
     @project.save(false)
     project_list = Project.where("category_id = ? and id != ?",@project.category_id,@project.id).select('id').collect{|p| p.id}
@@ -89,6 +89,7 @@ class ProjectsController < ApplicationController
 
   def supporters
     @project = Project.find(params[:project_id])
+    session[:current_project_id] = @project.id
 
     respond_to do |format|
       format.html # show.html.erb
@@ -98,7 +99,7 @@ class ProjectsController < ApplicationController
 
   def comments
     @project = Project.find(params[:project_id])
-
+    session[:current_project_id] = @project.id
     respond_to do |format|
       format.html # show.html.erb
       format.xml  { render :xml => @project }
@@ -107,7 +108,7 @@ class ProjectsController < ApplicationController
 
   def progress
     @project = Project.find(params[:project_id])
-
+    session[:current_project_id] = @project.id
     respond_to do |format|
       format.html # show.html.erb
       format.xml  { render :xml => @project }
@@ -118,7 +119,7 @@ class ProjectsController < ApplicationController
   # GET /projects/new.xml
   def new
     @project = Project.new
-    @project.complete_time = Time.now.since(1.day)
+    @project.complete_time = Time.now.since(2.day)
     respond_to do |format|
       format.html # new.html.erb
       format.xml  { render :xml => @project }
@@ -221,11 +222,13 @@ class ProjectsController < ApplicationController
 
   def set_project_success
     @project = Project.find(params[:project_id])
-    @project.success_yn = true
-    if @project.save
-      @project.deliver_project_result
+    if (@project.user_id == session[:current_user_id]) and (@project.success_yn.blank?)
+      @project.success_yn = true
+      if @project.save
+        @project.deliver_project_result
+      end
+      session[:closed_projects].delete(@project.id) if !session[:closed_projects].blank? && session[:closed_projects].include?(@project.id)
     end
-    session[:closed_projects].delete(@project.id) if !session[:closed_projects].blank? && session[:closed_projects].include?(@project.id)
     respond_to do |format|
       format.js
     end
@@ -233,11 +236,13 @@ class ProjectsController < ApplicationController
 
   def set_project_fail
     @project = Project.find(params[:project_id])
-    @project.success_yn = false
-    if @project.save
-      @project.deliver_project_result
+    if (@project.user_id == session[:current_user_id]) and (@project.success_yn.blank?)
+      @project.success_yn = false
+      if @project.save
+        @project.deliver_project_result
+      end
+      session[:closed_projects].delete(@project.id) if !session[:closed_projects].blank? && session[:closed_projects].include?(@project.id)
     end
-    session[:closed_projects].delete(@project.id) if !session[:closed_projects].blank? && session[:closed_projects].include?(@project.id)
     respond_to do |format|
       format.js
     end

@@ -8,7 +8,7 @@
   </fieldset>
   <fieldset>
     <%= form.label :目标期限,{:for=>"project_complete_time_1i"} %>
-    <%= form.date_select :complete_time,:class=>"validate[required,future[now]" %>
+    <%= form.date_select :complete_time,:start_year=>Time.now.year,:end_year=>(Time.now.year + 1),:class=>"validate[required,future[now]" %>
   </fieldset>
   <fieldset>
     <%= form.label :选个类别吧, {:for=>"project_category_id"} %>

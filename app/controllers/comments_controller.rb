@@ -48,6 +48,7 @@ class CommentsController < ApplicationController
   def create
     @comment = Comment.new(params[:comment])
     @comment.user_id = session[:current_user_id]
+    @comment.project_id = session[:current_project_id]
     
     respond_to do |format|
       if @comment.save

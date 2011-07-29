@@ -12,8 +12,21 @@ class Project < ActiveRecord::Base
   scope :current_projects, where('complete_time >= NOW()')
   scope :past_projects, where('complete_time < NOW()')
 
+  attr_protected :user_id, :views, :created_at, :updated_at
   cattr_reader :per_page
   @@per_page = 10
+
+  validates :name, :length => { :minimum => 4, :maximum=> 17 }
+  validates :description, :length => { :minimum => 50 }
+  validate :complete_time_cannot_be_in_the_past, :complete_time_cannot_be_in_too_far_awary
+    
+  def complete_time_cannot_be_in_the_past
+    errors.add(:complete_time, "can't be in the past") if self.new_record? and !complete_time.blank? and complete_time.to_date < Date.today
+  end
+
+  def complete_time_cannot_be_in_too_far_awary
+    errors.add(:complete_time, "can't be too far away in future.") if self.new_record? and !complete_time.blank? and complete_time > 24.months.from_now
+  end
 
 
   # return a list of locations for current projects

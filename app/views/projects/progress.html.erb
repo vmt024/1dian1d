@@ -12,10 +12,9 @@
   <% end %>
   <% end %>
   <% if @project.owner.id.eql?(session[:current_user_id])%>       
-    <%= form_for :project_update, :url=>project_updates_url,:html=>{:method=>:post} do |f| %>
-      <%= f.hidden_field :project_id, :value=>@project.id %>
+    <%= form_for :project_update, :url=>project_updates_url,:html=>{:id=>'project_update_form',:method=>:post} do |f| %>
       <fieldset>
-      <%= f.text_area :content %>
+        <%= f.text_area :content, :class=>"validate[required,minSize[5]]" %>
       </fieldset>
       <%= f.submit '更新', :disable_with=>"更新中..." %>
     <% end %>
@@ -23,3 +22,6 @@
  </div>
 
 <div class="clear"></div>
+<script type="text/javascript">
+    $("#project_update_form").validationEngine();
+</script>

@@ -48,6 +48,7 @@ class ProjectUpdatesController < ApplicationController
   # POST /project_updates.xml
   def create
     @project_update = ProjectUpdate.new(params[:project_update])
+    @project_update.project_id = session[:current_project_id]
     respond_to do |format|
       if @project_update.save
         format.html { redirect_to(:back, :notice =>'ProjectUpdate was successfully created.') }
