@@ -41,7 +41,8 @@
 <%= params[:location] %>
 <%= params[:category] %>
 </h1>
-<%= image_tag "beijing.gif" if params[:location].eql?("北京市")%>
+<%= image_tag "beijing.gif" if params[:location].eql?("北京")%>
+<%= image_tag "zhejiang.gif" if params[:location].eql?("浙江")%>
 <% end %>
 <% end %>
 
