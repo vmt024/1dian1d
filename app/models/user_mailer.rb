@@ -44,4 +44,17 @@ class UserMailer < ActionMailer::Base
          :date => Date.today,
          :reply_to => "peterpengnz@gmail.com")
   end
+
+  def user_email(email)
+    @url = "http://www.1dian1di.com/"
+    attachments.inline['ribbon.jpg'] = File.read(Rails.public_path + '/images/ribbon.jpg')
+    attachments.inline['header-bg.jpg'] = File.read(Rails.public_path + '/images/header-bg.jpg')
+    attachments.inline['line-break-2.jpg'] = File.read(Rails.public_path + '/images/line-break-2.jpg')
+    attachments.inline['date-bg.jpg'] = File.read(Rails.public_path + '/images/date-bg.jpg')
+    mail(:to => 'peterpengnz@gmail.com', #email,
+         :subject => "1点1滴上线啦",
+         :date => Date.today,
+         :reply_to => "1dian1di@1dian1di.com")
+  end
+
 end
