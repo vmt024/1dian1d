@@ -21,6 +21,9 @@ class UserController < ApplicationController
   def show
     @user = User.find(params[:id])
     @projects = Project.where('user_id = ?',@user.id).order("updated_at DESC")
+    unless session[:followed_fans].blank?
+      session[:followed_fans].delete(@user.id) if session[:followed_fans].include?(@user.id)
+    end
   end
   
   def messages

@@ -57,7 +57,7 @@ class User < ActiveRecord::Base
     def followed_fans
       list = []
       fans = self.fans.where("created_at > ?",self.last_login_time)
-      fans.collect{|f| list << f.id.to_i unless list.include?(f.id.to_i)}
+      fans.collect{|f| list << f.user_id.to_i unless list.include?(f.user_id.to_i)}
       return list
     end
 
