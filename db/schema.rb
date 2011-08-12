@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 16) do
+ActiveRecord::Schema.define(:version => 17) do
 
   create_table "categories", :force => true do |t|
     t.string   "avatar_file_name"
@@ -95,14 +95,14 @@ ActiveRecord::Schema.define(:version => 16) do
   add_index "project_updates", ["project_id"], :name => "index_project_updates_on_project_id"
 
   create_table "projects", :force => true do |t|
-    t.integer  "user_id",                             :null => false
-    t.integer  "category_id",                         :null => false
+    t.integer  "user_id",                              :null => false
+    t.integer  "category_id",                          :null => false
     t.string   "name"
     t.text     "description"
     t.string   "location"
-    t.datetime "complete_time",                       :null => false
-    t.integer  "views",                :default => 0, :null => false
-    t.integer  "number_of_supporters", :default => 0, :null => false
+    t.datetime "complete_time",                        :null => false
+    t.integer  "views",                :default => 0,  :null => false
+    t.integer  "number_of_supporters", :default => 0,  :null => false
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "avatar_file_name"
@@ -110,6 +110,7 @@ ActiveRecord::Schema.define(:version => 16) do
     t.integer  "avatar_file_size"
     t.datetime "avatar_updated_at"
     t.boolean  "success_yn"
+    t.integer  "goal_value",           :default => 20, :null => false
   end
 
   add_index "projects", ["category_id"], :name => "index_projects_on_category_id"
@@ -155,5 +156,14 @@ ActiveRecord::Schema.define(:version => 16) do
   add_index "users", ["email"], :name => "index_users_on_email"
   add_index "users", ["location"], :name => "index_users_on_location"
   add_index "users", ["name"], :name => "index_users_on_name"
+
+  create_table "vote_histories", :force => true do |t|
+    t.integer "user_id",      :null => false
+    t.integer "project_id",   :null => false
+    t.boolean "push_or_hide", :null => false
+  end
+
+  add_index "vote_histories", ["project_id"], :name => "index_vote_histories_on_project_id"
+  add_index "vote_histories", ["user_id"], :name => "index_vote_histories_on_user_id"
 
 end

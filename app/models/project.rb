@@ -11,8 +11,10 @@ class Project < ActiveRecord::Base
 
   scope :current_projects, where('complete_time >= NOW()')
   scope :past_projects, where('complete_time < NOW()')
+  scope :recommend_projects, where('goal_value >= 20')
+  scope :hidden_projects, where('goal_value < 1')
 
-  attr_protected :user_id, :views, :created_at, :updated_at
+  attr_protected :user_id, :views, :created_at, :updated_at, :goal_value
   cattr_reader :per_page
   @@per_page = 10
 

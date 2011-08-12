@@ -7,7 +7,7 @@ class ProjectsController < ApplicationController
   # GET /projects
   # GET /projects.xml
   def welcome
-    @projects = Project.current_projects.paginate(:all,:page=>params[:page],:order=>"rand()",:per_page=>10)
+    @projects = Project.current_projects.recommend_projects.paginate(:all,:page=>params[:page],:order=>"rand()",:per_page=>10)
 
     respond_to do |format|
       format.html # index.html.erb
@@ -21,24 +21,24 @@ class ProjectsController < ApplicationController
   def index
     if !params[:category].blank?
       category_id = Category.find_by_name(params[:category]).id
-      @projects = Project.paginate(:all,:conditions=>["category_id = ?",category_id],:order=>"name Asc",:page=>params[:page])
+      @projects = Project.recommend_projects.paginate(:all,:conditions=>["category_id = ?",category_id],:order=>"name Asc",:page=>params[:page])
     elsif !params[:search_by].blank?
       case params[:search_by]
       when "热门目标"
-        @projects = Project.current_projects.paginate(:all,:order=>"views Desc",:page=>params[:page],:per_page=>10)
+        @projects = Project.current_projects.recommend_projects.paginate(:all,:order=>"views Desc",:page=>params[:page],:per_page=>10)
       when "过去的目标"
-        @projects = Project.past_projects.paginate(:all,:order=>"rand()",:page=>params[:page],:per_page=>10)
+        @projects = Project.past_projects.recommend_projects.paginate(:all,:order=>"rand()",:page=>params[:page],:per_page=>10)
       when "最新目标"
-        @projects = Project.current_projects.paginate(:all,:order=>"created_at Desc",:page=>params[:page],:per_page=>10)
+        @projects = Project.current_projects.recommend_projects.paginate(:all,:order=>"created_at Desc",:page=>params[:page],:per_page=>10)
       else
-        @projects = Project.paginate(:all,:order=>"name Asc",:page=>params[:page],:per_page=>10)
+        @projects = Project.recommend_projects.paginate(:all,:order=>"name Asc",:page=>params[:page],:per_page=>10)
       end
     elsif !params[:location].blank?
-      @projects = Project.paginate(:all,:conditions=>["location = ?",params[:location]],:order=>"name Asc",:page=>params[:page])
+      @projects = Project.recommend_projects.paginate(:all,:conditions=>["location = ?",params[:location]],:order=>"name Asc",:page=>params[:page])
     elsif !params[:support_by].blank?
       @projects = User.find(params[:support_by]).support_projects.paginate(:page=>params[:page],:per_page=>10)
     else
-      @projects = Project.paginate(:all,:order=>"name Asc",:page=>params[:page],:per_page=>10)
+      @projects = Project.recommend_projects.paginate(:all,:order=>"name Asc",:page=>params[:page],:per_page=>10)
     end
 
     respond_to do |format|
