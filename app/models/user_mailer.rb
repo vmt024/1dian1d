@@ -40,9 +40,9 @@ class UserMailer < ActionMailer::Base
     attachments.inline['line-break-2.jpg'] = File.read(Rails.public_path + '/images/line-break-2.jpg')
     attachments.inline['date-bg.jpg'] = File.read(Rails.public_path + '/images/date-bg.jpg')
     mail(:to => user.email,
-         :subject => "感谢您对#{user.name}的目标：#{project.name}的支持",
+         :subject => "您好#{user.name}, 感谢您对#{project.owner.name}的目标：#{project.name}的支持",
          :date => Date.today,
-         :reply_to => "peterpengnz@gmail.com")
+         :reply_to => "1dian1di@1dian1di.com")
   end
 
   def user_email(email)
