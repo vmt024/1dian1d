@@ -1,13 +1,13 @@
 <% @projects.each do |project| %>
 <div class="grid_7 alpah omega">
-    <a href="<%= project_url(project.id)%> ">
+    <a href="<%= goal_url(project.id)%> ">
     <%if File.exist?(project.avatar.url(:thumb)) %>
       <%= image_tag project.avatar.url(:thumb), :size=>"83x53" %>
     <% else %>
       <%= image_tag project.category.avatar.url(:thumb), :size=>"83x53" %>
     <% end %>
     </a>
-    <h3><%= link_to project.name, project_url(project.id) %></h3>
+    <h3><%= link_to project.name, goal_url(project.id) %></h3>
     <ul class="project-meta">
         <li><%= project.owner.name %></li>
         <li><%= project.owner.location %></li>

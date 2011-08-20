@@ -96,9 +96,9 @@ a:hover { text-decoration: underline !important; }
 </table><!--/line break-->
 	<h1 style="font-size: 36px; font-weight: normal; color: #333333; font-family: Georgia, 'Times New Roman', Times, serif; margin-top: 0px; margin-bottom: 20px;">谢谢您的支持！</h1>
     <% if @project.success_yn %>
-      <p style="font-size: 16px; line-height: 22px; font-family: Georgia, 'Times New Roman', Times, serif; color: #333; margin: 0px;">在大家的鼓励下<%= link_to(@project_owner, user_url(@project.user_id)).html_safe %>的目标：<%=link_to(@project_name, project_url(@project.id)).html_safe%>已经成功的完成了，1点1滴和<%= @project_owner%>真诚的感谢您的鼓励与支持！</p>
+      <p style="font-size: 16px; line-height: 22px; font-family: Georgia, 'Times New Roman', Times, serif; color: #333; margin: 0px;">在大家的鼓励下<%= link_to(@project_owner, user_url(@project.user_id)).html_safe %>的目标：<%=link_to(@project_name, goal_url(@project.id)).html_safe%>已经成功的完成了，1点1滴和<%= @project_owner%>真诚的感谢您的鼓励与支持！</p>
   <% else %>
-    <p style="font-size: 16px; line-height: 22px; font-family: Georgia, 'Times New Roman', Times, serif; color: #333; margin: 0px;">在大家的鼓励下<%= link_to(@project_owner, user_url(@project.user_id)).html_safe%>的目标：<%=link_to(@project_name, project_url(@project.id)).html_safe%>已经完成了，虽然目标没有成功。但是1点1滴和<%= @project_owner%>真诚的感谢您的鼓励与支持！</p>
+    <p style="font-size: 16px; line-height: 22px; font-family: Georgia, 'Times New Roman', Times, serif; color: #333; margin: 0px;">在大家的鼓励下<%= link_to(@project_owner, user_url(@project.user_id)).html_safe%>的目标：<%=link_to(@project_name, goal_url(@project.id)).html_safe%>已经完成了，虽然目标没有成功。但是1点1滴和<%= @project_owner%>真诚的感谢您的鼓励与支持！</p>
   <% end %>
     </td>
   </tr>

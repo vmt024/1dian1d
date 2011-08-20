@@ -6,7 +6,7 @@
   <tr id="support_project_<%= my_int_proj.id%>">
     <td class="td-titles">
     <% project_name = (!session[:followed_progress].blank? && session[:followed_progress].include?(my_int_proj.id)) ? ("<span class=\"followed-progress\">#{my_int_proj.name}</span>").html_safe : my_int_proj.name %>
-    <%= link_to project_name, project_url(my_int_proj.id) %></td>
+    <%= link_to project_name, goal_url(my_int_proj.id) %></td>
     <td><%= my_int_proj.supporters.count %>支持</td>
     <td><%= project_days_left(my_int_proj.complete_time) %>天剩余</td>
     <td><%= link_to my_int_proj.owner.name, user_url(my_int_proj.user_id) %></td>

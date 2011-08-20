@@ -1,7 +1,7 @@
   <td><%=link_to supporter.name, user_url(supporter.id) %></td>
   <td><%= supporter.location %></td>
   <% if supporter.support_projects.count > 0 %>
-    <td>支持了其他<%=link_to " #{supporter.support_projects.count} ", projects_url(:support_by=>supporter.id) %>个目标</td>
+    <td>支持了其他<%=link_to " #{supporter.support_projects.count} ", goals_url(:support_by=>supporter.id) %>个目标</td>
   <% else %>
     <td></td>
   <% end %>

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 17) do
+ActiveRecord::Schema.define(:version => 18) do
 
   create_table "categories", :force => true do |t|
     t.string   "avatar_file_name"
@@ -137,20 +137,21 @@ ActiveRecord::Schema.define(:version => 17) do
   end
 
   create_table "users", :force => true do |t|
-    t.string   "email",                                              :null => false
+    t.string   "email",                                                  :null => false
     t.text     "description"
     t.string   "location"
-    t.string   "crypted_password",                                   :null => false
-    t.string   "password_salt",                                      :null => false
+    t.string   "crypted_password",                                       :null => false
+    t.string   "password_salt",                                          :null => false
     t.string   "name"
-    t.string   "username",           :limit => 50
-    t.string   "superman",           :limit => 4,  :default => "NO", :null => false
+    t.string   "username",               :limit => 50
+    t.string   "superman",               :limit => 4,  :default => "NO", :null => false
     t.datetime "created_at"
     t.datetime "updated_at"
     t.datetime "last_login_time"
     t.datetime "current_login_time"
     t.string   "last_login_ip"
     t.string   "current_login_ip"
+    t.datetime "last_notification_time"
   end
 
   add_index "users", ["email"], :name => "index_users_on_email"

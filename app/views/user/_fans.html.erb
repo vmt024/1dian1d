@@ -14,7 +14,7 @@
         <td><%= fan_user.location %></td>
         <td>
           <% unless fan_user.support_projects.blank? %>
-            支持了<%=link_to "#{fan_user.support_projects.count} ", projects_url(:support_by=>fan_user.id) %>个目标
+            支持了<%=link_to "#{fan_user.support_projects.count} ", goals_url(:support_by=>fan_user.id) %>个目标
           <% end %>
         </td>
         <td></td>

@@ -17,6 +17,8 @@ Ququ::Application.routes.draw do
       get :support_this_project
       get :recent_updated_followed
       get :more_rewards
+      get :digg_goal
+      get :bury_goal
     end
   end
 
@@ -63,6 +65,7 @@ Ququ::Application.routes.draw do
 
   # Sample resource route (maps HTTP verbs to controller actions automatically):
   #   resources :products
+  resources :goals, :controller => "projects"
 
   # Sample resource route with options:
   #   resources :products do

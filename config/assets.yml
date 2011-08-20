@@ -1,0 +1,20 @@
+compress_assets: off
+embed_assets: off
+rewrite_relative_paths: off 
+
+javascripts:
+  common:
+    - public/javascripts/jquery.min.js
+    - public/javascripts/jquery_ujs.js
+    - public/javascripts/modernizr-1.5.min.js
+    - public/javascripts/jquery.validationEngine.js
+    - public/javascripts/jquery.validationEngine-zh.js
+    - public/javascripts/jquery.countdown.min.js
+    - public/javascripts/jquery.countdown-zh-CN.js
+                  
+stylesheets:
+  common:
+    - public/stylesheets/master.css
+    - public/stylesheets/grids.css
+    - public/stylesheets/validationEngine.jquery.css
+    - public/stylesheets/jquery.countdown.css

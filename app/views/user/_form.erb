@@ -1,7 +1,7 @@
   <fieldset>
     <%= form.label :你的昵称,{:for=>"user_name"} %>
     <% if @user.new_record? %>
-      <%= form.text_field :name,:class=>"validate[required,funcCall[validateName],minSize[2],maxSize[6]]",:onfocus=>"if(this.value == ''){$(this).validationEngine('showPrompt', '昵称在注册成功后是不能随意更改的', 'load','topRight',true)}" %>
+      <%= form.text_field :name,:class=>"validate[required,funcCall[validateName],minSize[2],maxSize[6],custom[onlyLetterNumber]]",:onfocus=>"if(this.value == ''){$(this).validationEngine('showPrompt', '昵称在注册成功后是不能随意更改的', 'load','topRight',true)}" %>
     <% else %>
       <%= form.text_field :name,:readonly=>true,:onkeypress=>"$(this).validationEngine('showPrompt', '您注册时使用的昵称是不能随意更改的', 'load','topRight',true)",:onblur=>"$(this).validationEngine('hide');" %>
     <% end %>

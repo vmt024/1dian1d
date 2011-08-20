@@ -1,5 +1,5 @@
 <% if @projects.blank? %>
-  <div>目前还没有创建目标,要不要<%= link_to "浏览", root_url %>其他人的目标<% if session[:current_user_id].eql?(@user.id) %>或者<%= link_to "创建",new_project_url %>自己的目标呢？<% end %></div>
+  <div>目前还没有创建目标,要不要<%= link_to "浏览", root_url %>其他人的目标<% if session[:current_user_id].eql?(@user.id) %>或者<%= link_to "创建",new_goal_url %>自己的目标呢？<% end %></div>
 <% else %>
   <table width="100%" border="0" summary="创建的目标" class="myTable">
     <% @projects.each do |my_proj| %>
@@ -11,7 +11,7 @@
       <% end %>
       <td class="td-titles">
       <% project_name = (!session[:new_progress].blank? && session[:new_progress].include?(my_proj.id)) ? ("<span class=\"new-progress\">#{my_proj.name}</span>").html_safe : my_proj.name %>
-      <%= link_to project_name, project_url(my_proj.id) %></span></td>
+      <%= link_to project_name, goal_url(my_proj.id) %></span></td>
       <td><%= my_proj.supporters.count %>支持</td>
       <td><%= project_days_left(my_proj.complete_time) %>天剩余</td>
     <td><%= my_proj.views %>次浏览</td>

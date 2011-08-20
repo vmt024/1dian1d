@@ -8,6 +8,9 @@ class Project < ActiveRecord::Base
   belongs_to :owner, :class_name=>'User', :foreign_key => 'user_id'
   has_many :project_updates, :order =>"created_at DESC"
   has_many :comments, :order=>"created_at DESC"
+  has_many :diggers ,:class_name=>'GoalDigger', :conditions=>{:push_or_hide => true}  # users who pushed goal
+  has_many :buryers ,:class_name=>'GoalDigger', :conditions=>{:push_or_hide => false} # users who hide goal
+  has_many :voters ,:class_name=>'GoalDigger' # all users who has digg or bury this project
 
   scope :current_projects, where('complete_time >= NOW()')
   scope :past_projects, where('complete_time < NOW()')

@@ -18,6 +18,11 @@ class User < ActiveRecord::Base
   validates_uniqueness_of :email
   validates_presence_of :name,:email
 
+ # def to_param 
+ #   name
+ # end
+
+
   # check the crypted  password
     def correct_password?(submitted_password)
       if Rails.env.development?
@@ -35,7 +40,13 @@ class User < ActiveRecord::Base
       password_salt = cookie.split('--A--')[1]
       user = User.find_by_email(email)
       if (!user.blank? && user.password_salt == password_salt)
+        user.last_login_time = user.current_login_time
         user.current_login_time = Time.now
+        session[:followed_progress] = user.followed_progress
+        session[:followed_fans] = user.followed_fans
+        session[:new_progress] = user.new_progress
+        session[:closed_projects] = user.closed_projects
+        user.last_notification_time = Time.now
         user.save
         return user.id 
       else
@@ -56,7 +67,7 @@ class User < ActiveRecord::Base
     # return [] if no fans 
     def followed_fans
       list = []
-      fans = self.fans.where("created_at > ?",self.last_login_time)
+      fans = self.fans.where("created_at > ?",self.last_notification_time)
       fans.collect{|f| list << f.user_id.to_i unless list.include?(f.user_id.to_i)}
       return list
     end
@@ -74,7 +85,7 @@ class User < ActiveRecord::Base
     # return [] if no updates since last_login_time
     def followed_progress
       list = []
-      projects = self.support_projects.includes(:project_updates).where("project_updates.created_at > ?",self.last_login_time)
+      projects = self.support_projects.includes(:project_updates).where("project_updates.created_at > ?",self.last_notification_time)
       projects.collect{|p| list << p.id.to_i unless list.include?(p.id.to_i)}
       return list
     end
@@ -85,8 +96,8 @@ class User < ActiveRecord::Base
       new_progress = {}
       own_projects = Project.where("user_id = ?",self.id).select('id')
       own_projects.each do |project|
-        comment_counts = Comment.count(:conditions=>["project_id = ? and created_at > ? and user_id != ?",project.id,self.last_login_time,self.id])
-        follower_counts = UserProject.count(:conditions=>["project_id = ? and created_at > ?",project.id,self.last_login_time])
+        comment_counts = Comment.count(:conditions=>["project_id = ? and created_at > ? and user_id != ?",project.id,self.last_notification_time,self.id])
+        follower_counts = UserProject.count(:conditions=>["project_id = ? and created_at > ?",project.id,self.last_notification_time])
         unless comment_counts.eql?(0) && follower_counts.eql?(0)
           new_progress[project.id] = {:comment_counts=>comment_counts,:follower_counts=>follower_counts}
         end

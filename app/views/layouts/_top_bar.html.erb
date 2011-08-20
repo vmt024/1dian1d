@@ -5,7 +5,7 @@
   <ul>
     <li><%= link_to "网站主页", root_url %></li>
     <% unless @project.blank? || @project.new_record? %>
-      <li><%= link_to @project.category.name, projects_url(:category=>@project.category.name) %></li>
+      <li><%= link_to @project.category.name, goals_url(:category=>@project.category.name) %></li>
     <% end %>
     <% if !params[:category].blank? && params[:controller].eql?('projects') %>
       <li><%= link_to params[:category], '#' %></li>

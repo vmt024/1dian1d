@@ -8,12 +8,13 @@ gem 'rake', '0.8.7'
 
 gem 'mysql2','0.2.7'
 gem "paperclip", "~> 2.3"
-gem "will_paginate", "~> 3.0.pre2"
+gem "will_paginate"#, "~> 3.0.pre2"
 gem "jquery-rails"
 gem "encryptor"
 gem "delayed_job"
-#gem "jammit"
+gem "jammit"
 gem "rails-footnotes", :group=>:development
+gem "mongrel", :group=>:development
 
 # Use unicorn as the web server
 # gem 'unicorn'

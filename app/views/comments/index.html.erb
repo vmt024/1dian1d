@@ -1,7 +1,7 @@
 <div id="breadcrumb">
     <ul>
     	<li><%= link_to "网站主页", root_url%></li>
-        <li><%= link_to @project.category.name, projects_url(:category=>@project.category.name) %></li>
+        <li><%= link_to @project.category.name, goals_url(:category=>@project.category.name) %></li>
     </ul>
 </div><!-- end of breadcrumb-->
 
@@ -16,7 +16,7 @@
 
    <div class="grid_5 alpha" id="project-navigation">
         	<ul>
-            	<li><%= link_to "目标主页", project_url(@project.id) %></li>
+            	<li><%= link_to "目标主页", goal_url(@project.id) %></li>
                 <li><%= link_to "进展(" + "#{@project.project_updates.size}" + ")",project_updates_url %></li>
                 <li><%= link_to "留言(" + "#{@project.comments.size}" + ")",comments_url, :class=>"currentNavigationalItem" %></li>
                 <li><%= link_to "支持者(" + "#{@project.supporters.count}" + ")",list_supporters_projects_url %></li>
@@ -26,7 +26,7 @@
         <div class="grid_2 omega" id="project-meta-detail">
         	<ul class="project-meta">
             	<li><%= link_to @project.owner.name, user_url(@project.user_id) %></li>
-                <li><%= link_to @project.owner.location,projects_url(:location=>@project.owner.location) %></li>
+                <li><%= link_to @project.owner.location,goals_url(:location=>@project.owner.location) %></li>
             </ul>
         </div>
         <div class="clear"></div>

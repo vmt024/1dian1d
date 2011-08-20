@@ -2,6 +2,7 @@ class UserController < ApplicationController
   layout 'diandi'
 
   before_filter :require_user, :only=>[:edit,:update,:add_friend, :delete_friend]
+  before_filter :calculate_notification, :only=>[:show]
 
   def signup
     @user = User.new
@@ -21,11 +22,31 @@ class UserController < ApplicationController
   def show
     @user = User.find(params[:id])
     @projects = Project.where('user_id = ?',@user.id).order("updated_at DESC")
-    unless session[:followed_fans].blank?
-      session[:followed_fans].delete(@user.id) if session[:followed_fans].include?(@user.id)
+    if session[:followed_fans_read].blank?
+      session[:followed_fans_read] = [@user.id]
+    else
+      session[:followed_fans_read] << [@user.id]
     end
   end
-  
+
+  def calculate_notification
+    unless session[:current_user_id].blank?
+      if session[:current_user_id].eql?(params[:id])
+      @user = User.find(session[:current_user_id])
+      session[:followed_progress] = recalculate_notification(@user.followed_progress,session[:followed_progress_read])
+      session[:followed_fans] = recalculate_notification(@user.followed_fans,session[:followed_fans_read])
+      session[:new_progress] = recalculate_notification(@user.new_progress,session[:new_progress_read])
+      session[:closed_projects] = recalculate_notification(@user.closed_projects,session[:closed_projects_read])
+      @user.last_notification_time = Time.now
+      end
+    end
+  end
+
+  def recalculate_notification(unread,read)
+    return unread if unread.blank? || read.blank?
+    return unread - read
+  end
+
   def messages
     @user = User.find(params[:user_id])
     @messages = Message.my_private_messages(params[:user_id])

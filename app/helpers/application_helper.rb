@@ -56,5 +56,14 @@ module ApplicationHelper
 
   def already_supported?
     UserProject.exists?(["project_id = ? and user_id = ?",session[:current_project_id],session[:current_user_id]])
+  rescue=>e
+    logger.error("Error::application_helper::already_supported")
+    logger.error(e)
+    return false
   end
+
+  def logged_in_user?
+    return !session[:current_user_id].blank?
+  end
+
 end

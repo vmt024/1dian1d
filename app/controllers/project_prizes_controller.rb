@@ -27,7 +27,7 @@ class ProjectPrizesController < ApplicationController
     @project_prize.project_id = session[:current_project_id]
     respond_to do |format|
       if @project_prize.save
-        format.html { redirect_to(project_url(session[:current_project_id]), :notice => 'ProjectPrize was successfully created.') }
+        format.html { redirect_to(goal_url(session[:current_project_id]), :notice => 'ProjectPrize was successfully created.') }
         format.xml  { render :xml => @project_prize, :status => :created, :location => @project_prize }
       else
         format.html { render :action => "new" }

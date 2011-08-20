@@ -2,7 +2,7 @@
   <ul>
     <% categories = Category.all %>
     <% categories.each_with_index do |category, index| %>
-      <li><%= link_to category.name, projects_url(:category=>category.name) %></li>
+      <li><%= link_to category.name, goals_url(:category=>category.name) %></li>
     <% end %>
   </ul>
   <div class="clear"></div>
