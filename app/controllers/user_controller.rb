@@ -2,7 +2,6 @@ class UserController < ApplicationController
   layout 'diandi'
 
   before_filter :require_user, :only=>[:edit,:update,:add_friend, :delete_friend]
-  before_filter :calculate_notification, :only=>[:show]
 
   def signup
     @user = User.new
@@ -20,6 +19,7 @@ class UserController < ApplicationController
   end
 
   def show
+    calculate_notification if session[:current_user_id].eql?(params[:id])
     @user = User.find(params[:id])
     @projects = Project.where('user_id = ?',@user.id).order("updated_at DESC")
     if session[:followed_fans_read].blank?
@@ -31,7 +31,6 @@ class UserController < ApplicationController
 
   def calculate_notification
     unless session[:current_user_id].blank?
-      if session[:current_user_id].eql?(params[:id])
       @user = User.find(session[:current_user_id])
       session[:followed_progress] = recalculate_notification(@user.followed_progress,session[:followed_progress_read])
       session[:followed_fans] = recalculate_notification(@user.followed_fans,session[:followed_fans_read])
@@ -39,7 +38,6 @@ class UserController < ApplicationController
       session[:closed_projects] = recalculate_notification(@user.closed_projects,session[:closed_projects_read])
       @user.last_notification_time = Time.now
       @user.save(:validate=>false)
-      end
     end
   end
 
