@@ -51,6 +51,12 @@ class UserController < ApplicationController
     unless read.blank? || unread.blank?
       return read.each_key{|k| unread.delete(k) if unread.has_key?(k)}
     end
+    unless unread.blank? || session[:new_progress].blank?
+      unread.each_key do |k|
+        unread[k][:comment_counts] += session[:new_progress][k][:comment_counts] if session[:new_progress].has_key?(k)
+        unread[k][:follower_counts] += session[:new_progress][k][:follower_counts] if session[:new_progress].has_key?(k)
+      end
+    end
     
     return unread 
   end
