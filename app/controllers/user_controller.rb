@@ -47,7 +47,7 @@ class UserController < ApplicationController
     return (previous + unread).uniq - read 
   end
 
-  def recalulate_new_progress(unread,read)
+  def recalculate_new_progress(unread,read)
     unless read.blank? || unread.blank?
       return read.each_key{|k| unread.delete(k) if unread.has_key?(k)}
     end
