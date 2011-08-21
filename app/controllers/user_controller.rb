@@ -19,9 +19,7 @@ class UserController < ApplicationController
   end
 
   def show
-    logger.error("notice==0")
-    calculate_notification if session[:current_user_id].eql?(params[:id])
-    logger.error("notice==4")
+    calculate_notification if session[:current_user_id].eql?(params[:id].to_i)
     @user = User.find(params[:id])
     @projects = Project.where('user_id = ?',@user.id).order("updated_at DESC")
     if session[:followed_fans_read].blank?
@@ -32,9 +30,7 @@ class UserController < ApplicationController
   end
 
   def calculate_notification
-    logger.error("notice==1")
     unless session[:current_user_id].blank?
-    logger.error("notice==2")
       @user = User.find(session[:current_user_id])
       session[:followed_progress] = recalculate_notification(@user.followed_progress,session[:followed_progress_read])
       session[:followed_fans] = recalculate_notification(@user.followed_fans,session[:followed_fans_read])
@@ -43,12 +39,17 @@ class UserController < ApplicationController
       @user.last_notification_time = Time.now
       @user.save(:validate=>false)
     end
-    logger.error("notice==3")
   end
 
   def recalculate_notification(unread,read)
     return unread if unread.blank? || read.blank?
-    return unread - read
+    if unread.is_a?(Array)
+      return unread - read 
+    elsif unread.is_a?(Hash) 
+      return  read.each_key{|k| unread.delete(k) if unread.has_key?(k)}
+    else
+      return unread
+    end
   end
 
   def messages
