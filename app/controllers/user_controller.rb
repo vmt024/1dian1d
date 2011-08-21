@@ -23,9 +23,9 @@ class UserController < ApplicationController
     @user = User.find(params[:id])
     @projects = Project.where('user_id = ?',@user.id).order("updated_at DESC")
     if session[:followed_fans_read].blank?
-      session[:followed_fans_read] = [@user.id]
+      session[:followed_fans_read] = [@user.id] unless @user.id.eql?(session[:current_user_id])
     else
-      session[:followed_fans_read] << [@user.id]
+      session[:followed_fans_read] << @user.id unless @user.id.eql?(session[:current_user_id])
     end
   end
 
@@ -38,6 +38,7 @@ class UserController < ApplicationController
       session[:new_progress] = recalculate_notification(@user.new_progress,session[:new_progress_read])
       session[:closed_projects] = recalculate_notification(@user.closed_projects,session[:closed_projects_read])
       @user.last_notification_time = Time.now
+      @user.save(:validate=>false)
       end
     end
   end
