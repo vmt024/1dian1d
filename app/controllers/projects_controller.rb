@@ -84,9 +84,13 @@ class ProjectsController < ApplicationController
       session[:closed_projects_read] << @project.id unless session[:closed_projects_read].include?(@project.id)
     end
 
-    unless session[:new_progress].blank? 
-      session[:new_progress_read] = {} if session[:new_progress_read].blank?
-      session[:new_progress_read][@project.id] = session[:new_progress][@project.id] if session[:new_progress].include?(@project.id)
+    if session[:new_progress_read].blank? 
+      session[:new_progress_read] = {} 
+    else
+      if session[:new_progress].include?(@project.id)
+        session[:new_progress_read][@project.id][:comment_counts] += session[:new_progress][@project.id][:comment_counts] 
+        session[:new_progress_read][@project.id][:follower_counts] += session[:new_progress][@project.id][:follower_counts] 
+      end
     end
 
     if session[:followed_progress_read].blank? 
