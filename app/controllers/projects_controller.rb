@@ -81,7 +81,7 @@ class ProjectsController < ApplicationController
     if session[:closed_projects_read].blank? 
       session[:closed_projects_read] = [@project.id]
     else
-      session[:closed_projects_read] << [@project.id]
+      session[:closed_projects_read] << @project.id unless session[:closed_projects_read].include?(@project.id)
     end
 
     unless session[:new_progress].blank? 
@@ -92,7 +92,7 @@ class ProjectsController < ApplicationController
     if session[:followed_progress_read].blank? 
       session[:followed_progress_read] = [@project.id]
     else
-      session[:followed_progress_read] << @project.id 
+      session[:followed_progress_read] << @project.id unless session[:followed_progress_read].include?(@project.id)
     end
 
     respond_to do |format|
