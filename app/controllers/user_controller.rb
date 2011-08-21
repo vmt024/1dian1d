@@ -32,24 +32,34 @@ class UserController < ApplicationController
   def calculate_notification
     unless session[:current_user_id].blank?
       @user = User.find(session[:current_user_id])
-      session[:followed_progress] = recalculate_notification(@user.followed_progress,session[:followed_progress_read])
-      session[:followed_fans] = recalculate_notification(@user.followed_fans,session[:followed_fans_read])
-      session[:new_progress] = recalculate_notification(@user.new_progress,session[:new_progress_read])
-      session[:closed_projects] = recalculate_notification(@user.closed_projects,session[:closed_projects_read])
+      session[:followed_progress] = recalculate_notification(@user.followed_progress,session[:followed_progress],session[:followed_progress_read])
+      session[:followed_fans] = recalculate_notification(@user.followed_fans,session[:followed_fans],session[:followed_fans_read])
+      session[:new_progress] = recalculate_new_progress(@user.new_progress,session[:new_progress_read])
+      session[:closed_projects] = recalculate_notification(@user.closed_projects,session[:closed_projects],session[:closed_projects_read])
       @user.last_notification_time = Time.now
       @user.save(:validate=>false)
     end
   end
 
-  def recalculate_notification(unread,read)
-    return unread if unread.blank? || read.blank?
-    if unread.is_a?(Array)
-      return unread - read 
-    elsif unread.is_a?(Hash) 
-      return  read.each_key{|k| unread.delete(k) if unread.has_key?(k)}
-    else
+  def recalculate_notification(unread,previous,read)
+    previous ||= []
+    return previous if unread.blank? || read.blank?
+    return (previous + unread).uniq - read 
+  end
+
+  def recalulate_new_progress(unread,read)
+    unless read.blank? || unread.blank?
+      return read.each_key{|k| unread.delete(k) if unread.has_key?(k)}
+    end
+    
+    unless unread.blank? || session[:new_progress].blank?
+      unread.each_key do |k|
+        unread[k][:comment_counts] += session[:new_progress][k][:comment_counts] if session[:new_progress].has_key?(k)
+        unread[k][:follower_counts] += session[:new_progress][k][:follower_counts] if session[:new_progress].has_key?(k)
+      end
       return unread
     end
+    return {} 
   end
 
   def messages

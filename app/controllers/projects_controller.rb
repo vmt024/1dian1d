@@ -78,25 +78,27 @@ class ProjectsController < ApplicationController
       @similar_projects = []
     end
 
-    if session[:closed_projects_read].blank? 
-      session[:closed_projects_read] = [@project.id]
-    else
-      session[:closed_projects_read] << @project.id unless session[:closed_projects_read].include?(@project.id)
-    end
-
-    if session[:new_progress_read].blank? 
-      session[:new_progress_read] = {} 
-    else
-      if session[:new_progress].include?(@project.id)
-        session[:new_progress_read][@project.id][:comment_counts] += session[:new_progress][@project.id][:comment_counts] 
-        session[:new_progress_read][@project.id][:follower_counts] += session[:new_progress][@project.id][:follower_counts] 
+    unless session[:closed_projects].blank? 
+      if session[:closed_projects_read].blank?
+        session[:closed_projects_read] = [@project.id] if session[:closed_projects].include?(@project.id)
+      else
+        session[:closed_projects_read] << @project.id if !session[:closed_projects_read].include?(@project.id) && session[:closed_projects].include?(@project.id)
       end
     end
 
-    if session[:followed_progress_read].blank? 
-      session[:followed_progress_read] = [@project.id]
-    else
-      session[:followed_progress_read] << @project.id unless session[:followed_progress_read].include?(@project.id)
+    unless session[:new_progress].blank? 
+      if session[:new_progress].include?(@project.id)
+          session[:new_progress_read] = {} if session[:new_progress_read].blank? 
+          session[:new_progress_read][@project.id] = {} 
+      end
+    end
+
+    unless session[:followed_progress].blank? 
+      if session[:followed_progress_read].blank? 
+        session[:followed_progress_read] = [@project.id] if session[:followed_progress].include?(@project.id)
+      else
+        session[:followed_progress_read] << @project.id if !session[:followed_progress_read].include?(@project.id) &&  session[:followed_progress].include?(@project.id)
+      end
     end
 
     respond_to do |format|
