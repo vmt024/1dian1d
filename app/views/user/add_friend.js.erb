@@ -1,1 +1,10 @@
-$("#supporter_row_<%= @user.id%>").html('<%= escape_javascript(render :partial=>'projects/supporter_row', :locals=>{:supporter => @user}).html_safe %>');
+if($("#supporter_row_<%= @user.id%>").length != 0){
+  $("#supporter_row_<%= @user.id%>").html('<%= escape_javascript(render :partial=>'projects/supporter_row', :locals=>{:supporter => @user}).html_safe %>');
+}
+if($('#follow_button').length != 0){
+  $('#follow_button').replaceWith('<%= escape_javascript(link_to "取消关注", delete_friend_user_index_url(:user_id=>@user.id), :remote=>true,:id=>"unfollow_button")%>');
+}
+if($('#fans_tab').length != 0){
+  $('#fans_tab').html('<%= escape_javascript("粉丝(#{@user.fans.size})") %>');
+  if($('#fans_tab').attr('class') == 'currentNavigationalItem'){$('#fans_tab').click();}
+}

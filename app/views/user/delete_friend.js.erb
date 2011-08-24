@@ -1,6 +1,17 @@
-<% if params[:supporter_list].blank? %> 
-$("#my_friend_<%= @user.id%>").slideUp();
-$("#friend_tab").html('<%= "关注(#{@friends_count.size})"%>');
-<% else %>
-$("#supporter_row_<%= @user.id%>").html('<%= escape_javascript(render :partial=>'projects/supporter_row', :locals=>{:supporter => @user}).html_safe %>');
-<% end %>
+if($('#supporter_row_<%= @user.id%>').length != 0 || $("#my_friend_<%= @user.id%>").length != 0){
+  <% if params[:supporter_list].blank? %> 
+    $("#my_friend_<%= @user.id%>").slideUp();
+    $("#friend_tab").html('<%= "关注(#{@friends_count.size})"%>');
+  <% else %>
+    $("#supporter_row_<%= @user.id%>").html('<%= escape_javascript(render :partial=>'projects/supporter_row', :locals=>{:supporter => @user}).html_safe %>');
+  <% end %>
+}
+
+if($('#unfollow_button').length != 0){
+  $('#unfollow_button').replaceWith('<%= escape_javascript(link_to "加关注", add_friend_user_index_url(:user_id=>@user.id), :remote=>true,:id=>"follow_button")%>');
+}
+
+if($('#fans_tab').length != 0){
+  $('#fans_tab').html('<%= escape_javascript("粉丝(#{@user.fans.size})") %>');
+  if($('#fans_tab').attr('class') == 'currentNavigationalItem'){$('#fans_tab').click();}
+}

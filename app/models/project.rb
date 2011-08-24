@@ -22,7 +22,7 @@ class Project < ActiveRecord::Base
   @@per_page = 10
 
   validates :name, :length => { :minimum => 4, :maximum=> 17 }
-  validates :description, :length => { :minimum => 50 }
+  validates :description, :length => { :minimum => 10 }
   validate :complete_time_cannot_be_in_the_past, :complete_time_cannot_be_in_too_far_awary
     
   def complete_time_cannot_be_in_the_past

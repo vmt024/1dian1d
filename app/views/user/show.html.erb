@@ -57,12 +57,12 @@
      <% if session[:current_user_id] %>
        <% if User.find(session[:current_user_id]).is_my_friend?(@user.id) %>
          <!--<= link_to "发私信", new_message_url(:friend=>@user.id) if @user.is_allowed_send_PM_to(session[:current_user_id]) and !@user.id.eql?(session[:current_user_id]) %>-->
-         <%= link_to "取消关注", delete_friend_user_index_url(:user_id=>@user.id) %>
+         <%= link_to "取消关注", delete_friend_user_index_url(:user_id=>@user.id), :remote=>true,:id=>'unfollow_button' %>
        <% else%>
-         <%= link_to "加关注", add_friend_user_index_url(:user_id=>@user.id) %>
+         <%= link_to "加关注", add_friend_user_index_url(:user_id=>@user.id),:remote=>true,:id=>'follow_button' %>
        <% end %>
      <% else %>
-         <%= link_to "加关注", add_friend_user_index_url(:user_id=>@user.id) %>
+       <%= link_to "加关注", add_friend_user_index_url(:user_id=>@user.id),:remote=>true,:id=>'follow_button' %>
      <% end %>
     </div>
   </div>

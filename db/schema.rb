@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 18) do
+ActiveRecord::Schema.define(:version => 19) do
 
   create_table "categories", :force => true do |t|
     t.string   "avatar_file_name"
@@ -86,10 +86,14 @@ ActiveRecord::Schema.define(:version => 18) do
   add_index "project_prizes", ["project_id"], :name => "index_project_prizes_on_project_id"
 
   create_table "project_updates", :force => true do |t|
-    t.integer  "project_id", :null => false
+    t.integer  "project_id",          :null => false
     t.text     "content"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "avatar_file_name"
+    t.string   "avatar_content_type"
+    t.integer  "avatar_file_size"
+    t.datetime "avatar_updated_at"
   end
 
   add_index "project_updates", ["project_id"], :name => "index_project_updates_on_project_id"

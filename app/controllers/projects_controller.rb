@@ -78,28 +78,9 @@ class ProjectsController < ApplicationController
       @similar_projects = []
     end
 
-    unless session[:closed_projects].blank? 
-      if session[:closed_projects_read].blank?
-        session[:closed_projects_read] = [@project.id] if session[:closed_projects].include?(@project.id)
-      else
-        session[:closed_projects_read] << @project.id if !session[:closed_projects_read].include?(@project.id) && session[:closed_projects].include?(@project.id)
-      end
-    end
-
-    unless session[:new_progress].blank? 
-      if session[:new_progress].include?(@project.id)
-          session[:new_progress_read] = {} if session[:new_progress_read].blank? 
-          session[:new_progress_read][@project.id] = {} 
-      end
-    end
-
-    unless session[:followed_progress].blank? 
-      if session[:followed_progress_read].blank? 
-        session[:followed_progress_read] = [@project.id] if session[:followed_progress].include?(@project.id)
-      else
-        session[:followed_progress_read] << @project.id if !session[:followed_progress_read].include?(@project.id) &&  session[:followed_progress].include?(@project.id)
-      end
-    end
+    session[:closed_projects].delete(@project.id) unless session[:closed_projects].blank? 
+    session[:new_progress].delete(@project.id) unless session[:new_progress].blank? 
+    session[:followed_progress].delete(@project.id) unless session[:followed_progress].blank?  
 
     respond_to do |format|
       format.html # show.html.erb

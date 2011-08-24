@@ -33,11 +33,19 @@ class Friend < ActiveRecord::Base
   # following friend_id
   def self.add_as_my_friend(user_id,friend_id)
     Friend.create({:user_id=>user_id,:friend_id=>friend_id})
+  rescue=>e
+    logger.error("Error::friend.rb::add_as_my_friend")
+    logger.error(e)
+    return true
   end
 
   # unfollow friend_id
   def self.delete_my_friend(user_id,friend_id)
     friend = Friend.where(:user_id=>user_id,:friend_id=>friend_id).first
     friend.destroy
+  rescue=>e
+    logger.error("Error::friend.rb::delete_my_friend")
+    logger.error(e)
+    return true
   end
 end

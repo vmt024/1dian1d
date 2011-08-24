@@ -18,10 +18,6 @@ class UserSessionController < ApplicationController
         @user.current_login_time = Time.now
         @user.save
         cookies[:remember_token] = Encryptor.encrypt(:value=>"#{@user.email}--A--#{@user.password_salt}") if params[:user][:remember_me].eql?('1')
-#        session[:followed_progress] = @user.followed_progress
-#        session[:followed_fans] = @user.followed_fans
-#        session[:new_progress] = @user.new_progress
-#        session[:closed_projects] = @user.closed_projects
         if @user.superman.eql?("YES")
           session[:is_superman] = true
         else

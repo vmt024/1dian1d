@@ -4,15 +4,12 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <% if params[:controller].eql?('projects') && !@project.blank? && !@project.new_record? %>
   <title>1点1滴 - <%= @project.name%> by <%= @project.owner.name %></title>
+<% elsif params[:controller].eql?('user') && !@user.blank? && !@user.new_record? %>
+  <title>1点1滴 - 分享和实现你的目标 - <%= @user.name%>的主页 </title>
 <% else %>
   <title>1点1滴 - 分享和实现你的目标</title>
 <% end %>
 <meta name="description" content="1点1滴 - 分享和实现你的目标 - 在这里你建立一个短期个人目标，告诉大家你的进展，得到大家的鼓励，当你完成了你的目标，用自己“特殊”的方式感谢你自己或是给予你支持和鼓励的人，和他们成为知心的朋友"/>
-<!--<= stylesheet_link_tag( "master", "grids","jqueryui1811",'validationEngine.jquery', 'jquery.countdown')  %>
-
-<= javascript_include_tag( "jquery.min","jquery_ujs","ui.core","ui.tabs")%>
-<= javascript_include_tag( "modernizr-1.5.min",'jquery.validationEngine', 'jquery.validationEngine-zh','jquery.countdown.min', 'jquery.countdown-zh-CN' )%>
--->
 <%= include_stylesheets :common, :media => 'all' %>
 <%= include_javascripts :common %>
 <!--[if lt IE 9]>

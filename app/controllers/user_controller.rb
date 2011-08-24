@@ -22,42 +22,38 @@ class UserController < ApplicationController
     calculate_notification if session[:current_user_id].eql?(params[:id].to_i)
     @user = User.find(params[:id])
     @projects = Project.where('user_id = ?',@user.id).order("updated_at DESC")
-    if session[:followed_fans_read].blank?
-      session[:followed_fans_read] = [@user.id] unless @user.id.eql?(session[:current_user_id])
-    else
-      session[:followed_fans_read] << @user.id unless @user.id.eql?(session[:current_user_id])
+    unless session[:followed_fans].blank? || @user.id.eql?(session[:current_user_id])
+      session[:followed_fans].delete(@user.id)  
     end
   end
 
   def calculate_notification
     unless session[:current_user_id].blank?
       @user = User.find(session[:current_user_id])
-      session[:followed_progress] = recalculate_notification(@user.followed_progress,session[:followed_progress],session[:followed_progress_read])
-      session[:followed_fans] = recalculate_notification(@user.followed_fans,session[:followed_fans],session[:followed_fans_read])
-      session[:new_progress] = recalculate_new_progress(@user.new_progress,session[:new_progress_read])
-      session[:closed_projects] = recalculate_notification(@user.closed_projects,session[:closed_projects],session[:closed_projects_read])
+      session[:followed_progress] = recalculate_notification(@user.followed_progress,session[:followed_progress])
+      session[:followed_fans] = recalculate_notification(@user.followed_fans,session[:followed_fans])
+      session[:new_progress] = recalculate_new_progress(@user.new_progress)
+      session[:closed_projects] = recalculate_notification(@user.closed_projects,session[:closed_projects])
       @user.last_notification_time = Time.now
       @user.save(:validate=>false)
     end
   end
 
-  def recalculate_notification(unread,previous,read)
+  def recalculate_notification(unread,previous)
     previous ||= []
-    return previous if unread.blank? || read.blank?
-    return (previous + unread).uniq - read 
+    unread ||= []
+    return (previous + unread).uniq
   end
 
-  def recalculate_new_progress(unread,read)
-    unless read.blank? || unread.blank?
-      return read.each_key{|k| unread.delete(k) if unread.has_key?(k)}
-    end
-    unless unread.blank? || session[:new_progress].blank?
+  def recalculate_new_progress(unread)
+    return session[:new_progress] if unread.blank?
+
+    unless session[:new_progress].blank?
       unread.each_key do |k|
         unread[k][:comment_counts] += session[:new_progress][k][:comment_counts] if session[:new_progress].has_key?(k)
         unread[k][:follower_counts] += session[:new_progress][k][:follower_counts] if session[:new_progress].has_key?(k)
       end
     end
-    
     return unread 
   end
 
