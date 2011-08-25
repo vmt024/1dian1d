@@ -89,7 +89,7 @@ class ProjectsController < ApplicationController
   end
 
   def supporters
-    @project = Project.find(params[:project_id])
+    @project = Project.find(params[:goal_id])
     session[:current_project_id] = @project.id
 
     respond_to do |format|
@@ -99,7 +99,7 @@ class ProjectsController < ApplicationController
   end
 
   def comments
-    @project = Project.find(params[:project_id])
+    @project = Project.find(params[:goal_id])
     session[:current_project_id] = @project.id
     respond_to do |format|
       format.html # show.html.erb
@@ -108,7 +108,7 @@ class ProjectsController < ApplicationController
   end
 
   def progress
-    @project = Project.find(params[:project_id])
+    @project = Project.find(params[:goal_id])
     session[:current_project_id] = @project.id
     respond_to do |format|
       format.html # show.html.erb
@@ -222,7 +222,7 @@ class ProjectsController < ApplicationController
   end
 
   def set_project_success
-    @project = Project.find(params[:project_id])
+    @project = Project.find(params[:goal_id])
     if (@project.user_id == session[:current_user_id]) and (@project.success_yn.blank?)
       @project.success_yn = true
       if @project.save
@@ -236,7 +236,7 @@ class ProjectsController < ApplicationController
   end
 
   def set_project_fail
-    @project = Project.find(params[:project_id])
+    @project = Project.find(params[:goal_id])
     if (@project.user_id == session[:current_user_id]) and (@project.success_yn.blank?)
       @project.success_yn = false
       if @project.save

@@ -4,11 +4,11 @@ Ququ::Application.routes.draw do
   #resources :categories
   resources :project_updates, :only=>[:create]
   resources :projects,:except=>[:update,:edit,:destroy] do
-    get :progress
-    get :comments
-    get :supporters
-    get :set_project_success
-    get :set_project_fail
+    #get :progress
+    #get :comments
+    #get :supporters
+    #get :set_project_success
+    #get :set_project_fail
     collection do
       get :not_support_this_project
       get :list_supporters
@@ -65,7 +65,13 @@ Ququ::Application.routes.draw do
 
   # Sample resource route (maps HTTP verbs to controller actions automatically):
   #   resources :products
-  resources :goals, :controller => "projects"
+  resources :goals, :controller => "projects" do
+    get :progress
+    get :comments
+    get :supporters
+    get :set_project_success
+    get :set_project_fail
+  end
 
   # Sample resource route with options:
   #   resources :products do
