@@ -4,7 +4,7 @@ class Comment < ActiveRecord::Base
 
   attr_protected :user_id, :project_id, :created_at, :updated_at
   
-  validates :content, :length => { :minimum => 5 }
+  validates :content, :length => { :minimum => 1 }
 
 
   after_save :update_project_timestamp

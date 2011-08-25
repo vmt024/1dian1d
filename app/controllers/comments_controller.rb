@@ -55,6 +55,8 @@ class CommentsController < ApplicationController
         format.html { redirect_to(:back, :notice =>'Comment was successfully created.') }
         format.xml  { render :xml => @comment, :status => :created, :location => @comment }
       else
+        logger.error("Error::comment_controller.rb::create")
+        logger.error(@comment.errors)
         format.html { render :action => "new" }
         format.xml  { render :xml => @comment.errors, :status => :unprocessable_entity }
       end

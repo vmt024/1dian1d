@@ -1,7 +1,6 @@
 <h2>我要留言</h2>
 
 <%= form_for(@comment) do |f| %>
-  <%= f.error_messages %>
   <%= render :partial => "form", :object => f %>
   <p>
     <%= f.submit '确定' %>

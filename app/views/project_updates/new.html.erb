@@ -1,7 +1,6 @@
 <h2>添加目标更新</h2>
 
 <%= form_for(@project_update) do |f| %>
-  <%= f.error_messages %>
   <%= render :partial => "form", :object => f %>
   <p>
     <%= f.submit '更新', :disable_with=>"更新中..." %>

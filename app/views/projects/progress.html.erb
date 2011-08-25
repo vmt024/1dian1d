@@ -6,7 +6,7 @@
   <% else %>
   <% @project.project_updates.each do |pu|%> 	
     <div class="entry">
-      <%= image_tag pu.avatar.url unless pu.avatar.blank? || pu.avatar.path.blank? %>
+      <%= image_tag pu.avatar.url(:medium) unless pu.avatar.blank? || pu.avatar.path.blank? %>
       <p><%= pu.content%></p>
       <h6>更新于<%= time_ago_in_words(pu.updated_at)%>前</h6>
     </div>
@@ -15,7 +15,7 @@
   <% if @project.owner.id.eql?(session[:current_user_id])%>       
     <%= form_for :project_update, :url=>project_updates_url,:html=>{:id=>'project_update_form',:multipart => true,:method=>:post} do |f| %>
       <fieldset>
-        <%= f.text_area :content, :class=>"validate[required,minSize[5]]" %>
+        <%= f.text_area :content, :class=>"validate[required]" %>
       </fieldset>
       <fieldset>
         <%= f.label :上传个图片吧,{:for=>"project_update_avatar"} %>
