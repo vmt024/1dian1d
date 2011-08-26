@@ -8,7 +8,7 @@
   </fieldset>
   <fieldset>
     <%= form.label :目标期限,{:for=>"project_complete_time_1i"} %>
-    <%= form.date_select :complete_time,:start_year=>Time.now.year,:end_year=>(Time.now.year + 1),:class=>"validate[required,future[now]" %>
+    <%= form.date_select :complete_time,{:start_year=>Time.now.year,:end_year=>(Time.now.year + 1)},{:class=>"validate[funcCall[validateCompleteDate]]"} %><span id="complete_date_msg"></span>
   </fieldset>
   <fieldset>
     <%= form.label :选个类别吧, {:for=>"project_category_id"} %>
@@ -28,3 +28,24 @@
     <%= form.label :上传个目标图片吧,{:for=>"project_avatar"} %>
     <%= form.file_field :avatar,:value=>"上传" %>
   </fieldset>
+<script>
+function validateCompleteDate(field, rules, i, options){
+  jQuery(function($) { 
+    var goal_complete_date = new Date($('#project_complete_time_1i').val(),$('#project_complete_time_2i').val()-1,$('#project_complete_time_3i').val());
+    var today = new Date();
+    var diff = goal_complete_date.getTime() - today.getTime();
+    var diff_in_days = (((diff/1000)/60)/60)/24;
+    var msg = '';
+
+    if (goal_complete_date < today){ msg =  options.allrules.validateCompleteDatePast.alertText;}
+    if (diff_in_days > 730){ msg =  options.allrules.validateCompleteDateFuture.alertText;}
+    if (msg != ''){
+      $('#complete_date_msg').validationEngine('showPrompt', msg, 'error','topRight',true);
+    }
+    else{
+      $('#complete_date_msg').validationEngine('hide');
+    }
+  })
+}
+</script>
+

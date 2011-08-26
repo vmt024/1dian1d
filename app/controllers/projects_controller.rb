@@ -120,7 +120,7 @@ class ProjectsController < ApplicationController
   # GET /projects/new.xml
   def new
     @project = Project.new
-    @project.complete_time = Time.now.since(2.day)
+    @project.complete_time = Date.today.since(2.day).to_s(:db)
     respond_to do |format|
       format.html # new.html.erb
       format.xml  { render :xml => @project }
@@ -150,11 +150,12 @@ class ProjectsController < ApplicationController
             reward.save
           end
         end
-
         format.html { redirect_to goal_url(@project) }
         format.xml  { render :xml => @project, :status => :created, :location => @project }
       else
-        format.html { render :action => "new" }
+        logger.error("Error::projects_controller::create")
+        logger.error("Error::#{@project.errors}")
+        format.html { redirect_to new_goal_url, :error=>@project.errors }
         format.xml  { render :xml => @project.errors, :status => :unprocessable_entity }
       end
     end

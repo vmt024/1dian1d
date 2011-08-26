@@ -26,11 +26,11 @@ class Project < ActiveRecord::Base
   validate :complete_time_cannot_be_in_the_past, :complete_time_cannot_be_in_too_far_awary
     
   def complete_time_cannot_be_in_the_past
-    errors.add(:complete_time, "can't be in the past") if self.new_record? and !complete_time.blank? and complete_time.to_date < Date.today
+    errors.add("目标完成期限", "不能是过去的某个时间") if self.new_record? and !complete_time.blank? and complete_time.to_date < Date.today
   end
 
   def complete_time_cannot_be_in_too_far_awary
-    errors.add(:complete_time, "can't be too far away in future.") if self.new_record? and !complete_time.blank? and complete_time > 24.months.from_now
+    errors.add("目标完成期限", "不能是太久远的未来") if self.new_record? and !complete_time.blank? and complete_time > 24.months.from_now
   end
 
 

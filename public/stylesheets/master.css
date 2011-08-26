@@ -753,3 +753,16 @@ Back to top button
 #back-top a:hover span {
 	background-color: #777;
 }
+
+/* digging*/
+
+#digg_text, #bury_text{
+    float: left;
+    margin-bottom: 18px;
+}
+
+#bury_text{
+    margin-left: 10px;
+}
+
+

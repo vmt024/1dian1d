@@ -6,11 +6,12 @@
   <% else %>
     <%= image_tag @project.category.avatar.url(:medium) %>
   <% end %>
+  <p><%= @project.description%></p>
   <div id="digg_text">
   <%= link_to_if((!already_voted? && !goal_owner? && logged_in_user?) , "<span id='diggers_no'>#{@project.diggers.size}</span> 顶".html_safe, digg_goal_projects_url, :remote=>true){"#{@project.diggers.size} 顶"} %>
   </div>
   <div id="bury_text"><%= link_to_if((!already_voted? && !goal_owner? && logged_in_user?), "<span id='buryers_no'>#{@project.buryers.size}</span> 踩".html_safe, bury_goal_projects_url, :remote=>true){"#{@project.buryers.size} 踩"} %></div>
-  <p><%= @project.description%></p>
+  <div class="clear"></div>
   <!-- JiaThis Button BEGIN -->
   <div id="ckepop">
     <a class="jiathis_button_qzone"></a>

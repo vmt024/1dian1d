@@ -95,6 +95,12 @@
                 "validateName": {
                     "alertText": "* 用户昵称已经存在"
                 },
+                "validateCompleteDatePast": {
+                    "alertText": "* 目标期限必须是未来的某天"
+                },
+                "validateCompleteDateFuture": {
+                    "alertText": "*  目标期限不能超过两年"
+                },
                 "validateUserEmail": {
                     "alertText": "* 邮箱地已经存在"
                 }
