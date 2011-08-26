@@ -765,4 +765,6 @@ Back to top button
     margin-left: 10px;
 }
 
-
+.goal_progress_img{
+    max-width: 538px;
+}

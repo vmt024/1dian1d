@@ -6,7 +6,7 @@
   <% else %>
   <% @project.project_updates.each do |pu|%> 	
     <div class="entry">
-      <%= image_tag pu.avatar.url(:medium) unless pu.avatar.blank? || pu.avatar.path.blank? %>
+      <%= image_tag pu.avatar.url,:class=>"goal_progress_img" unless pu.avatar.blank? || pu.avatar.path.blank? %>
       <p><%= pu.content%></p>
       <h6>更新于<%= time_ago_in_words(pu.updated_at)%>前</h6>
     </div>
