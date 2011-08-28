@@ -65,7 +65,7 @@ Ququ::Application.routes.draw do
 
   # Sample resource route (maps HTTP verbs to controller actions automatically):
   #   resources :products
-  resources :goals, :controller => "projects" do
+  resources :goals, :controller => "projects",:except=>[:update,:edit,:destroy] do
     get :progress
     get :comments
     get :supporters
