@@ -11,8 +11,10 @@
     <td><%= project_days_left(my_int_proj.complete_time) %>天剩余</td>
     <td><%= link_to my_int_proj.owner.name, user_url(my_int_proj.user_id) %></td>
     <td>
-    <% if project_days_left(my_int_proj.complete_time).eql?(0) %>
+    <% if project_days_left(my_int_proj.complete_time).eql?(0) && my_int_proj.success_yn.eql?(true) %>
       <span style="color: green">目标成功</span>
+    <% elsif project_days_left(my_int_proj.complete_time).eql?(0) && my_int_proj.success_yn.eql?(false) %>
+      <span style="color: red">目标失败</span>
     <% else %>
       <% if !user_is_project_owner?(my_int_proj.user_id) && @user.id.eql?(session[:current_user_id]) %>
         <%= link_to "取消支持", not_support_this_project_projects_url(:project_id=>my_int_proj.id),:remote=>true %>
