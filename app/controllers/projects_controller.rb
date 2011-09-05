@@ -90,6 +90,7 @@ class ProjectsController < ApplicationController
 
   def supporters
     @project = Project.find(params[:goal_id])
+    @supporters = @project.supporters.paginate :per_page=>20, :page=>params[:page]
     session[:current_project_id] = @project.id
 
     respond_to do |format|
@@ -100,6 +101,7 @@ class ProjectsController < ApplicationController
 
   def comments
     @project = Project.find(params[:goal_id])
+    @comments = @project.comments.paginate :per_page=>10, :page=>params[:page]
     session[:current_project_id] = @project.id
     respond_to do |format|
       format.html # show.html.erb
@@ -109,6 +111,7 @@ class ProjectsController < ApplicationController
 
   def progress
     @project = Project.find(params[:goal_id])
+    @goal_updates = @project.project_updates.paginate :per_page=>10, :page=>params[:page]
     session[:current_project_id] = @project.id
     respond_to do |format|
       format.html # show.html.erb

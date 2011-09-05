@@ -23,9 +23,9 @@ Ququ::Application.routes.draw do
   end
 
   resources :user,:except=>[:destroy,:index] do
-    get :projects
+#    get :projects
 #    get :messages
-    get :supported_projects
+    get :supported_goals
     get :friends
     get :fans
     collection do

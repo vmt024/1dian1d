@@ -21,7 +21,7 @@ class UserController < ApplicationController
   def show
     calculate_notification if session[:current_user_id].eql?(params[:id].to_i)
     @user = User.find(params[:id])
-    @projects = Project.where('user_id = ?',@user.id).order("updated_at DESC")
+    @projects = Project.where('user_id = ?',@user.id).order("updated_at DESC").paginate :per_page=>20, :page=>params[:page]
     unless session[:followed_fans].blank? || @user.id.eql?(session[:current_user_id])
       session[:followed_fans].delete(@user.id)  
     end
@@ -67,33 +67,37 @@ class UserController < ApplicationController
 
   def friends
     @user = User.find(params[:user_id])
-    @friends = Friend.my_friends(params[:user_id]) 
+    @friends = Friend.my_friends(params[:user_id]).paginate :per_page=>20, :page=>params[:page]
     respond_to do |format|
+      format.html
       format.js
     end
   end
 
   def fans
     @user = User.find(params[:user_id])
-    @fans = Friend.my_fans(params[:user_id]) 
+    @fans = Friend.my_fans(params[:user_id]).paginate :per_page=>20, :page=>params[:page]
     respond_to do |format|
+      format.html
       format.js
     end
   end
 
 
-  def projects
-    @user = User.find(params[:user_id])
-    @projects = Project.where('user_id = ?',params[:user_id]).order("updated_at DESC")
-    respond_to do |format|
-      format.js
-    end
-  end
+#  def projects
+#    @user = User.find(params[:user_id])
+#    @projects = Project.where('user_id = ?',params[:user_id]).order("updated_at DESC").paginate :per_page=>20, :page=>params[:page]
+#    respond_to do |format|
+#      format.html
+#      format.js
+#    end
+#  end
 
-  def supported_projects
+  def supported_goals
     @user = User.find(params[:user_id])
-    @projects = @user.support_projects
+    @projects = @user.support_projects.paginate :per_page=>20, :page=>params[:page]
     respond_to do |format|
+      format.html
       format.js
     end
   end

@@ -66,4 +66,11 @@ module ApplicationHelper
     return !session[:current_user_id].blank?
   end
 
+  def highlight_this?(name)
+    return params[:action].eql?(name) ? "currentNavigationalItem" : ""
+  rescue=>e
+    logger.error("Error:#{e}")
+    return ""
+  end
+
 end

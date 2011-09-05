@@ -1,19 +1,20 @@
 <%= render :partial=>"project_detail_header"%>
 
 <table width="100%" border="0" summary="supporter list" class="myTable">
-  <% if @project.supporters.blank? %>
+  <% if @supporters.blank? %>
     <% if @project.owner.id.eql?(session[:current_user_id])%>
       目前还没有人支持这个目标，让我们一起期待吧。
     <% else %>
      目前还没有人支持这个目标，要不要<%= link_to "支持",support_this_project_projects_url(:project_id=>@project.id),:remote=>!session[:current_user_id].blank? %>一下呢？
     <% end %>
   <% else %>
-  <% @project.supporters.each do |supporter| %>
-  <tr id="supporter_row_<%= supporter.id%>">
-    <%= render :partial=>'supporter_row', :locals=>{:supporter => supporter}%>
-  </tr>
-  <% end %>
+    <% @supporters.each do |supporter| %>
+      <tr id="supporter_row_<%= supporter.id%>">
+        <%= render :partial=>'supporter_row', :locals=>{:supporter => supporter}%>
+      </tr>
+    <% end %>
   <% end %>
 </table>
+<%= will_paginate @supporters%>
 
 <div class="clear"></div>
