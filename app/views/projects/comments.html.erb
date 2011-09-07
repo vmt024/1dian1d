@@ -15,8 +15,13 @@
     </div>
     <% end %>
   <% end %>
-  <%= will_paginate @comments%>
- </div>
+</div>
+  <br/>
+  <div class="clear"></div>
+  <div id="pagination" class="grid_3 alpha">
+    <%= will_paginate @comments%>
+  </div>
+  <div class="clear"></div>
 
 <% unless session[:current_user_id].blank? %>
   <%= form_for(:comment, :url=>comments_url,:html=>{:id=>"comment_form",:method=>:post}) do |f| %>

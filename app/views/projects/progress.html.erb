@@ -12,7 +12,14 @@
       </div>
     <% end %>
   <% end %>
-  <%= will_paginate @goal_updates %>
+</div>
+  <br/>
+  <div class="clear"></div>
+  <div id="pagination" class="grid_3 alpha">
+    <%= will_paginate @goal_updates %>
+  </div>
+  <div class="clear"></div>
+
   <% if @project.owner.id.eql?(session[:current_user_id])%>       
     <%= form_for :project_update, :url=>project_updates_url,:html=>{:id=>'project_update_form',:multipart => true,:method=>:post} do |f| %>
       <fieldset>
@@ -25,7 +32,6 @@
       <%= f.submit '更新', :disable_with=>"更新中..." %>
     <% end %>
   <% end %>
- </div>
 
 <div class="clear"></div>
 <script type="text/javascript">
