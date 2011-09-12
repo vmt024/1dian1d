@@ -1,9 +1,18 @@
 <% if session[:current_user_id].eql?(@user.id) %>
-<% unless session[:followed_fans].blank? && session[:new_progress].blank? && session[:followed_progress].blank? && session[:closed_projects].blank? %>
+<% unless session[:followed_fans].blank? && session[:new_progress].blank? && session[:followed_progress].blank? && session[:closed_projects].blank? && session[:followers_new_goal].blank? %>
   <div class="global-notification">
     <ul>
       <% unless session[:closed_projects].blank? %>
         <li>目标 <%= session[:closed_projects].collect{|cp| link_to Project.find(cp).name, goal_url(cp)}.join(', ').html_safe %> 已经到了完成期限，您还没有确认目标成功与否。</li>
+      <% end %>
+      <% unless session[:followers_new_goal].blank? %>
+        <li>
+          <strong>
+            <span class="followers-goal">
+              您所关注的朋友刚刚建立了 <%= link_to session[:followers_new_goal].size, recent_created_goals_url %>
+            </span>
+          </strong> 个的新目标，快去支持他们吧！
+        </li>
       <% end %>
       <% unless session[:followed_progress].blank? %>
         <li>

@@ -45,6 +45,7 @@ class User < ActiveRecord::Base
         session[:followed_progress] = user.followed_progress
         session[:followed_fans] = user.followed_fans
         session[:new_progress] = user.new_progress
+        session[:followers_new_goal] = user.followers_new_goal
         session[:closed_projects] = user.closed_projects
         user.last_notification_time = Time.now
         user.save
@@ -88,6 +89,22 @@ class User < ActiveRecord::Base
       projects = self.support_projects.includes(:project_updates).where("project_updates.created_at > ?",self.last_notification_time)
       projects.collect{|p| list << p.id.to_i unless list.include?(p.id.to_i)}
       return list
+    end
+
+    # return a list of goal id which is created by the person who current user followed 
+    # return [] if no goal
+    def followers_new_goal
+      list = []
+      friend_list = self.friends.collect{|f| f.friend_id}
+      supported_goal_list = self.support_projects.collect{|s| s.id}
+      unless friend_list.blank? 
+        if supported_goal_list.blank?
+          list = Project.where("user_id in (#{friend_list.join(',')}) and success_yn is null and created_at > ?",self.last_notification_time).collect{|n| n.id}
+        else
+          list = Project.where("id not in (#{supported_goal_list.join(',')}) and user_id in (#{friend_list.join(',')}) and success_yn is null and created_at > ?", self.last_notification_time).collect{|n| n.id}
+        end
+      end
+      return list.sort
     end
 
     # return a list of project id which has new supporters and comments since last login

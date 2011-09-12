@@ -1,5 +1,5 @@
 class Friend < ActiveRecord::Base
- 
+
   # return friend's user name
   def name
     return User.exists?(["id = ?",self.user_id]) ? User.find(self.user_id).name : ""

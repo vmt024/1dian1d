@@ -71,6 +71,9 @@ Ququ::Application.routes.draw do
     get :supporters
     get :set_project_success
     get :set_project_fail
+    collection do
+      get :recent_created
+    end
   end
 
   # Sample resource route with options:

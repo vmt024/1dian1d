@@ -64,6 +64,11 @@ class ProjectsController < ApplicationController
     render :action=> "welcome"
   end
 
+  def recent_created
+    @projects = Project.recommend_projects.where(["id in (#{session[:followers_new_goal].join(',')})"]).paginate(:page=>params[:page]).order("name Asc")
+    render :action=> "welcome"
+  end
+
   # GET /projects/1
   # GET /projects/1.xml
   def show
@@ -81,6 +86,7 @@ class ProjectsController < ApplicationController
     session[:closed_projects].delete(@project.id) unless session[:closed_projects].blank? 
     session[:new_progress].delete(@project.id) unless session[:new_progress].blank? 
     session[:followed_progress].delete(@project.id) unless session[:followed_progress].blank?  
+    session[:followers_new_goal].delete(@project.id) unless session[:followers_new_goal].blank?  
 
     respond_to do |format|
       format.html # show.html.erb

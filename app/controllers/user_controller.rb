@@ -32,6 +32,7 @@ class UserController < ApplicationController
       @user = User.find(session[:current_user_id])
       session[:followed_progress] = recalculate_notification(@user.followed_progress,session[:followed_progress])
       session[:followed_fans] = recalculate_notification(@user.followed_fans,session[:followed_fans])
+      session[:followers_new_goal] = recalculate_notification(@user.followers_new_goal,session[:followers_new_goal])
       session[:new_progress] = recalculate_new_progress(@user.new_progress)
       session[:closed_projects] = recalculate_notification(@user.closed_projects,session[:closed_projects])
       @user.last_notification_time = Time.now
