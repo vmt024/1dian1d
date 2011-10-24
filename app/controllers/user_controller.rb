@@ -114,6 +114,7 @@ class UserController < ApplicationController
       @user.password = params[:user][:password]
     end
 
+    @user.avatar = params[:user][:avatar]
     @user.description = params[:user][:description]
     @user.location = params[:user][:location]
     if @user.save

@@ -15,16 +15,18 @@
       <td><%= my_proj.supporters.count %>支持</td>
       <td><%= project_days_left(my_proj.complete_time) %>天剩余</td>
     <td><%= my_proj.views %>次浏览</td>
-    <% if (project_days_left(my_proj.complete_time) < 1)  && my_proj.success_yn.nil? && user_is_project_owner?(my_proj.user_id) %>
+      <%if (project_days_left(my_proj.complete_time) < 1)  && my_proj.success_yn.nil? && user_is_project_owner?(my_proj.user_id) %>
       <td id="project_result_<%= my_proj.id%>">
-        <%= link_to "成功", goal_set_project_success_url(:goal_id=>my_proj.id),:remote=>true %>
+        <%= link_to "成功", goal_set_project_success_url(:goal_id=>my_proj.id),:remote=>true %><%= ('&nbsp;'*12).html_safe %>
         <%= link_to "失败", goal_set_project_fail_url(:goal_id=>my_proj.id),:remote=>true %>
-    </td>
+      </td>
     <% else %>
-    <td>
+    <td id="project_result_<%= my_proj.id%>">
       <% if my_proj.success_yn.nil? %>
         <% if user_is_project_owner?(my_proj.user_id) %>
           <%= link_to "更新进展", goal_progress_url(:goal_id=>my_proj.id) %>
+          &nbsp;&nbsp;&nbsp;&nbsp;
+          <%= link_to "提前失败", goal_set_project_fail_url(:goal_id=>my_proj.id),:remote=>true %>
         <% end %>
       <% else %>
         <% msg = my_proj.success_yn.eql?(true) ? "<span style='color: green;'>目标成功</span>" : "<span style='color: red;'>目标失败</span>"%>

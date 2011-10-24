@@ -5,7 +5,7 @@
 </div>
 <% end %>
 
-<%= form_for @user,:html=>{:id=>"edit_user_form",:autocomplete=>"off"} do |f| %>
+<%= form_for @user,:html=>{:id=>"edit_user_form",:autocomplete=>"off", :multipart => true } do |f| %>
   <%= render :partial => "form", :object => f %>
   <%= f.submit "修改",:disable_with=>"修改中..." %>
 <% end %>

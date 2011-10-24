@@ -7,7 +7,7 @@
         <% friend_user = User.find(friend.friend_id) %>
       <% row_id = "my_friend_#{friend.friend_id}"%>
       <tr id="<%= row_id%>">
-        <td><%= link_to friend_user.name, user_url(friend_user.id) %></td>
+        <td><%= display_user_avatar(:user=>friend_user,:size=>:small)%><%= link_to friend_user.name, user_url(friend_user.id) %></td>
         <td><%= friend_user.location %></td>
         <td>
           <% unless friend_user.support_projects.blank? %>

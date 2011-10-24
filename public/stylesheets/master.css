@@ -332,7 +332,7 @@ ul.project-meta li{
 }
 
 ul.project-meta li.project-meta-user{
-	background:url(../images/user.png) no-repeat left center;
+	/*background:url(../images/user.png) no-repeat left center;*/
 	padding-left:20px;
 }
 

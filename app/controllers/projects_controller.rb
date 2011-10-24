@@ -74,8 +74,10 @@ class ProjectsController < ApplicationController
   def show
     @project = Project.find(params[:id])
     session[:current_project_id] = @project.id
-    @project.views += 1
-    @project.save(:validate=>false)
+    unless !session[:current_user_id].blank? && session[:current_user_id].eql?(@project.user_id)
+      @project.views += 1 
+      @project.save(:validate=>false)
+    end
     project_list = Project.recommend_projects.where("category_id = ? and id != ?",@project.category_id,@project.id).select('id').collect{|p| p.id}
     unless project_list.blank?
       @similar_projects = Project.where("id in (#{project_list.shuffle.first(9).join(",")})")

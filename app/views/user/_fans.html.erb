@@ -9,7 +9,7 @@
       <tr id="<%= row_id%>">
         <td>
           <% fans_user_name = (!session[:followed_fans].blank? && session[:followed_fans].include?(fan_user.id)) ? ("<span class=\"followed-fans\">#{fan_user.name}</span>").html_safe : fan_user.name %>  
-          <%= link_to fans_user_name, user_url(fan_user.id) %>
+          <%= display_user_avatar(:user=>fan_user,:size=>:small)%> <%= link_to fans_user_name, user_url(fan_user.id) %>
         </td>
         <td><%= fan_user.location %></td>
         <td>

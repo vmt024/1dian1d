@@ -76,8 +76,9 @@
     </div>
   </div>
 
-     <div class="clear"></div>
-    <p><%=h @user.description %></p>
+  <div class="clear"></div>
+  <%= display_user_avatar(:user=>@user, :size=>:large) %>
+  <p><%=h @user.description %></p>
   <% end %>
 
   </div>

@@ -11,7 +11,10 @@
     <div class="entry">
     <% end %>
       	<p><%= comment.content%></p>
-        <h6><%=link_to comment.user.name, user_url(comment.user)%> 更新于<%= time_ago_in_words(comment.updated_at)%>前</h6>
+        <h6><%= display_user_avatar(:user=>comment.user,:size=>:small)%>
+            <%=link_to comment.user.name, user_url(comment.user)%> 
+            更新于<%= time_ago_in_words(comment.updated_at)%>前
+        </h6>
     </div>
     <% end %>
   <% end %>

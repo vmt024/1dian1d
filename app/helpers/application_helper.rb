@@ -73,4 +73,28 @@ module ApplicationHelper
     return ""
   end
 
+  def user_has_avatar?(avatar, size=nil)
+    size ||= :medium
+    return false if avatar.blank?
+    return false if avatar.path.eql?("/avatars/medium/missing.png")
+    return File.exist?(avatar.path(size))
+  rescue=>e
+    logger.error("Error:#{e}")
+    return false
+  end
+
+  def display_user_avatar(options)
+    user = options[:user]
+    options[:size] ||= :large
+    if user_has_avatar?(user.avatar,options[:size])
+      return image_tag user.avatar.url(options[:size])
+    else
+      return image_tag 'user.png'
+    end
+  rescue => e
+    logger.error("Error::application_helper::display_user_avatar")
+    logger.error(e)
+    return image_tag 'user.png'
+  end
+
 end

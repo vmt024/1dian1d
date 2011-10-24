@@ -38,3 +38,4 @@ gem "mongrel", :group=>:development
 # group :development, :test do
 #   gem 'webrat'
 # end
+gem "mocha", :group => :test

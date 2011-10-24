@@ -2,7 +2,7 @@ require 'digest'
 
 class User < ActiveRecord::Base
 
-  has_attached_file :avatar, :styles => { :medium => "538x288#", :thumb => "220x144#" }
+  has_attached_file :avatar, :styles => { :large => "48x48#", :medium => "36x36#", :small => "16x16#" }
   has_many :user_projects
   has_many :support_projects, :through=>:user_projects, :source=>:project
   has_many :my_projects, :class_name=>'Project'

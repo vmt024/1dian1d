@@ -15,6 +15,11 @@
     <% end %>
   </fieldset>
   <fieldset>
+    <%= display_user_avatar(:user=>@user,:size=>:large) %>
+    <%= form.label :上传个头像吧,{:for=>"user_avatar"} %>
+    <%= form.file_field :avatar,:value=>"上传" %>
+  </fieldset>
+  <fieldset>
     <%= form.label :自我介绍, {:for=>"user_description"} %>
     <%= form.text_area :description,:class=>"" %>
   </fieldset>

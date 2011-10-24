@@ -9,7 +9,7 @@
     <%= link_to project_name, goal_url(my_int_proj.id) %></td>
     <td><%= my_int_proj.supporters.count %>支持</td>
     <td><%= project_days_left(my_int_proj.complete_time) %>天剩余</td>
-    <td><%= link_to my_int_proj.owner.name, user_url(my_int_proj.user_id) %></td>
+    <td><%= display_user_avatar(:user=>my_int_proj.owner,:size=>:small)%><%= link_to my_int_proj.owner.name, user_url(my_int_proj.user_id) %></td>
     <td>
     <% if project_days_left(my_int_proj.complete_time).eql?(0) && my_int_proj.success_yn.eql?(true) %>
       <span style="color: green">目标成功</span>

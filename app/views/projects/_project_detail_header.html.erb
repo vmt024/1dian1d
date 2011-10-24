@@ -17,7 +17,7 @@
 
     <div class="grid_2 omega" id="project-meta-detail">
       <ul class="project-meta">
-        <li class="project-meta-user"><%= link_to @project.owner.name, user_url(@project.user_id) %></li>
+        <li class="project-meta-user"><%= display_user_avatar(:user=>@project.owner, :size=>:small) %> <%= link_to @project.owner.name, user_url(@project.user_id) %></li>
         <li class="project-meta-place"><%= link_to @project.owner.location, goals_url(:location=>@project.owner.location) %></li>
       </ul>
     </div>
