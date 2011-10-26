@@ -3,7 +3,7 @@
     <div class="grid_3 <%= cycle("alpha", "omega prefix_1") -%>">
       <h3><%= link_to project.name, goal_url(project.id) %></h3>
       <ul class="project-meta">
-        <li class="project-meta-user">
+        <li class="project-meta-user" style="margin-left:-20px !important;">
           <%= display_user_avatar(:user=>project.owner,:size=>:small) %>
           <%= link_to project.owner.name, user_url(project.owner.id) %>
         </li>

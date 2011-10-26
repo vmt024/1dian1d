@@ -85,11 +85,13 @@ module ApplicationHelper
 
   def display_user_avatar(options)
     user = options[:user]
+    margin = '5px'
     options[:size] ||= :large
+    margin = '10px' if options[:size].eql?(:large) 
     if user_has_avatar?(user.avatar,options[:size])
-      return image_tag user.avatar.url(options[:size])
+      return image_tag user.avatar.url(options[:size]), :style=>"float:left; margin-right: #{margin};"
     else
-      return image_tag 'user.png'
+      return image_tag 'user.png', :style=>"float:left; margin-right:#{margin};"
     end
   rescue => e
     logger.error("Error::application_helper::display_user_avatar")
