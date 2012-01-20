@@ -17,7 +17,13 @@ class UserSessionController < ApplicationController
         @user.last_login_time = @user.current_login_time
         @user.current_login_time = Time.now
         @user.save
-        cookies[:remember_token] = Encryptor.encrypt(:value=>"#{@user.email}--A--#{@user.password_salt}") if params[:user][:remember_me].eql?('1')
+        if params[:user][:remember_me].eql?('1')
+          cookies[:remember_token] = {
+            :value => Encryptor.encrypt(:value=>"#{@user.email}--A--#{@user.password_salt}"), 
+            :expires => 10.year.from_now,
+            :domain => '1dian1di.com'
+           }
+        end
         if @user.superman.eql?("YES")
           session[:is_superman] = true
         else
